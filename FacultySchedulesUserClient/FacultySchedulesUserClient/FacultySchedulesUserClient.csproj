@@ -75,6 +75,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -89,6 +92,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Scrape.cs" />
+    <Compile Include="GiveData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
