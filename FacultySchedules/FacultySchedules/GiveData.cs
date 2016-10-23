@@ -6,8 +6,12 @@ namespace FacultySchedules
 {
 	public class GiveData
 	{
-		public string name;
-		public void DBGather(List<string> data)
+		public void multipleDBGather(List<string> data, string name)
+		{
+
+		}
+
+		public void DBGather(List<string> data, string name)
 		{
 			string inputDay, inputHour, inputEvent;
 
@@ -17,11 +21,11 @@ namespace FacultySchedules
 				inputDay = subStrings[0];
 				inputHour = subStrings[1];
 				inputEvent = subStrings[2];
-				DBpush(inputDay, inputHour, inputEvent);
+				DBpush(inputDay, inputHour, inputEvent, name);
 			}
 		}
 		//public void DBpush(int inputDay, int inputHour, int inputEvent)
-		public void DBpush(string inputDay, string inputHour, string inputEvent)
+		public void DBpush(string inputDay, string inputHour, string inputEvent, string name)
 		{
 			string connectionParam = "server=192.168.1.24;uid=test;port=8889;pwd=test;database=Faculty;";
 			MySqlConnection connection = null;
@@ -32,7 +36,7 @@ namespace FacultySchedules
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
 				//string stm = "INSERT INTO trax (Entry, Name, PO, IDC) VALUES(@Entry, @Name, @PO, @IDC)";
-				string stm = "INSERT INTO IraWoodring (day, hour, event) VALUES(@day, @hour, @event)";
+				string stm = "INSERT INTO " + name + " (day, hour, event) VALUES(@day, @hour, @event)";
 
 				MySqlCommand cmd = new MySqlCommand(stm, connection);
 				cmd.Parameters.AddWithValue("@day", inputDay);

@@ -27,14 +27,15 @@
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ExW-zL-YdR">
                         <rect key="frame" x="59" y="301" width="246" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <popUpButtonCell key="cell" type="push" title="Ira Woodring" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="xIP-tG-xk7" id="Atf-W8-iOO">
+                        <popUpButtonCell key="cell" type="push" title="Select Faculty Name" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="xIP-tG-xk7" id="Atf-W8-iOO">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="nz3-AC-lGl">
                                 <items>
-                                    <menuItem title="Ira Woodring" state="on" id="xIP-tG-xk7"/>
-                                    <menuItem title="Ana Posada" id="gjx-zb-7h8"/>
-                                    <menuItem title="Item 3" id="uff-hY-Hrn"/>
+                                    <menuItem title="Select Faculty Name" state="on" id="xIP-tG-xk7"/>
+                                    <menuItem title="Ira Woodring" id="gjx-zb-7h8"/>
+                                    <menuItem title="Ana Posada" id="PwX-pf-eeu"/>
+                                    <menuItem title="Som Guy" id="tDA-NA-JwK"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
