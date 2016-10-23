@@ -7,7 +7,7 @@ namespace FacultySchedules
 {
 	public partial class MainWindowController : NSWindowController
 	{
-		string facName;
+		string facName, firstName, lastName;
 
 		public void ViewDidLoad()
 		{
@@ -18,11 +18,11 @@ namespace FacultySchedules
 		partial void clickedScrapeButton(Foundation.NSObject sender)
 		{
 			Run runInit = new Run();
-
 			facName = facultyListCombo.TitleOfSelectedItem;
-
+			firstName = splitNameGetFirst(facName);
+			lastName = splitNameGetLast(facName);
 			facName = RemoveWhitespace(facName);
-			runInit.start(facName);
+			runInit.start(facName, firstName, lastName);
 		}
 
 		public MainWindowController(IntPtr handle) : base(handle) { }
@@ -40,6 +40,20 @@ namespace FacultySchedules
 		public new MainWindow Window
 		{
 			get { return (MainWindow)base.Window; }
+		}
+
+		public static string splitNameGetFirst(string input)
+		{
+			string[] names = input.Split();
+			string first = names[0];
+			return first;
+		}
+
+		public string splitNameGetLast(string input)
+		{
+			string[] names = input.Split();
+			string last = names[1];
+			return last;
 		}
 
 		public static string RemoveWhitespace(string input)

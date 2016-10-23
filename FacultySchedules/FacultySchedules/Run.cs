@@ -6,7 +6,7 @@ namespace FacultySchedules
 {
 	class Run
 	{
-		public void start(string name)
+		public void start(string name, string firstName, string lastName)
 		{
 			List<string> dayList = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 
@@ -16,7 +16,7 @@ namespace FacultySchedules
 			string value = "";
 
 			Scrape scraper = new Scrape();
-			List<HtmlNode> x = scraper.BeginScrape();
+			List<HtmlNode> x = scraper.BeginScrape(firstName, lastName);
 
 			bool first = true;
 
