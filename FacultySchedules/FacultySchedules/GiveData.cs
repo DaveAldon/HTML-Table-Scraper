@@ -6,6 +6,8 @@ namespace FacultySchedules
 {
 	public class GiveData
 	{
+		bool firstTime = true;
+
 		public void multipleDBGather(List<string> data, string name)
 		{
 
@@ -27,36 +29,65 @@ namespace FacultySchedules
 		//public void DBpush(int inputDay, int inputHour, int inputEvent)
 		public void DBpush(string inputDay, string inputHour, string inputEvent, string name)
 		{
-			string connectionParam = "server=192.168.1.24;uid=test;port=8889;pwd=test;database=Faculty;";
-			MySqlConnection connection = null;
-			MySqlDataReader dataReader = null;
+			string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
+
+			MySqlConnection addConnection = null;
+			MySqlDataReader addDataReader = null;
+
+			if (firstTime == true)
+			{
+				MySqlConnection connection = null;
+				MySqlDataReader dataReader = null;
+				try
+				{
+					connection = new MySqlConnection(connectionParam);
+					connection.Open();
+					string replaceStm = "truncate " + name;
+					MySqlCommand replaceCmd = new MySqlCommand(replaceStm, connection);
+					dataReader = replaceCmd.ExecuteReader();
+				}
+				catch (MySqlException error)
+				{
+				}
+				finally //We need to close all of our connections once everything is retrieved
+				{
+					if (dataReader != null)
+					{
+						dataReader.Close();
+					}
+
+					if (connection != null)
+					{
+						connection.Close();
+					}
+				}
+				firstTime = false;
+			}
 
 			try
 			{
-				connection = new MySqlConnection(connectionParam);
-				connection.Open();
-				//string stm = "INSERT INTO trax (Entry, Name, PO, IDC) VALUES(@Entry, @Name, @PO, @IDC)";
+				addConnection = new MySqlConnection(connectionParam);
+				addConnection.Open();
 				string stm = "INSERT INTO " + name + " (day, hour, event) VALUES(@day, @hour, @event)";
-
-				MySqlCommand cmd = new MySqlCommand(stm, connection);
+				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
 				cmd.Parameters.AddWithValue("@day", inputDay);
 				cmd.Parameters.AddWithValue("@hour", inputHour);
 				cmd.Parameters.AddWithValue("@event", inputEvent);
-				dataReader = cmd.ExecuteReader();
+				addDataReader = cmd.ExecuteReader();
 			}
 			catch (MySqlException error)
 			{
 			}
 			finally //We need to close all of our connections once everything is retrieved
 			{
-				if (dataReader != null)
+				if (addDataReader != null)
 				{
-					dataReader.Close();
+					addDataReader.Close();
 				}
 
-				if (connection != null)
+				if (addConnection != null)
 				{
-					connection.Close();
+					addConnection.Close();
 				}
 			}
 		}
