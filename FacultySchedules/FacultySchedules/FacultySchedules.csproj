@@ -96,6 +96,7 @@
     <Compile Include="Scrape.cs" />
     <Compile Include="Run.cs" />
     <Compile Include="GiveData.cs" />
+    <Compile Include="allFaculty.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />

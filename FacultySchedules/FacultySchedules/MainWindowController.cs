@@ -8,6 +8,8 @@ namespace FacultySchedules
 	public partial class MainWindowController : NSWindowController
 	{
 		string facName, firstName, lastName;
+		Run runInit = new Run();
+		allFaculty allFacultyInit = new allFaculty();
 
 		public void ViewDidLoad()
 		{
@@ -17,19 +19,19 @@ namespace FacultySchedules
 
 		partial void clickedScrapeButton(Foundation.NSObject sender)
 		{
-			Run runInit = new Run();
-
+			
 			if (allFacultyCheckBox.State == NSCellStateValue.On)
 			{
-
+				foreach (string name in allFacultyInit.getEveryonesName())
+				{
+					facName = name;
+					grabSplitAndRun();
+				}
 			}
 			else
 			{
 				facName = facultyListCombo.TitleOfSelectedItem;
-				firstName = splitNameGetFirst(facName);
-				lastName = splitNameGetLast(facName);
-				facName = RemoveWhitespace(facName);
-				runInit.start(facName, firstName, lastName);
+				grabSplitAndRun();
 			}
 		}
 
@@ -56,6 +58,14 @@ namespace FacultySchedules
 		public new MainWindow Window
 		{
 			get { return (MainWindow)base.Window; }
+		}
+
+		public void grabSplitAndRun()
+		{
+			firstName = splitNameGetFirst(facName);
+			lastName = splitNameGetLast(facName);
+			facName = RemoveWhitespace(facName);
+			runInit.start(facName, firstName, lastName);
 		}
 
 		public static string splitNameGetFirst(string input)
