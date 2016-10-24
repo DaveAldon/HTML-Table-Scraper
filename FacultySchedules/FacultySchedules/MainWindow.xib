@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="11201"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
@@ -10,7 +11,9 @@
                 <outlet property="allFacultyCheckBox" destination="jpy-aA-JJH" id="dRB-rp-9yo"/>
                 <outlet property="facultyListCombo" destination="ExW-zL-YdR" id="PNZ-ng-Q9V"/>
                 <outlet property="resultTextBox" destination="rCV-Su-gzp" id="7EK-IM-l51"/>
+                <outlet property="scheduleButton" destination="qJk-dN-hSd" id="Ztn-H8-TNb"/>
                 <outlet property="scrapeButton" destination="t2H-Lo-Vmo" id="qWs-ek-D1d"/>
+                <outlet property="webViewSchedule" destination="EGe-jf-7JE" id="Z21-cY-vQO"/>
                 <outlet property="window" destination="2" id="6"/>
             </connections>
         </customObject>
@@ -18,14 +21,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" animationBehavior="default" id="2" customClass="MainWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="131" y="74" width="606" height="354"/>
+            <rect key="contentRect" x="131" y="74" width="1046" height="686"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
-            <view key="contentView" id="3">
-                <rect key="frame" x="0.0" y="0.0" width="606" height="354"/>
+            <view key="contentView" misplaced="YES" id="3">
+                <rect key="frame" x="0.0" y="0.0" width="1046" height="686"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ExW-zL-YdR">
-                        <rect key="frame" x="59" y="301" width="246" height="26"/>
+                        <rect key="frame" x="343" y="642" width="246" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="Select Faculty Name" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="xIP-tG-xk7" id="Atf-W8-iOO">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -41,7 +44,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <button verticalHuggingPriority="750" misplaced="YES" id="jpy-aA-JJH">
-                        <rect key="frame" x="320" y="299" width="85" height="32"/>
+                        <rect key="frame" x="101" y="640" width="85" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="All Faculty" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1wJ-Dl-8GW">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -49,7 +52,7 @@
                         </buttonCell>
                     </button>
                     <textField verticalHuggingPriority="750" misplaced="YES" id="rCV-Su-gzp">
-                        <rect key="frame" x="255" y="133" width="96" height="37"/>
+                        <rect key="frame" x="20" y="577" width="96" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Result" drawsBackground="YES" id="A4V-tr-tNm">
                             <font key="font" metaFont="system"/>
@@ -58,7 +61,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" misplaced="YES" id="t2H-Lo-Vmo">
-                        <rect key="frame" x="260" y="235" width="87" height="32"/>
+                        <rect key="frame" x="14" y="638" width="87" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Scrape!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Erb-wA-bie">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -68,8 +71,33 @@
                             <action selector="clickedScrapeButton:" target="-2" id="HnC-Vs-W5t"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="qJk-dN-hSd">
+                        <rect key="frame" x="315" y="597" width="130" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="View Schedule" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cJf-An-K1w">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="clickedScheduleButton:" target="-2" id="i7Q-As-g3m"/>
+                        </connections>
+                    </button>
+                    <webView misplaced="YES" id="EGe-jf-7JE">
+                        <rect key="frame" x="16" y="20" width="1010" height="518"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <webPreferences key="preferences" defaultFontSize="16" defaultFixedFontSize="13" minimumFontSize="0">
+                            <nil key="identifier"/>
+                        </webPreferences>
+                        <connections>
+                            <accessibilityConnection property="title" destination="3" id="Sdk-ZQ-ioT"/>
+                        </connections>
+                    </webView>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="webViewSchedules" destination="EGe-jf-7JE" id="3In-mQ-9bd"/>
+            </connections>
+            <point key="canvasLocation" x="279" y="179"/>
         </window>
     </objects>
 </document>

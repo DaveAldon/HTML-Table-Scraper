@@ -29,6 +29,8 @@
     <UseRefCounting>true</UseRefCounting>
     <PlatformTarget>x86</PlatformTarget>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <HttpClientHandler>CFNetworkHandler</HttpClientHandler>
+    <TlsProvider>Default</TlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -56,6 +58,9 @@
     <Reference Include="System.Data" />
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSwift.Attributes">
+      <HintPath>..\packages\SharpSwift.Attributes.1.1.0\lib\SharpSwift.Attributes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

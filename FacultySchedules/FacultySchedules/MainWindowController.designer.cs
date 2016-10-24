@@ -22,21 +22,25 @@ namespace FacultySchedules
 		AppKit.NSTextField resultTextBox { get; set; }
 
 		[Outlet]
+		AppKit.NSButton scheduleButton { get; set; }
+
+		[Outlet]
 		AppKit.NSButton scrapeButton { get; set; }
+
+		[Outlet]
+		WebKit.WebView webViewSchedule { get; set; }
+
+		[Action ("clickedScheduleButton:")]
+		partial void clickedScheduleButton (Foundation.NSObject sender);
 
 		[Action ("clickedScrapeButton:")]
 		partial void clickedScrapeButton (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (scrapeButton != null) {
-				scrapeButton.Dispose ();
-				scrapeButton = null;
-			}
-
-			if (resultTextBox != null) {
-				resultTextBox.Dispose ();
-				resultTextBox = null;
+			if (allFacultyCheckBox != null) {
+				allFacultyCheckBox.Dispose ();
+				allFacultyCheckBox = null;
 			}
 
 			if (facultyListCombo != null) {
@@ -44,9 +48,24 @@ namespace FacultySchedules
 				facultyListCombo = null;
 			}
 
-			if (allFacultyCheckBox != null) {
-				allFacultyCheckBox.Dispose ();
-				allFacultyCheckBox = null;
+			if (resultTextBox != null) {
+				resultTextBox.Dispose ();
+				resultTextBox = null;
+			}
+
+			if (scheduleButton != null) {
+				scheduleButton.Dispose ();
+				scheduleButton = null;
+			}
+
+			if (scrapeButton != null) {
+				scrapeButton.Dispose ();
+				scrapeButton = null;
+			}
+
+			if (webViewSchedule != null) {
+				webViewSchedule.Dispose ();
+				webViewSchedule = null;
 			}
 		}
 	}

@@ -18,11 +18,24 @@ namespace FacultySchedules
 		partial void clickedScrapeButton(Foundation.NSObject sender)
 		{
 			Run runInit = new Run();
-			facName = facultyListCombo.TitleOfSelectedItem;
-			firstName = splitNameGetFirst(facName);
-			lastName = splitNameGetLast(facName);
-			facName = RemoveWhitespace(facName);
-			runInit.start(facName, firstName, lastName);
+
+			if (allFacultyCheckBox.State == NSCellStateValue.On)
+			{
+
+			}
+			else
+			{
+				facName = facultyListCombo.TitleOfSelectedItem;
+				firstName = splitNameGetFirst(facName);
+				lastName = splitNameGetLast(facName);
+				facName = RemoveWhitespace(facName);
+				runInit.start(facName, firstName, lastName);
+			}
+		}
+
+		partial void clickedScheduleButton(Foundation.NSObject sender)
+		{
+			webViewSchedule.MainFrameUrl = "https://www.gvsu.edu/";
 		}
 
 		public MainWindowController(IntPtr handle) : base(handle) { }
