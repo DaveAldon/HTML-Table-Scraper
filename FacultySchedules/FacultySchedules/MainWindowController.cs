@@ -35,7 +35,10 @@ namespace FacultySchedules
 
 		partial void clickedScheduleButton(Foundation.NSObject sender)
 		{
-			webViewSchedule.MainFrameUrl = "https://www.gvsu.edu/";
+			facName = facultyListCombo.TitleOfSelectedItem;
+			firstName = splitNameGetFirst(facName);
+			lastName = splitNameGetLast(facName);
+			webViewSchedule.MainFrameUrl = "http://www.cis.gvsu.edu/public/staffListing/index.php?page=staff&fname=" + firstName + "&lname=" + lastName;
 		}
 
 		public MainWindowController(IntPtr handle) : base(handle) { }
