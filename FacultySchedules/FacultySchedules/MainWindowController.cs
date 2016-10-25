@@ -2,6 +2,7 @@
 using Foundation;
 using AppKit;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FacultySchedules
 {
@@ -10,6 +11,7 @@ namespace FacultySchedules
 		string facName, firstName, lastName;
 		Run runInit = new Run();
 		allFaculty allFacultyInit = new allFaculty();
+		List<string> names = new List<string>();
 
 		public void ViewDidLoad()
 		{
@@ -19,10 +21,15 @@ namespace FacultySchedules
 
 		partial void clickedScrapeButton(Foundation.NSObject sender)
 		{
-			
+
+			foreach (string poop in allFacultyInit.getEveryonesName())
+			{
+				names.Add(poop);
+			}
+
 			if (allFacultyCheckBox.State == NSCellStateValue.On)
 			{
-				foreach (string name in allFacultyInit.getEveryonesName())
+				foreach (string name in names)
 				{
 					facName = name;
 					grabSplitAndRun();
@@ -70,15 +77,15 @@ namespace FacultySchedules
 
 		public static string splitNameGetFirst(string input)
 		{
-			string[] names = input.Split();
-			string first = names[0];
+			string[] nameToSplit = input.Split();
+			string first = nameToSplit[0];
 			return first;
 		}
 
 		public string splitNameGetLast(string input)
 		{
-			string[] names = input.Split();
-			string last = names[1];
+			string[] nameToSplit = input.Split();
+			string last = nameToSplit[1];
 			return last;
 		}
 

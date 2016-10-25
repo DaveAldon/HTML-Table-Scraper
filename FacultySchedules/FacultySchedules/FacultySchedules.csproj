@@ -97,6 +97,7 @@
     <Compile Include="Run.cs" />
     <Compile Include="GiveData.cs" />
     <Compile Include="allFaculty.cs" />
+    <Compile Include="GetData.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
