@@ -13,10 +13,22 @@ namespace FacultySchedules
 	partial class MainWindowController
 	{
 		[Outlet]
+		AppKit.NSView addFacultyButton { get; set; }
+
+		[Outlet]
 		AppKit.NSButton allFacultyCheckBox { get; set; }
 
 		[Outlet]
 		AppKit.NSPopUpButton facultyListCombo { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField firstNameInput { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField lastNameInput { get; set; }
+
+		[Outlet]
+		AppKit.NSView removeFacultyButton { get; set; }
 
 		[Outlet]
 		AppKit.NSTextField resultTextBox { get; set; }
@@ -30,6 +42,12 @@ namespace FacultySchedules
 		[Outlet]
 		WebKit.WebView webViewSchedule { get; set; }
 
+		[Action ("clickedAddFacultyButton:")]
+		partial void clickedAddFacultyButton (Foundation.NSObject sender);
+
+		[Action ("clickedRemoveFacultyButton:")]
+		partial void clickedRemoveFacultyButton (Foundation.NSObject sender);
+
 		[Action ("clickedScheduleButton:")]
 		partial void clickedScheduleButton (Foundation.NSObject sender);
 
@@ -38,6 +56,21 @@ namespace FacultySchedules
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (lastNameInput != null) {
+				lastNameInput.Dispose ();
+				lastNameInput = null;
+			}
+
+			if (firstNameInput != null) {
+				firstNameInput.Dispose ();
+				firstNameInput = null;
+			}
+
+			if (addFacultyButton != null) {
+				addFacultyButton.Dispose ();
+				addFacultyButton = null;
+			}
+
 			if (allFacultyCheckBox != null) {
 				allFacultyCheckBox.Dispose ();
 				allFacultyCheckBox = null;
@@ -46,6 +79,11 @@ namespace FacultySchedules
 			if (facultyListCombo != null) {
 				facultyListCombo.Dispose ();
 				facultyListCombo = null;
+			}
+
+			if (removeFacultyButton != null) {
+				removeFacultyButton.Dispose ();
+				removeFacultyButton = null;
 			}
 
 			if (resultTextBox != null) {

@@ -12,7 +12,6 @@ namespace FacultySchedules
 			string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
 			MySqlConnection connection = null;
 			MySqlDataReader dataReader = null;
-
 			try
 			{
 				connection = new MySqlConnection(connectionParam);

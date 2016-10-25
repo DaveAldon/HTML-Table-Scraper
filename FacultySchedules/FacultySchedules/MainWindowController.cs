@@ -19,14 +19,24 @@ namespace FacultySchedules
 			//Set initial values here
 		}
 
+		partial void clickedAddFacultyButton(NSObject sender)
+		{
+			runInit.giveDB.createTable(firstNameInput.StringValue + lastNameInput.StringValue);
+
+		}
+
+		partial void clickedRemoveFacultyButton(NSObject sender)
+		{
+			runInit.giveDB.dropTable(firstNameInput.StringValue + lastNameInput.StringValue);
+		}
+
 		partial void clickedScrapeButton(Foundation.NSObject sender)
 		{
-
-			foreach (string poop in allFacultyInit.getEveryonesName())
+			foreach (string eachName in allFacultyInit.getEveryonesName())
 			{
-				names.Add(poop);
+				facultyListCombo.AddItem(eachName);
+				names.Add(eachName);
 			}
-
 			if (allFacultyCheckBox.State == NSCellStateValue.On)
 			{
 				foreach (string name in names)

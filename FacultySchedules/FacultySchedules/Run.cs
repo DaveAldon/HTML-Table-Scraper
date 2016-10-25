@@ -6,6 +6,8 @@ namespace FacultySchedules
 {
 	class Run
 	{
+		public GiveData giveDB = new GiveData();
+	 
 		public void start(string name, string firstName, string lastName)
 		{
 			List<string> dayList = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
@@ -43,8 +45,6 @@ namespace FacultySchedules
 				}
 				index = 0;
 			}
-
-			GiveData giveDB = new GiveData();
 			giveDB.DBGather(days, name);
 		}
 	}
