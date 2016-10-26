@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace FacultySchedules
@@ -9,7 +8,7 @@ namespace FacultySchedules
 		List<string> everybodyName = new List<string>();
 		public List<string> getEveryonesName()
 		{
-			string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
+			string connectionParam = Globals.connectionParam;
 			MySqlConnection connection = null;
 			MySqlDataReader dataReader = null;
 			try

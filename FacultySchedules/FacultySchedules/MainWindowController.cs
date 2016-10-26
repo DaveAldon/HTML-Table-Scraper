@@ -1,92 +1,21 @@
 ﻿using System;
 using Foundation;
 using AppKit;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FacultySchedules
 {
 	public partial class MainWindowController : NSWindowController
 	{
-		//string facName, firstName, lastName;
-		Run runInit = new Run();
-		allFaculty allFacultyInit = new allFaculty();
-		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting();
+		Run runInit = new Run(); //Instantiation of main engine
+		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
+		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the crazy names into proper URLs
 		List<string> names = new List<string>();
 
 		public void ViewDidLoad()
 		{
 			base.AwakeFromNib();
 		}
-
-		partial void clickedAddFacultyButton(NSObject sender)
-		{
-				runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
-		}
-
-		partial void clickedRemoveFacultyButton(NSObject sender)
-		{
-				runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
-		}
-
-		partial void clickedScrapeButton(Foundation.NSObject sender)
-		{
-			foreach (string eachName in allFacultyInit.getEveryonesName())
-			{
-				facultyListCombo.AddItem(eachName);
-				names.Add(eachName);
-				runInit.start(eachName);
-			}
-			/*
-			if (allFacultyCheckBox.State == NSCellStateValue.On)
-			{
-				foreach (string name in names)
-				{
-					facName = name;
-					runInit.start(facName);
-					//grabSplitAndRun();
-				}
-			}
-			else
-			{
-				facName = facultyListCombo.TitleOfSelectedItem;
-				runInit.start(facName);
-				//grabSplitAndRun();
-			}
-			*/
-		}
-
-		partial void clickedScheduleButton(Foundation.NSObject sender)
-		{
-			string facName = facultyListCombo.TitleOfSelectedItem;
-			//firstName = splitNameGetFirst(facName);
-			//lastName = splitNameGetLast(facName);
-			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName);
-		}
-
-		public MainWindowController(IntPtr handle) : base(handle) { }
-
-		[Export("initWithCoder:")]
-		public MainWindowController(NSCoder coder) : base(coder) { }
-
-		public MainWindowController() : base("MainWindow") { }
-
-		/*
-		public void initScrape()
-		{
-			foreach (string eachName in allFacultyInit.getEveryonesName())
-			{
-				facultyListCombo.AddItem(eachName);
-				names.Add(eachName);
-			}
-			foreach (string name in names)
-			{
-				facName = name;
-				//grabSplitAndRun();
-			}
-		}
-		*/
 
 		public override void AwakeFromNib()
 		{
@@ -98,35 +27,37 @@ namespace FacultySchedules
 			get { return (MainWindow)base.Window; }
 		}
 
-		/*
-		public void grabSplitAndRun()
+		public MainWindowController(IntPtr handle) : base(handle) { }
+
+		[Export("initWithCoder:")]
+		public MainWindowController(NSCoder coder) : base(coder) { }
+
+		public MainWindowController() : base("MainWindow") { }
+
+		partial void clickedAddFacultyButton(NSObject sender) //Button click event
 		{
-			firstName = splitNameGetFirst(facName);
-			lastName = splitNameGetLast(facName);
-			facName = RemoveWhitespace(facName);
-			runInit.start(facName, firstName, lastName);
+			runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 
-		public static string splitNameGetFirst(string input)
+		partial void clickedRemoveFacultyButton(NSObject sender)
 		{
-			string[] nameToSplit = input.Split();
-			string first = nameToSplit[0];
-			return first;
+			runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 
-		public string splitNameGetLast(string input)
+		partial void clickedScheduleButton(Foundation.NSObject sender)
 		{
-			string[] nameToSplit = input.Split();
-			string last = nameToSplit[1];
-			return last;
+			string facName = facultyListCombo.TitleOfSelectedItem; //Grabs the selected combo list item
+			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName); //Sets browser view to the formatted URL
 		}
 
-		public static string RemoveWhitespace(string input)
+		partial void clickedScrapeButton(Foundation.NSObject sender)
 		{
-			return new string(input.ToCharArray()
-				.Where(c => !Char.IsWhiteSpace(c))
-				.ToArray());
+			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
+			{
+				facultyListCombo.AddItem(eachName); //Adds a new element to the combo list
+				names.Add(eachName);
+				runInit.start(eachName); //Begins the main engine with the given name
+			}
 		}
-		*/
 	}
 }

@@ -29,7 +29,7 @@ namespace FacultySchedules
 		//public void DBpush(int inputDay, int inputHour, int inputEvent)
 		public void DBpush(string inputDay, string inputHour, string inputEvent, string name)
 		{
-			string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
+			string connectionParam = Globals.connectionParam;
 
 			MySqlConnection addConnection = null;
 			MySqlDataReader addDataReader = null;

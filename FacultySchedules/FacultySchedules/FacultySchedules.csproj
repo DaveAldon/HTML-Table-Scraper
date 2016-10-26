@@ -99,6 +99,7 @@
     <Compile Include="allFaculty.cs" />
     <Compile Include="GetData.cs" />
     <Compile Include="SpecialNameFormatting.cs" />
+    <Compile Include="Globals.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />

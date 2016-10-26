@@ -8,29 +8,26 @@ namespace FacultySchedules
 	{
 		string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
 
-		public void multipleDBGather(List<string> data, string name)
-		{
-
-		}
-
 		public void DBGather(List<string> data, string name)
 		{
 			string inputDay, inputHour, inputEvent;
 			bool firstTime = true;
+
 			if (firstTime == true)
 			{
 				dropTable(name);
 			}
 			for (int i = 0; i < data.Count; i++)
 			{
-				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None);
+				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
 				inputDay = subStrings[0];
 				inputHour = subStrings[1];
 				inputEvent = subStrings[2];
-				DBpush(inputDay, inputHour, inputEvent, name);
+				DBpush(inputDay, inputHour, inputEvent, name); //Sends the data out into the appropriate database
 			}
 			firstTime = false;
 		}
+
 		public void DBpush(string inputDay, string inputHour, string inputEvent, string name)
 		{
 			createTable(name);
@@ -84,7 +81,7 @@ namespace FacultySchedules
 			catch (MySqlException error)
 			{
 			}
-			finally //We need to close all of our connections once everything is retrieved
+			finally
 			{
 				if (addDataReader != null)
 				{
@@ -113,7 +110,7 @@ namespace FacultySchedules
 			catch (MySqlException error)
 			{
 			}
-			finally //We need to close all of our connections once everything is retrieved
+			finally
 			{
 				if (dataReader != null)
 				{
