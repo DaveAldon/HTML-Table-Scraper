@@ -28,6 +28,9 @@ namespace FacultySchedules
 		AppKit.NSTextField lastNameInput { get; set; }
 
 		[Outlet]
+		AppKit.NSTextField middleInitialInput { get; set; }
+
+		[Outlet]
 		AppKit.NSView removeFacultyButton { get; set; }
 
 		[Outlet]
@@ -56,16 +59,6 @@ namespace FacultySchedules
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (lastNameInput != null) {
-				lastNameInput.Dispose ();
-				lastNameInput = null;
-			}
-
-			if (firstNameInput != null) {
-				firstNameInput.Dispose ();
-				firstNameInput = null;
-			}
-
 			if (addFacultyButton != null) {
 				addFacultyButton.Dispose ();
 				addFacultyButton = null;
@@ -79,6 +72,21 @@ namespace FacultySchedules
 			if (facultyListCombo != null) {
 				facultyListCombo.Dispose ();
 				facultyListCombo = null;
+			}
+
+			if (firstNameInput != null) {
+				firstNameInput.Dispose ();
+				firstNameInput = null;
+			}
+
+			if (lastNameInput != null) {
+				lastNameInput.Dispose ();
+				lastNameInput = null;
+			}
+
+			if (middleInitialInput != null) {
+				middleInitialInput.Dispose ();
+				middleInitialInput = null;
 			}
 
 			if (removeFacultyButton != null) {

@@ -98,6 +98,7 @@
     <Compile Include="GiveData.cs" />
     <Compile Include="allFaculty.cs" />
     <Compile Include="GetData.cs" />
+    <Compile Include="SpecialNameFormatting.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />

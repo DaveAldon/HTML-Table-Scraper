@@ -3,31 +3,31 @@ using Foundation;
 using AppKit;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FacultySchedules
 {
 	public partial class MainWindowController : NSWindowController
 	{
-		string facName, firstName, lastName;
+		//string facName, firstName, lastName;
 		Run runInit = new Run();
 		allFaculty allFacultyInit = new allFaculty();
+		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting();
 		List<string> names = new List<string>();
 
 		public void ViewDidLoad()
 		{
 			base.AwakeFromNib();
-			//Set initial values here
 		}
 
 		partial void clickedAddFacultyButton(NSObject sender)
 		{
-			runInit.giveDB.createTable(firstNameInput.StringValue + lastNameInput.StringValue);
-
+				runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 
 		partial void clickedRemoveFacultyButton(NSObject sender)
 		{
-			runInit.giveDB.dropTable(firstNameInput.StringValue + lastNameInput.StringValue);
+				runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 
 		partial void clickedScrapeButton(Foundation.NSObject sender)
@@ -36,28 +36,33 @@ namespace FacultySchedules
 			{
 				facultyListCombo.AddItem(eachName);
 				names.Add(eachName);
+				runInit.start(eachName);
 			}
+			/*
 			if (allFacultyCheckBox.State == NSCellStateValue.On)
 			{
 				foreach (string name in names)
 				{
 					facName = name;
-					grabSplitAndRun();
+					runInit.start(facName);
+					//grabSplitAndRun();
 				}
 			}
 			else
 			{
 				facName = facultyListCombo.TitleOfSelectedItem;
-				grabSplitAndRun();
+				runInit.start(facName);
+				//grabSplitAndRun();
 			}
+			*/
 		}
 
 		partial void clickedScheduleButton(Foundation.NSObject sender)
 		{
-			facName = facultyListCombo.TitleOfSelectedItem;
-			firstName = splitNameGetFirst(facName);
-			lastName = splitNameGetLast(facName);
-			webViewSchedule.MainFrameUrl = "http://www.cis.gvsu.edu/public/staffListing/index.php?page=staff&fname=" + firstName + "&lname=" + lastName;
+			string facName = facultyListCombo.TitleOfSelectedItem;
+			//firstName = splitNameGetFirst(facName);
+			//lastName = splitNameGetLast(facName);
+			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName);
 		}
 
 		public MainWindowController(IntPtr handle) : base(handle) { }
@@ -66,6 +71,22 @@ namespace FacultySchedules
 		public MainWindowController(NSCoder coder) : base(coder) { }
 
 		public MainWindowController() : base("MainWindow") { }
+
+		/*
+		public void initScrape()
+		{
+			foreach (string eachName in allFacultyInit.getEveryonesName())
+			{
+				facultyListCombo.AddItem(eachName);
+				names.Add(eachName);
+			}
+			foreach (string name in names)
+			{
+				facName = name;
+				//grabSplitAndRun();
+			}
+		}
+		*/
 
 		public override void AwakeFromNib()
 		{
@@ -77,6 +98,7 @@ namespace FacultySchedules
 			get { return (MainWindow)base.Window; }
 		}
 
+		/*
 		public void grabSplitAndRun()
 		{
 			firstName = splitNameGetFirst(facName);
@@ -105,5 +127,6 @@ namespace FacultySchedules
 				.Where(c => !Char.IsWhiteSpace(c))
 				.ToArray());
 		}
+		*/
 	}
 }

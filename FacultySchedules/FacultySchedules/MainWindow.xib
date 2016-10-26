@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
@@ -13,6 +13,7 @@
                 <outlet property="facultyListCombo" destination="Ykw-BU-HJ5" id="g3y-c1-39T"/>
                 <outlet property="firstNameInput" destination="gIM-aj-meq" id="dc9-3B-WNa"/>
                 <outlet property="lastNameInput" destination="fIU-HJ-AkL" id="Lxx-zw-KSy"/>
+                <outlet property="middleInitialInput" destination="3" id="PHY-ym-eeM"/>
                 <outlet property="removeFacultyButton" destination="3" id="pRa-ID-C34"/>
                 <outlet property="resultTextBox" destination="rCV-Su-gzp" id="7EK-IM-l51"/>
                 <outlet property="scheduleButton" destination="qJk-dN-hSd" id="Ztn-H8-TNb"/>
@@ -101,8 +102,26 @@
                             <action selector="facultyListCombo:" target="-2" id="UpN-eB-0vt"/>
                         </connections>
                     </popUpButton>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="fIU-HJ-AkL">
+                        <rect key="frame" x="545" y="644" width="96" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Last Name" drawsBackground="YES" id="bsL-rM-iwW">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="w4R-7n-wfb">
+                        <rect key="frame" x="446" y="644" width="96" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Middle" drawsBackground="YES" id="ohg-62-0z7">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                     <button verticalHuggingPriority="750" misplaced="YES" id="SNj-0j-pgE">
-                        <rect key="frame" x="538" y="637" width="112" height="32"/>
+                        <rect key="frame" x="643" y="637" width="112" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Add Faculty" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IOG-WQ-HFs">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -113,7 +132,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" misplaced="YES" id="0S4-BU-3vd">
-                        <rect key="frame" x="644" y="637" width="136" height="32"/>
+                        <rect key="frame" x="747" y="637" width="136" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Remove Faculty" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bc6-x6-9Z5">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -123,15 +142,6 @@
                             <action selector="clickedRemoveFacultyButton:" target="-2" id="wmK-Bx-fmM"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" misplaced="YES" id="fIU-HJ-AkL">
-                        <rect key="frame" x="446" y="644" width="96" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Last Name" drawsBackground="YES" id="bsL-rM-iwW">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                 </subviews>
             </view>
             <connections>

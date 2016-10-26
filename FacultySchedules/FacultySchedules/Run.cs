@@ -8,7 +8,7 @@ namespace FacultySchedules
 	{
 		public GiveData giveDB = new GiveData();
 	 
-		public void start(string name, string firstName, string lastName)
+		public void start(string name)
 		{
 			List<string> dayList = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 
@@ -18,7 +18,7 @@ namespace FacultySchedules
 			string value = "";
 
 			Scrape scraper = new Scrape();
-			List<HtmlNode> x = scraper.BeginScrape(firstName, lastName);
+			List<HtmlNode> x = scraper.BeginScrape(name);
 
 			bool first = true;
 
@@ -39,7 +39,6 @@ namespace FacultySchedules
 						time = value;
 						continue;
 					}
-
 					days.Add(dayList[index - 1] + "$" + time + "$" + value);
 					index = index + 1;
 				}

@@ -8,10 +8,12 @@ namespace FacultySchedules
 {
 	public class Scrape
 	{
-		public List<HtmlNode> BeginScrape(string firstName, string lastName)
+		public List<HtmlNode> BeginScrape(string name)
 		{
+			SpecialNameFormatting specialFormatInit = new SpecialNameFormatting();
 			WebClient webClient = new WebClient();
-			string page = webClient.DownloadString("http://www.cis.gvsu.edu/public/staffListing/index.php?page=staff&fname=" + firstName + "&lname=" + lastName);
+
+			string page = webClient.DownloadString(specialFormatInit.splitNameGetURL(name));
 
 			HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
 			doc.LoadHtml(page);

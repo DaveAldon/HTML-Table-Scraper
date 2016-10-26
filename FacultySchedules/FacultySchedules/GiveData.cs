@@ -6,7 +6,6 @@ namespace FacultySchedules
 {
 	public class GiveData
 	{
-		bool firstTime = true;
 		string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
 
 		public void multipleDBGather(List<string> data, string name)
@@ -17,7 +16,11 @@ namespace FacultySchedules
 		public void DBGather(List<string> data, string name)
 		{
 			string inputDay, inputHour, inputEvent;
-
+			bool firstTime = true;
+			if (firstTime == true)
+			{
+				dropTable(name);
+			}
 			for (int i = 0; i < data.Count; i++)
 			{
 				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None);
@@ -26,14 +29,10 @@ namespace FacultySchedules
 				inputEvent = subStrings[2];
 				DBpush(inputDay, inputHour, inputEvent, name);
 			}
+			firstTime = false;
 		}
 		public void DBpush(string inputDay, string inputHour, string inputEvent, string name)
 		{
-			if (firstTime == true)
-			{
-				dropTable(name);
-				firstTime = false;
-			}
 			createTable(name);
 			insertIntoTable(inputDay, inputHour, inputEvent, name);
 		}
@@ -46,7 +45,7 @@ namespace FacultySchedules
 			{
 				connectionCreate = new MySqlConnection(connectionParam);
 				connectionCreate.Open();
-				string stm = "CREATE TABLE " + name + " (id int(50) NOT NULL AUTO_INCREMENT, day varchar(50), hour varchar(50), event varchar(50), PRIMARY KEY (id))";
+				string stm = "CREATE TABLE `" + name + "` (id int(50) NOT NULL AUTO_INCREMENT, day varchar(50), hour varchar(50), event varchar(50), PRIMARY KEY (id))";
 				MySqlCommand createCmd = new MySqlCommand(stm, connectionCreate);
 				dataReaderCreate = createCmd.ExecuteReader();
 			}
@@ -75,7 +74,7 @@ namespace FacultySchedules
 			{
 				addConnection = new MySqlConnection(connectionParam);
 				addConnection.Open();
-				string stm = "INSERT INTO " + name + " (day, hour, event) VALUES(@day, @hour, @event)";
+				string stm = "INSERT INTO `" + name + "` (day, hour, event) VALUES(@day, @hour, @event)";
 				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
 				cmd.Parameters.AddWithValue("@day", inputDay);
 				cmd.Parameters.AddWithValue("@hour", inputHour);
@@ -107,7 +106,7 @@ namespace FacultySchedules
 			{
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
-				string replaceStm = "DROP TABLE IF EXISTS " + name;
+				string replaceStm = "DROP TABLE IF EXISTS `" + name + "`";
 				MySqlCommand replaceCmd = new MySqlCommand(replaceStm, connection);
 				dataReader = replaceCmd.ExecuteReader();
 			}
