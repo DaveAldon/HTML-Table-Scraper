@@ -10,6 +10,7 @@ namespace FacultySchedules
 		Run runInit = new Run(); //Instantiation of main engine
 		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the crazy names into proper URLs
+		GetData getDataInit = new GetData();
 		List<string> names = new List<string>();
 
 		public void ViewDidLoad()
@@ -34,6 +35,36 @@ namespace FacultySchedules
 
 		public MainWindowController() : base("MainWindow") { }
 
+		partial void findOut1(NSObject sender)
+		{
+			resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyComboQuery.TitleOfSelectedItem, eventInput1.StringValue);
+		}
+
+		partial void findOut2(NSObject sender)
+		{
+
+		}
+
+		partial void findOut3(NSObject sender)
+		{
+
+		}
+
+		partial void findOut4(NSObject sender)
+		{
+
+		}
+
+		partial void findOut5(NSObject sender)
+		{
+
+		}
+
+
+
+
+
+
 		partial void clickedAddFacultyButton(NSObject sender) //Button click event
 		{
 			runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
@@ -55,6 +86,7 @@ namespace FacultySchedules
 			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
 			{
 				facultyListCombo.AddItem(eachName); //Adds a new element to the combo list
+				facultyComboQuery.AddItem("asaf");
 				names.Add(eachName);
 				runInit.start(eachName); //Begins the main engine with the given name
 			}

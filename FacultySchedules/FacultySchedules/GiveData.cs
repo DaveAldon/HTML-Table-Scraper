@@ -6,7 +6,7 @@ namespace FacultySchedules
 {
 	public class GiveData
 	{
-		string connectionParam = "server=127.0.0.1;uid=test;port=8889;pwd=test;database=Faculty;";
+		string connectionParam = Globals.connectionParam;
 
 		public void DBGather(List<string> data, string name)
 		{

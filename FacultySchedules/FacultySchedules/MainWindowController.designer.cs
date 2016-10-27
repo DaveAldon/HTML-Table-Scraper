@@ -19,6 +19,21 @@ namespace FacultySchedules
 		AppKit.NSButton allFacultyCheckBox { get; set; }
 
 		[Outlet]
+		AppKit.NSTextField eventInput1 { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField eventInput2 { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField eventInput3 { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField eventInput5 { get; set; }
+
+		[Outlet]
+		AppKit.NSPopUpButton facultyComboQuery { get; set; }
+
+		[Outlet]
 		AppKit.NSPopUpButton facultyListCombo { get; set; }
 
 		[Outlet]
@@ -56,6 +71,21 @@ namespace FacultySchedules
 
 		[Action ("clickedScrapeButton:")]
 		partial void clickedScrapeButton (Foundation.NSObject sender);
+
+		[Action ("findOut1:")]
+		partial void findOut1 (Foundation.NSObject sender);
+
+		[Action ("findOut2:")]
+		partial void findOut2 (Foundation.NSObject sender);
+
+		[Action ("findOut3:")]
+		partial void findOut3 (Foundation.NSObject sender);
+
+		[Action ("findOut4:")]
+		partial void findOut4 (Foundation.NSObject sender);
+
+		[Action ("findOut5:")]
+		partial void findOut5 (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -67,6 +97,26 @@ namespace FacultySchedules
 			if (allFacultyCheckBox != null) {
 				allFacultyCheckBox.Dispose ();
 				allFacultyCheckBox = null;
+			}
+
+			if (eventInput1 != null) {
+				eventInput1.Dispose ();
+				eventInput1 = null;
+			}
+
+			if (eventInput2 != null) {
+				eventInput2.Dispose ();
+				eventInput2 = null;
+			}
+
+			if (eventInput3 != null) {
+				eventInput3.Dispose ();
+				eventInput3 = null;
+			}
+
+			if (eventInput5 != null) {
+				eventInput5.Dispose ();
+				eventInput5 = null;
 			}
 
 			if (facultyListCombo != null) {
