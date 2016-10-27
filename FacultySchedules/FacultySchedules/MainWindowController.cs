@@ -86,7 +86,7 @@ namespace FacultySchedules
 			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
 			{
 				facultyListCombo.AddItem(eachName); //Adds a new element to the combo list
-				facultyComboQuery.AddItem("asaf");
+				//facultyComboQuery.AddItem("asaf");
 				names.Add(eachName);
 				runInit.start(eachName); //Begins the main engine with the given name
 			}

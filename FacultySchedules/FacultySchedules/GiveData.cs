@@ -10,7 +10,7 @@ namespace FacultySchedules
 
 		public void DBGather(List<string> data, string name)
 		{
-			string inputDay, inputHour, inputEvent;
+			string inputDay, inputHour, inputEvent, inputRowSpan;
 			bool firstTime = true;
 
 			if (firstTime == true)
@@ -23,15 +23,16 @@ namespace FacultySchedules
 				inputDay = subStrings[0];
 				inputHour = subStrings[1];
 				inputEvent = subStrings[2];
-				DBpush(inputDay, inputHour, inputEvent, name); //Sends the data out into the appropriate database
+				inputRowSpan = subStrings[3];
+				DBpush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the appropriate database
 			}
 			firstTime = false;
 		}
 
-		public void DBpush(string inputDay, string inputHour, string inputEvent, string name)
+		public void DBpush(string inputDay, string inputHour, string inputEvent, string inputRowSpan, string name)
 		{
 			createTable(name);
-			insertIntoTable(inputDay, inputHour, inputEvent, name);
+			insertIntoTable(inputDay, inputHour, inputEvent, inputRowSpan, name);
 		}
 
 		public void createTable(string name)
@@ -42,7 +43,7 @@ namespace FacultySchedules
 			{
 				connectionCreate = new MySqlConnection(connectionParam);
 				connectionCreate.Open();
-				string stm = "CREATE TABLE `" + name + "` (id int(50) NOT NULL AUTO_INCREMENT, day varchar(50), hour varchar(50), event varchar(50), PRIMARY KEY (id))";
+				string stm = "CREATE TABLE `" + name + "` (id int(50) NOT NULL AUTO_INCREMENT, day varchar(50), hour varchar(50), event varchar(50), rowspan varchar (10), PRIMARY KEY (id))";
 				MySqlCommand createCmd = new MySqlCommand(stm, connectionCreate);
 				dataReaderCreate = createCmd.ExecuteReader();
 			}
@@ -63,7 +64,7 @@ namespace FacultySchedules
 			}
 		}
 
-		public void insertIntoTable(string inputDay, string inputHour, string inputEvent, string name)
+		public void insertIntoTable(string inputDay, string inputHour, string inputEvent, string inputRowSpan, string name)
 		{
 			MySqlConnection addConnection = null;
 			MySqlDataReader addDataReader = null;
@@ -71,11 +72,12 @@ namespace FacultySchedules
 			{
 				addConnection = new MySqlConnection(connectionParam);
 				addConnection.Open();
-				string stm = "INSERT INTO `" + name + "` (day, hour, event) VALUES(@day, @hour, @event)";
+				string stm = "INSERT INTO `" + name + "` (day, hour, event, rowspan) VALUES(@day, @hour, @event, @rowspan)";
 				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
 				cmd.Parameters.AddWithValue("@day", inputDay);
 				cmd.Parameters.AddWithValue("@hour", inputHour);
 				cmd.Parameters.AddWithValue("@event", inputEvent);
+				cmd.Parameters.AddWithValue("@rowspan", inputRowSpan);
 				addDataReader = cmd.ExecuteReader();
 			}
 			catch (MySqlException error)
