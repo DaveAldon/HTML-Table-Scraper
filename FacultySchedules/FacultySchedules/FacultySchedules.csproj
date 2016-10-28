@@ -62,6 +62,7 @@
     <Reference Include="SharpSwift.Attributes">
       <HintPath>..\packages\SharpSwift.Attributes.1.1.0\lib\SharpSwift.Attributes.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
