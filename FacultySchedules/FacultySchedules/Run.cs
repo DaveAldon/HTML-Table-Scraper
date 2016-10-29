@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System;
 using HtmlAgilityPack;
 
@@ -19,10 +18,11 @@ namespace FacultySchedules
 			string rowSpan = "rowspan=\"";
 			string tempHTML = "";
 			char rowSpanChar;
-			string span = "0";
+			int span = 0;
 			Scrape scraper = new Scrape();
 			List<HtmlNode> x = scraper.BeginScrape(name);
 			var time = "";
+			DateTime firstTime;
 
 			bool first = true;
 
@@ -56,46 +56,35 @@ namespace FacultySchedules
 
 					if (subStrings[i].Contains(rowSpan))
 					{
-						rowSpanChar = tempHTML[tempHTML.IndexOf(rowSpan, System.StringComparison.Ordinal) + 9];
-						span = (rowSpanChar - '0').ToString();
-
+						rowSpanChar = tempHTML[tempHTML.IndexOf(rowSpan, StringComparison.Ordinal) + 9];
+						span = (rowSpanChar - '0');
 						value = innerString;
-						/*
-						if (index == 0)
-						{
-							index = index + 1;
-							//time = value;
-							continue;
-						}
-						*/
+						firstTime = DateTime.Parse(time);
+						days.Add(dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
 
-						days.Add(dayList[index] + "$" + time + "$" + value + "$" + span);
+						if (span > 0)
+						{
+							firstTime = DateTime.Parse(time);
+							int tempSpan = span;
+							while (tempSpan > 1)
+							{
+								firstTime = firstTime.AddMinutes(30);
+
+								days.Add(dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+								tempSpan--;
+							}
+						}
 						index = index + 1;
 					}
+
 					else {
-						span = "0";
-
-						value = innerString;
-						/*
-						if (index == 0)
-						{
-							index = index + 1;
-							//time = value;
-							continue;
-						}
-						*/
-
-						days.Add(dayList[index] + "$" + time + "$" + value + "$" + span);
+						span = 0;
+						//value = innerString;
+						//days.Add(dayList[index] + "$" + time + "$" + value + "$" + span);
 						index = index + 1;
 					}
 				}
 				index = 0;
-
-
-
-
-
-				//index = 0;
 			}
 			giveDB.DBGather(days, name);
 		}
