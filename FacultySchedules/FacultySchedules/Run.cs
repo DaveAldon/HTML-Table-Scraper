@@ -11,8 +11,8 @@ namespace FacultySchedules
 		public void start(string name)
 		{
 			List<string> dayList = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
-
 			List<string> days = new List<string>();
+			List<string> classes = new List<string>();
 			int index = 0;
 			string value = "";
 			string rowSpan = "rowspan=\"";
@@ -23,7 +23,6 @@ namespace FacultySchedules
 			List<HtmlNode> x = scraper.BeginScrape(name);
 			var time = "";
 			DateTime firstTime;
-
 			bool first = true;
 
 			foreach (HtmlNode item in x)
@@ -61,6 +60,7 @@ namespace FacultySchedules
 						value = innerString;
 						firstTime = DateTime.Parse(time);
 						days.Add(dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+						classes.Add(value);
 
 						if (span > 0)
 						{
@@ -86,7 +86,7 @@ namespace FacultySchedules
 				}
 				index = 0;
 			}
-			giveDB.DBGather(days, name);
+			giveDB.DBGather(days, name, classes);
 		}
 	}
 }

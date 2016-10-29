@@ -9,6 +9,7 @@ namespace FacultySchedules
 	{
 		Run runInit = new Run(); //Instantiation of main engine
 		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
+		AllClasses allClassesInit = new AllClasses(); //Class finder
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the crazy names into proper URLs
 		GetData getDataInit = new GetData();
 		List<string> names = new List<string>();
@@ -37,12 +38,13 @@ namespace FacultySchedules
 
 		partial void findOut1(NSObject sender)
 		{
-			resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyComboQuery.TitleOfSelectedItem, eventInput1.StringValue);
+			resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyListCombo.TitleOfSelectedItem, classCombo.TitleOfSelectedItem);
+			//eventInput1.StringValue
 		}
 
 		partial void findOut2(NSObject sender)
 		{
-
+			
 		}
 
 		partial void findOut3(NSObject sender)
@@ -60,12 +62,7 @@ namespace FacultySchedules
 
 		}
 
-
-
-
-
-
-		partial void clickedAddFacultyButton(NSObject sender) //Button click event
+		partial void clickedAddFacultyButton(NSObject sender)
 		{
 			runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
@@ -77,7 +74,7 @@ namespace FacultySchedules
 
 		partial void clickedScheduleButton(Foundation.NSObject sender)
 		{
-			string facName = facultyListCombo.TitleOfSelectedItem; //Grabs the selected combo list item
+			string facName = htmlScheduleCombo.TitleOfSelectedItem; //Grabs the selected combo list item
 			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName); //Sets browser view to the formatted URL
 		}
 
@@ -86,9 +83,16 @@ namespace FacultySchedules
 			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
 			{
 				facultyListCombo.AddItem(eachName); //Adds a new element to the combo list
-				//facultyComboQuery.AddItem("asaf");
+				htmlScheduleCombo.AddItem(eachName);
 				names.Add(eachName);
 				runInit.start(eachName); //Begins the main engine with the given name
+			}
+
+			foreach (string eachClassName in allClassesInit.getEveryClass()) //Goes through each faculty name in the database table
+			{
+				classCombo.AddItem(eachClassName);
+				classCombo2.AddItem(eachClassName);
+				classCombo3.AddItem(eachClassName);
 			}
 		}
 	}

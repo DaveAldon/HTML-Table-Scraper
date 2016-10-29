@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using AppKit;
 
 namespace FacultySchedules
 {
@@ -16,7 +15,7 @@ namespace FacultySchedules
 			{
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
-				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = 'Office Hour'";
+				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = '" + className + "'";
 				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 				dataReader = replaceCmd.ExecuteReader();
 
@@ -39,6 +38,16 @@ namespace FacultySchedules
 			}
 			catch (MySqlException error)
 			{
+				NSAlert oAlert = new NSAlert();
+				// Set the buttons
+				oAlert.InvokeOnMainThread(delegate
+				{
+					oAlert.AddButton("Ok");
+				});
+				// Show the message box and capture
+				oAlert.MessageText = "Oops!";
+				oAlert.InformativeText = "The message";
+				oAlert.AlertStyle = NSAlertStyle.Informational;
 				return error.ToString();
 			}
 			finally //We need to close all of our connections once everything is retrieved

@@ -101,6 +101,7 @@
     <Compile Include="GetData.cs" />
     <Compile Include="SpecialNameFormatting.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="AllClasses.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />

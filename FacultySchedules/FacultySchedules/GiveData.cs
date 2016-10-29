@@ -7,8 +7,9 @@ namespace FacultySchedules
 	public class GiveData
 	{
 		string connectionParam = Globals.connectionParam;
+		AllClasses allClassesInit = new AllClasses();
 
-		public void DBGather(List<string> data, string name)
+		public void DBGather(List<string> data, string name, List<string> classes)
 		{
 			string inputDay, inputHour, inputEvent;
 			int inputRowSpan;
@@ -28,6 +29,11 @@ namespace FacultySchedules
 				DBpush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the appropriate database
 			}
 			firstTime = false;
+
+			for (int i = 0; i < classes.Count; i++)
+			{
+				insertIntoClasses(classes[i]);
+			}
 		}
 
 		public void DBpush(string inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
@@ -79,6 +85,40 @@ namespace FacultySchedules
 				cmd.Parameters.AddWithValue("@hour", inputHour);
 				cmd.Parameters.AddWithValue("@event", inputEvent);
 				cmd.Parameters.AddWithValue("@rowspan", inputRowSpan);
+				addDataReader = cmd.ExecuteReader();
+			}
+			catch (MySqlException error)
+			{
+			}
+			finally
+			{
+				if (addDataReader != null)
+				{
+					addDataReader.Close();
+				}
+
+				if (addConnection != null)
+				{
+					addConnection.Close();
+				}
+			}
+		}
+
+		public void insertIntoClasses(string className)
+		{
+			MySqlConnection addConnection = null;
+			MySqlDataReader addDataReader = null;
+			try
+			{
+				addConnection = new MySqlConnection(connectionParam);
+				addConnection.Open();
+
+				//string stm = "INSERT INTO Classes (name) SELECT name WHERE NOT EXISTS(SELECT * FROM Classes WHERE name = @name)";
+
+
+				string stm = "INSERT INTO Classes (name) VALUES(@name)";
+				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
+				cmd.Parameters.AddWithValue("@name", className);
 				addDataReader = cmd.ExecuteReader();
 			}
 			catch (MySqlException error)

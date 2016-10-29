@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
             <connections>
                 <outlet property="addFacultyButton" destination="3" id="8h1-zN-qqX"/>
                 <outlet property="allFacultyCheckBox" destination="jpy-aA-JJH" id="dRB-rp-9yo"/>
+                <outlet property="classCombo" destination="ciC-pE-ljA" id="caK-ym-LMM"/>
+                <outlet property="classCombo2" destination="ysf-ef-RmZ" id="ORe-by-Jxl"/>
+                <outlet property="classCombo3" destination="AAl-WF-UnB" id="nSe-1p-ozi"/>
                 <outlet property="eventInput1" destination="cE7-yk-Gwa" id="CSF-QH-KTj"/>
                 <outlet property="eventInput2" destination="H7K-IY-bgD" id="HaT-fo-xD8"/>
                 <outlet property="eventInput3" destination="0G6-41-8WB" id="amE-jJ-xZO"/>
@@ -23,6 +27,7 @@
                 <outlet property="findOut4" destination="7XV-tc-Y67" id="lEb-Zh-ZKh"/>
                 <outlet property="findOut5" destination="dtL-yL-FEW" id="Fp4-sm-fUG"/>
                 <outlet property="firstNameInput" destination="gIM-aj-meq" id="dc9-3B-WNa"/>
+                <outlet property="htmlScheduleCombo" destination="tmU-il-FhR" id="5BL-EW-to8"/>
                 <outlet property="lastNameInput" destination="fIU-HJ-AkL" id="Lxx-zw-KSy"/>
                 <outlet property="middleInitialInput" destination="3" id="PHY-ym-eeM"/>
                 <outlet property="removeFacultyButton" destination="3" id="pRa-ID-C34"/>
@@ -92,20 +97,8 @@
                             <accessibilityConnection property="title" destination="3" id="Sdk-ZQ-ioT"/>
                         </connections>
                     </webView>
-                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="Ykw-BU-HJ5">
-                        <rect key="frame" x="14" y="543" width="153" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="DUn-NK-cNI">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="zIR-pc-FNd"/>
-                        </popUpButtonCell>
-                        <connections>
-                            <action selector="facultyListCombo:" target="-2" id="UpN-eB-0vt"/>
-                        </connections>
-                    </popUpButton>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" id="xon-z8-wVk">
-                        <rect key="frame" x="607" y="640" width="153" height="26"/>
+                        <rect key="frame" x="549" y="642" width="153" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Efc-bz-3c2">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -175,7 +168,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="fcA-WO-kDF">
-                        <rect key="frame" x="536" y="647" width="73" height="17"/>
+                        <rect key="frame" x="478" y="649" width="73" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When does" id="Azo-p1-Dxc">
                             <font key="font" metaFont="system"/>
@@ -184,7 +177,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="7Jo-bG-dTr">
-                        <rect key="frame" x="760" y="645" width="38" height="17"/>
+                        <rect key="frame" x="705" y="648" width="38" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="have" id="MnB-cI-cJa">
                             <font key="font" metaFont="system"/>
@@ -214,31 +207,13 @@
                             <action selector="findOut2:" target="-2" id="7cs-02-SMA"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" misplaced="YES" id="cE7-yk-Gwa">
-                        <rect key="frame" x="798" y="643" width="122" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Class Name" drawsBackground="YES" id="Dfz-gK-eTb">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <textField verticalHuggingPriority="750" misplaced="YES" id="H7K-IY-bgD">
-                        <rect key="frame" x="798" y="619" width="122" height="22"/>
+                        <rect key="frame" x="757" y="66" width="122" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Class Name" drawsBackground="YES" id="gSe-Ci-Y64">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="UB9-wy-GqE">
-                        <rect key="frame" x="714" y="622" width="84" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who teaches" id="0RD-1t-wVP">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" misplaced="YES" id="dtL-yL-FEW">
@@ -284,21 +259,12 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" misplaced="YES" id="0G6-41-8WB">
-                        <rect key="frame" x="798" y="596" width="122" height="22"/>
+                        <rect key="frame" x="757" y="43" width="122" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Class Name" drawsBackground="YES" id="8JY-KV-UkY">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="Skf-6L-C9I">
-                        <rect key="frame" x="647" y="599" width="151" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who is free and teaches" id="5vR-ns-rwj">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="CFk-D8-k0G">
@@ -317,6 +283,75 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ciC-pE-ljA">
+                        <rect key="frame" x="747" y="642" width="176" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="ulc-He-ti9">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="RZe-yx-tpr"/>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="classCombo:" target="-2" id="5Q6-eU-JlZ"/>
+                        </connections>
+                    </popUpButton>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="cE7-yk-Gwa">
+                        <rect key="frame" x="757" y="90" width="122" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Class Name" drawsBackground="YES" id="Dfz-gK-eTb">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="tmU-il-FhR">
+                        <rect key="frame" x="14" y="544" width="160" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="bvK-d4-WDV">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="xCo-tJ-CUv"/>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="HTMLScheduleCombo:" target="-2" id="p2x-Tk-EZp"/>
+                        </connections>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ysf-ef-RmZ">
+                        <rect key="frame" x="747" y="616" width="176" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="X1w-5i-7ij">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="hEw-Pc-raG"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="AAl-WF-UnB">
+                        <rect key="frame" x="747" y="592" width="176" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="QI9-Tg-aSn">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="qq2-03-EAC"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="UB9-wy-GqE">
+                        <rect key="frame" x="653" y="623" width="84" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who teaches" id="0RD-1t-wVP">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="Skf-6L-C9I">
+                        <rect key="frame" x="586" y="600" width="151" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who is free and teaches" id="5vR-ns-rwj">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>

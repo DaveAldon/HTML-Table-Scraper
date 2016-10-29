@@ -19,6 +19,15 @@ namespace FacultySchedules
 		AppKit.NSButton allFacultyCheckBox { get; set; }
 
 		[Outlet]
+		AppKit.NSPopUpButton classCombo { get; set; }
+
+		[Outlet]
+		AppKit.NSPopUpButton classCombo2 { get; set; }
+
+		[Outlet]
+		AppKit.NSPopUpButton classCombo3 { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField eventInput1 { get; set; }
 
 		[Outlet]
@@ -31,13 +40,10 @@ namespace FacultySchedules
 		AppKit.NSTextField eventInput5 { get; set; }
 
 		[Outlet]
-		AppKit.NSPopUpButton facultyComboQuery { get; set; }
-
-		[Outlet]
-		AppKit.NSPopUpButton facultyListCombo { get; set; }
-
-		[Outlet]
 		AppKit.NSTextField firstNameInput { get; set; }
+
+		[Outlet]
+		AppKit.NSPopUpButton htmlScheduleCombo { get; set; }
 
 		[Outlet]
 		AppKit.NSTextField lastNameInput { get; set; }
@@ -59,6 +65,9 @@ namespace FacultySchedules
 
 		[Outlet]
 		WebKit.WebView webViewSchedule { get; set; }
+
+		[Outlet]
+		AppKit.NSPopUpButton facultyListCombo { get; set; }
 
 		[Action ("clickedAddFacultyButton:")]
 		partial void clickedAddFacultyButton (Foundation.NSObject sender);
@@ -89,6 +98,21 @@ namespace FacultySchedules
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (htmlScheduleCombo != null) {
+				htmlScheduleCombo.Dispose ();
+				htmlScheduleCombo = null;
+			}
+
+			if (classCombo2 != null) {
+				classCombo2.Dispose ();
+				classCombo2 = null;
+			}
+
+			if (classCombo3 != null) {
+				classCombo3.Dispose ();
+				classCombo3 = null;
+			}
+
 			if (addFacultyButton != null) {
 				addFacultyButton.Dispose ();
 				addFacultyButton = null;
@@ -97,6 +121,11 @@ namespace FacultySchedules
 			if (allFacultyCheckBox != null) {
 				allFacultyCheckBox.Dispose ();
 				allFacultyCheckBox = null;
+			}
+
+			if (classCombo != null) {
+				classCombo.Dispose ();
+				classCombo = null;
 			}
 
 			if (eventInput1 != null) {
