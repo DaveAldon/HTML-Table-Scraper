@@ -34,6 +34,7 @@
                 <outlet property="resultTextBox" destination="rCV-Su-gzp" id="7EK-IM-l51"/>
                 <outlet property="scheduleButton" destination="qJk-dN-hSd" id="Ztn-H8-TNb"/>
                 <outlet property="scrapeButton" destination="t2H-Lo-Vmo" id="qWs-ek-D1d"/>
+                <outlet property="timeCombo" destination="YHV-l5-PhS" id="g9p-KC-Xoi"/>
                 <outlet property="webViewSchedule" destination="EGe-jf-7JE" id="Z21-cY-vQO"/>
                 <outlet property="window" destination="2" id="6"/>
             </connections>
@@ -276,15 +277,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" misplaced="YES" id="0GI-cZ-hif">
-                        <rect key="frame" x="798" y="548" width="122" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="3:00pm" drawsBackground="YES" id="S0X-Zy-URa">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ciC-pE-ljA">
                         <rect key="frame" x="747" y="642" width="176" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -352,6 +344,24 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="YHV-l5-PhS">
+                        <rect key="frame" x="803" y="544" width="120" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="QI4-ab-dWK">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="pOv-Xn-gEH"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="0GI-cZ-hif">
+                        <rect key="frame" x="757" y="116" width="122" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="input5" placeholderString="3:00pm" drawsBackground="YES" id="S0X-Zy-URa">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>

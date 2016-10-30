@@ -19,6 +19,7 @@ namespace FacultySchedules
 			{
 				dropTable(name);
 			}
+
 			for (int i = 0; i < data.Count; i++)
 			{
 				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
@@ -28,6 +29,7 @@ namespace FacultySchedules
 				inputRowSpan = Convert.ToInt16(subStrings[3]);
 				DBpush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the appropriate database
 			}
+
 			firstTime = false;
 
 			for (int i = 0; i < classes.Count; i++)
@@ -54,9 +56,11 @@ namespace FacultySchedules
 				MySqlCommand createCmd = new MySqlCommand(stm, connectionCreate);
 				dataReaderCreate = createCmd.ExecuteReader();
 			}
+
 			catch (MySqlException error)
 			{
 			}
+
 			finally //We need to close all of our connections once everything is retrieved
 			{
 				if (dataReaderCreate != null)
@@ -87,9 +91,11 @@ namespace FacultySchedules
 				cmd.Parameters.AddWithValue("@rowspan", inputRowSpan);
 				addDataReader = cmd.ExecuteReader();
 			}
+
 			catch (MySqlException error)
 			{
 			}
+
 			finally
 			{
 				if (addDataReader != null)
@@ -112,17 +118,16 @@ namespace FacultySchedules
 			{
 				addConnection = new MySqlConnection(connectionParam);
 				addConnection.Open();
-
-				//string stm = "INSERT INTO Classes (name) SELECT name WHERE NOT EXISTS(SELECT * FROM Classes WHERE name = @name)";
-
 				string stm = "INSERT INTO Classes (name) VALUES(@name)";
 				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
 				cmd.Parameters.AddWithValue("@name", className);
 				addDataReader = cmd.ExecuteReader();
 			}
+
 			catch (MySqlException error)
 			{
 			}
+
 			finally
 			{
 				if (addDataReader != null)
@@ -149,9 +154,11 @@ namespace FacultySchedules
 				MySqlCommand replaceCmd = new MySqlCommand(replaceStm, connection);
 				dataReader = replaceCmd.ExecuteReader();
 			}
+
 			catch (MySqlException error)
 			{
 			}
+
 			finally
 			{
 				if (dataReader != null)

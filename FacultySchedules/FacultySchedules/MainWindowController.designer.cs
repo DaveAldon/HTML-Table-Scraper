@@ -40,6 +40,9 @@ namespace FacultySchedules
 		AppKit.NSTextField eventInput5 { get; set; }
 
 		[Outlet]
+		AppKit.NSPopUpButton facultyListCombo { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField firstNameInput { get; set; }
 
 		[Outlet]
@@ -64,10 +67,10 @@ namespace FacultySchedules
 		AppKit.NSButton scrapeButton { get; set; }
 
 		[Outlet]
-		WebKit.WebView webViewSchedule { get; set; }
+		AppKit.NSPopUpButton timeCombo { get; set; }
 
 		[Outlet]
-		AppKit.NSPopUpButton facultyListCombo { get; set; }
+		WebKit.WebView webViewSchedule { get; set; }
 
 		[Action ("clickedAddFacultyButton:")]
 		partial void clickedAddFacultyButton (Foundation.NSObject sender);
@@ -98,19 +101,9 @@ namespace FacultySchedules
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (htmlScheduleCombo != null) {
-				htmlScheduleCombo.Dispose ();
-				htmlScheduleCombo = null;
-			}
-
-			if (classCombo2 != null) {
-				classCombo2.Dispose ();
-				classCombo2 = null;
-			}
-
-			if (classCombo3 != null) {
-				classCombo3.Dispose ();
-				classCombo3 = null;
+			if (timeCombo != null) {
+				timeCombo.Dispose ();
+				timeCombo = null;
 			}
 
 			if (addFacultyButton != null) {
@@ -126,6 +119,16 @@ namespace FacultySchedules
 			if (classCombo != null) {
 				classCombo.Dispose ();
 				classCombo = null;
+			}
+
+			if (classCombo2 != null) {
+				classCombo2.Dispose ();
+				classCombo2 = null;
+			}
+
+			if (classCombo3 != null) {
+				classCombo3.Dispose ();
+				classCombo3 = null;
 			}
 
 			if (eventInput1 != null) {
@@ -148,14 +151,14 @@ namespace FacultySchedules
 				eventInput5 = null;
 			}
 
-			if (facultyListCombo != null) {
-				facultyListCombo.Dispose ();
-				facultyListCombo = null;
-			}
-
 			if (firstNameInput != null) {
 				firstNameInput.Dispose ();
 				firstNameInput = null;
+			}
+
+			if (htmlScheduleCombo != null) {
+				htmlScheduleCombo.Dispose ();
+				htmlScheduleCombo = null;
 			}
 
 			if (lastNameInput != null) {
@@ -191,6 +194,11 @@ namespace FacultySchedules
 			if (webViewSchedule != null) {
 				webViewSchedule.Dispose ();
 				webViewSchedule = null;
+			}
+
+			if (facultyListCombo != null) {
+				facultyListCombo.Dispose ();
+				facultyListCombo = null;
 			}
 		}
 	}

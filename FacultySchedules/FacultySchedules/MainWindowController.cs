@@ -53,12 +53,12 @@ namespace FacultySchedules
 
 		partial void findOut4(NSObject sender)
 		{
-
+			resultTextBox.StringValue = getDataInit.whenIsEveryoneAvailable();
 		}
 
 		partial void findOut5(NSObject sender)
 		{
-
+			resultTextBox.StringValue = getDataInit.whoIsFreeAtX(timeCombo.TitleOfSelectedItem);
 		}
 
 		partial void clickedAddFacultyButton(NSObject sender)
@@ -92,6 +92,11 @@ namespace FacultySchedules
 				classCombo.AddItem(eachClassName);
 				classCombo2.AddItem(eachClassName);
 				classCombo3.AddItem(eachClassName);
+			}
+
+			foreach (string eachTime in Globals.timeList)
+			{
+				timeCombo.AddItem(eachTime);
 			}
 		}
 	}
