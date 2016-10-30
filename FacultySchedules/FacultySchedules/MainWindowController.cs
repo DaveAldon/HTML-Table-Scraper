@@ -10,8 +10,8 @@ namespace FacultySchedules
 		Run runInit = new Run(); //Instantiation of main engine
 		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
 		AllClasses allClassesInit = new AllClasses(); //Class finder
-		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the crazy names into proper URLs
-		GetData getDataInit = new GetData();
+		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
+		GetData getDataInit = new GetData(); //Class of query builders
 		List<string> names = new List<string>();
 
 		public void ViewDidLoad()
@@ -39,12 +39,11 @@ namespace FacultySchedules
 		partial void findOut1(NSObject sender)
 		{
 			resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyListCombo.TitleOfSelectedItem, classCombo.TitleOfSelectedItem);
-			//eventInput1.StringValue
 		}
 
 		partial void findOut2(NSObject sender)
 		{
-			
+			resultTextBox.StringValue = getDataInit.whoTeachesX(classCombo2.TitleOfSelectedItem);
 		}
 
 		partial void findOut3(NSObject sender)

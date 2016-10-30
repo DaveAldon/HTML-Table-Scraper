@@ -115,7 +115,6 @@ namespace FacultySchedules
 
 				//string stm = "INSERT INTO Classes (name) SELECT name WHERE NOT EXISTS(SELECT * FROM Classes WHERE name = @name)";
 
-
 				string stm = "INSERT INTO Classes (name) VALUES(@name)";
 				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
 				cmd.Parameters.AddWithValue("@name", className);

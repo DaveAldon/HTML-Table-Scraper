@@ -79,8 +79,6 @@ namespace FacultySchedules
 
 					else {
 						span = 0;
-						//value = innerString;
-						//days.Add(dayList[index] + "$" + time + "$" + value + "$" + span);
 						index = index + 1;
 					}
 				}
