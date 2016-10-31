@@ -6,64 +6,90 @@ namespace FacultySchedules
 {
 	public class GetData
 	{
-		public string whoIsFreeAtX(string time)
+		allFaculty allFacultyInit = new allFaculty();
+		public string whoIsFreeAtXAndTeachesY(string time, string className)
 		{
-			allFaculty allFacultyInit = new allFaculty();
-			int existanceResult;
+			int facultyCount = internalWhoTeachesX(className).Count;
 			string finalResult = "";
 
-			foreach (string eachName in allFacultyInit.getEveryonesName())
+			foreach (string eachName in internalWhoTeachesX(className))
 			{
-				string connectionParam = Globals.connectionParam;
-				MySqlConnection connection = null;
-				MySqlDataReader dataReader = null;
-
-				try
+				if (internalWhoIsFreeAtX(time).Count == facultyCount)
 				{
-					connection = new MySqlConnection(connectionParam);
-					connection.Open();
-					string stm = "SELECT 1 FROM `" + eachName + "` WHERE hour = '" + time + "'" + "LIMIT 1";
-					MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
-					dataReader = replaceCmd.ExecuteReader();
-					int count = dataReader.FieldCount;
-					existanceResult = 0;
-
-					while (dataReader.Read())
-					{
-						existanceResult = int.Parse(dataReader.GetString(0));
-					}
-
-					if (existanceResult == 0)
-					{
-						finalResult = finalResult + eachName + "\n";
-					}
+					finalResult += eachName + "\n";
 				}
+			}
+		return finalResult;
+		}
 
-				catch (MySqlException error)
-				{
-					errorHandle(error);
-					return error.ToString();
-				}
+		public string whoIsFreeAtX(string time)
+		{
+			int existanceResult;
+			string finalResult = "";
+			List<string> resultList = new List<string>();
+			List<string> everyName = new List<string>();
+			everyName.AddRange(allFacultyInit.getEveryonesName());
+			int nameCount = everyName.Count;
+			string connectionParam = Globals.connectionParam;
 
-				finally //We need to close all of our connections once everything is retrieved
-				{
-					if (dataReader != null)
+			foreach (string eachDay in Globals.dayList)
+			{
+				resultList.Add("\n" + "~ " + eachDay + " ~" + "\n");
+				for (int i = 0; i < nameCount; i++) {
+					MySqlConnection connection = null;
+					MySqlDataReader dataReader = null;
+
+					try
 					{
-						dataReader.Close();
+						connection = new MySqlConnection(connectionParam);
+						connection.Open();
+						string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+						MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+						dataReader = replaceCmd.ExecuteReader();
+						existanceResult = 0;
+
+						while (dataReader.Read())
+						{
+							existanceResult = int.Parse(dataReader.GetString(0));
+						}
+
+						if (existanceResult == 0)
+						{
+							resultList.Add(everyName[i] + "\n");
+						}
 					}
 
-					if (connection != null)
+					catch (MySqlException error)
 					{
-						connection.Close();
+						errorHandle(error);
+					}
+
+					finally //We need to close all of our connections once everything is retrieved
+					{
+						if (dataReader != null)
+						{
+							dataReader.Close();
+						}
+
+						if (connection != null)
+						{
+							connection.Close();
+						}
 					}
 				}
 			}
+
+			foreach (string results in resultList)
+			{
+				finalResult += results;
+			}
+
+			everyName.Clear();
 			return finalResult;
 		}
 
 		public List<string> internalWhoIsFreeAtX(string time)
 		{
-			allFaculty allFacultyInit = new allFaculty();
 			int existanceResult;
 			List<string> finalResult = new List<string>();
 
@@ -117,7 +143,6 @@ namespace FacultySchedules
 
 		public string whenIsEveryoneAvailable()
 		{
-			allFaculty allFacultyInit = new allFaculty();
 			int facultyCount = allFacultyInit.getEveryonesName().Count;
 			string finalResult = "";
 
@@ -131,11 +156,10 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
-		public string whoIsFreeAndTeachesX(string className)
+		public List<string> internalWhoTeachesX(string className)
 		{
-			allFaculty allFacultyInit = new allFaculty();
 			int existanceResult;
-			string finalResult = "";
+			List<string> finalResult = new List<string>();
 
 			foreach (string eachName in allFacultyInit.getEveryonesName())
 			{
@@ -160,14 +184,13 @@ namespace FacultySchedules
 
 					if (existanceResult == 1)
 					{
-						finalResult = finalResult + eachName + "\n";
+						finalResult.Add(eachName);
 					}
 				}
 
 				catch (MySqlException error)
 				{
 					errorHandle(error);
-					return error.ToString();
 				}
 
 				finally
@@ -188,7 +211,6 @@ namespace FacultySchedules
 
 		public string whoTeachesX(string className)
 		{
-			allFaculty allFacultyInit = new allFaculty();
 			int existanceResult;
 			string finalResult = "";
 
@@ -214,14 +236,13 @@ namespace FacultySchedules
 
 					if (existanceResult == 1)
 					{
-						finalResult = finalResult + eachName + "\n";
+						finalResult += eachName + "\n";
 					}
 				}
 
 				catch (MySqlException error)
 				{
 					errorHandle(error);
-					return error.ToString();
 				}
 
 				finally
@@ -253,11 +274,15 @@ namespace FacultySchedules
 				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = '" + className + "'";
 				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 				dataReader = replaceCmd.ExecuteReader();
-
 				int count = dataReader.FieldCount;
 				string retrievedDay = "";
 				string retrievedHour = "";
 				string result = "";
+				List<string> monday = new List<string>();
+				List<string> tuesday = new List<string>();
+				List<string> wednesday = new List<string>();
+				List<string> thursday = new List<string>();
+				List<string> friday = new List<string>();
 
 				while (dataReader.Read())
 				{
@@ -265,8 +290,51 @@ namespace FacultySchedules
 					{
 						retrievedDay = dataReader.GetString(i);
 						retrievedHour = dataReader.GetString(i + 1);
-						result = result + retrievedDay + " " + retrievedHour + "\n";
+
+						if (retrievedDay.Contains("Monday")) {
+							monday.Add(retrievedHour);
+						} else
+						if (retrievedDay.Contains("Tuesday")) {
+							tuesday.Add(retrievedHour);
+						}
+						else
+						if (retrievedDay.Contains("Wednesday")) {
+							wednesday.Add(retrievedHour);
+						}
+						else
+						if (retrievedDay.Contains("Thursday")) {
+							thursday.Add(retrievedHour);	
+						}
+						else
+						if (retrievedDay.Contains("Friday")) {
+							friday.Add(retrievedHour);
+						}
 					}
+				}
+				result += "~ Monday ~\n";
+				foreach (string hour in monday)
+				{
+					result += hour + "\n";
+				}
+				result += "\n~ Tuesday ~\n";
+				foreach (string hour in tuesday)
+				{
+					result += hour + "\n";
+				}
+				result += "\n~ Wednesday ~\n";
+				foreach (string hour in wednesday)
+				{
+					result += hour + "\n";
+				}
+				result += "\n~ Thursday ~\n";
+				foreach (string hour in thursday)
+				{
+					result += hour + "\n";
+				}
+				result += "\n~ Friday ~\n";
+				foreach (string hour in friday)
+				{
+					result += hour + "\n";
 				}
 				return result;
 			}

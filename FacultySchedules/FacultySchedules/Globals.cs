@@ -11,7 +11,7 @@ namespace FacultySchedules
 		public const string database = "Faculty";
 
 		public const string connectionParam = "server=" + ip + ";uid=" + username + ";port=" + port + ";pwd=" + password + ";database=" + database + ";";
-
+		public static List<string> dayList = new List<string> {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 		public static List<string> timeList = new List<string>{ 
 		"7:00 AM",
 		"7:30 AM",

@@ -8,6 +8,7 @@ namespace FacultySchedules
 		List<string> everybodyName = new List<string>();
 		public List<string> getEveryonesName()
 		{
+			everybodyName.Clear();
 			string connectionParam = Globals.connectionParam;
 			MySqlConnection connection = null;
 			MySqlDataReader dataReader = null;

@@ -7,17 +7,19 @@ namespace FacultySchedules
 	public class GiveData
 	{
 		string connectionParam = Globals.connectionParam;
-		AllClasses allClassesInit = new AllClasses();
+		bool firstTime = true;
 
 		public void DBGather(List<string> data, string name, List<string> classes)
 		{
 			string inputDay, inputHour, inputEvent;
 			int inputRowSpan;
-			bool firstTime = true;
 
 			if (firstTime == true)
 			{
 				dropTable(name);
+				dropTable("Classes");
+				createClassesTable();
+				firstTime = false;
 			}
 
 			for (int i = 0; i < data.Count; i++)
@@ -30,11 +32,9 @@ namespace FacultySchedules
 				DBpush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the appropriate database
 			}
 
-			firstTime = false;
-
-			for (int i = 0; i < classes.Count; i++)
+			foreach (string className in classes) 
 			{
-				insertIntoClasses(classes[i]);
+				insertIntoClasses(className);
 			}
 		}
 
@@ -42,6 +42,37 @@ namespace FacultySchedules
 		{
 			createTable(name);
 			insertIntoTable(inputDay, inputHour, inputEvent, inputRowSpan, name);
+		}
+
+		public void createClassesTable()
+		{
+			MySqlConnection connectionCreate = null;
+			MySqlDataReader dataReaderCreate = null;
+			try
+			{
+				connectionCreate = new MySqlConnection(connectionParam);
+				connectionCreate.Open();
+				string stm = "CREATE TABLE `Classes` (id int(50) NOT NULL AUTO_INCREMENT, Name varchar(50), PRIMARY KEY (id))";
+				MySqlCommand createCmd = new MySqlCommand(stm, connectionCreate);
+				dataReaderCreate = createCmd.ExecuteReader();
+			}
+
+			catch (MySqlException error)
+			{
+			}
+
+			finally //We need to close all of our connections once everything is retrieved
+			{
+				if (dataReaderCreate != null)
+				{
+					dataReaderCreate.Close();
+				}
+
+				if (connectionCreate != null)
+				{
+					connectionCreate.Close();
+				}
+			}
 		}
 
 		public void createTable(string name)

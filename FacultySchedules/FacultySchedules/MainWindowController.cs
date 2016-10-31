@@ -48,7 +48,7 @@ namespace FacultySchedules
 
 		partial void findOut3(NSObject sender)
 		{
-
+			resultTextBox.StringValue = getDataInit.whoIsFreeAtXAndTeachesY(timeCombo2.TitleOfSelectedItem, classCombo3.TitleOfSelectedItem);
 		}
 
 		partial void findOut4(NSObject sender)
@@ -87,7 +87,7 @@ namespace FacultySchedules
 				runInit.start(eachName); //Begins the main engine with the given name
 			}
 
-			foreach (string eachClassName in allClassesInit.getEveryClass()) //Goes through each faculty name in the database table
+			foreach (string eachClassName in allClassesInit.getEveryClass())
 			{
 				classCombo.AddItem(eachClassName);
 				classCombo2.AddItem(eachClassName);
@@ -97,6 +97,7 @@ namespace FacultySchedules
 			foreach (string eachTime in Globals.timeList)
 			{
 				timeCombo.AddItem(eachTime);
+				timeCombo2.AddItem(eachTime);
 			}
 		}
 	}

@@ -7,23 +7,22 @@ namespace FacultySchedules
 	class Run
 	{
 		public GiveData giveDB = new GiveData();
-
 		public void start(string name)
 		{
-			List<string> dayList = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 			List<string> days = new List<string>();
 			List<string> classes = new List<string>();
 			int index = 0;
 			string value = "";
 			string rowSpan = "rowspan=\"";
 			string tempHTML = "";
-			char rowSpanChar;
 			int span = 0;
 			Scrape scraper = new Scrape();
 			List<HtmlNode> x = scraper.BeginScrape(name);
 			var time = "";
 			DateTime firstTime;
 			bool first = true;
+			int breakIndex;
+			string tempSubString = "";
 
 			foreach (HtmlNode item in x)
 			{
@@ -52,27 +51,64 @@ namespace FacultySchedules
 					var innerString = subStrings[i].Substring(subStrings[i].IndexOf(">", StringComparison.Ordinal) + 1,
 														  subStrings[i].IndexOf("</td>", StringComparison.Ordinal) -
 														  subStrings[i].IndexOf(">", StringComparison.Ordinal) - 1);
-
-					if (subStrings[i].Contains(rowSpan))
+					
+					if (innerString.Contains("<br>"))
 					{
-						rowSpanChar = tempHTML[tempHTML.IndexOf(rowSpan, StringComparison.Ordinal) + 9];
-						span = (rowSpanChar - '0');
+						breakIndex = innerString.IndexOf("<br>", StringComparison.Ordinal);
+						if (breakIndex > 0)
+						{
+							innerString = innerString.Substring(0, breakIndex - 2);
+						}
+					}
+
+					else if (innerString.Contains("Meeting "))
+					{
+						breakIndex = innerString.IndexOf("Meeting ", StringComparison.Ordinal);
+						if (breakIndex > 0)
+						{
+							innerString = innerString.Substring(0, breakIndex - 2);
+						}
+					}
+
+					tempSubString = subStrings[i];
+
+					if (tempSubString.Contains(rowSpan))
+					{
+						if (tempSubString.LastIndexOf('2', 50) > 0)
+						{
+							span = 2;
+						}
+						else if (tempSubString.LastIndexOf('3', 50) > 0)
+						{
+							span = 3;
+						}
+						else if (tempSubString.LastIndexOf('4', 50) > 0)
+						{
+							span = 4;
+						}
+						else if (tempSubString.LastIndexOf('5', 50) > 0)
+						{
+							span = 5;
+						}
+						else if (tempSubString.LastIndexOf('6', 50) > 0)
+						{
+							span = 6;
+						}
+
 						value = innerString;
 						firstTime = DateTime.Parse(time);
-						days.Add(dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+						days.Add(Globals.dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
 						classes.Add(value);
 
-						if (span > 0)
-						{
-							firstTime = DateTime.Parse(time);
-							int tempSpan = span;
-							while (tempSpan > 1)
-							{
-								firstTime = firstTime.AddMinutes(30);
+						firstTime = DateTime.Parse(time);
+						int tempSpan = span;
 
-								days.Add(dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
-								tempSpan--;
-							}
+						while (tempSpan > 1)
+						{
+							firstTime = firstTime.AddMinutes(30);
+
+							days.Add(Globals.dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+							tempSpan--;
 						}
 						index = index + 1;
 					}

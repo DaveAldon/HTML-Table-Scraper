@@ -70,6 +70,9 @@ namespace FacultySchedules
 		AppKit.NSPopUpButton timeCombo { get; set; }
 
 		[Outlet]
+		AppKit.NSPopUpButton timeCombo2 { get; set; }
+
+		[Outlet]
 		WebKit.WebView webViewSchedule { get; set; }
 
 		[Action ("clickedAddFacultyButton:")]
@@ -101,9 +104,9 @@ namespace FacultySchedules
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (timeCombo != null) {
-				timeCombo.Dispose ();
-				timeCombo = null;
+			if (timeCombo2 != null) {
+				timeCombo2.Dispose ();
+				timeCombo2 = null;
 			}
 
 			if (addFacultyButton != null) {
@@ -151,6 +154,11 @@ namespace FacultySchedules
 				eventInput5 = null;
 			}
 
+			if (facultyListCombo != null) {
+				facultyListCombo.Dispose ();
+				facultyListCombo = null;
+			}
+
 			if (firstNameInput != null) {
 				firstNameInput.Dispose ();
 				firstNameInput = null;
@@ -191,14 +199,14 @@ namespace FacultySchedules
 				scrapeButton = null;
 			}
 
+			if (timeCombo != null) {
+				timeCombo.Dispose ();
+				timeCombo = null;
+			}
+
 			if (webViewSchedule != null) {
 				webViewSchedule.Dispose ();
 				webViewSchedule = null;
-			}
-
-			if (facultyListCombo != null) {
-				facultyListCombo.Dispose ();
-				facultyListCombo = null;
 			}
 		}
 	}

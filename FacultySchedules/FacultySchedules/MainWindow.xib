@@ -35,6 +35,8 @@
                 <outlet property="scheduleButton" destination="qJk-dN-hSd" id="Ztn-H8-TNb"/>
                 <outlet property="scrapeButton" destination="t2H-Lo-Vmo" id="qWs-ek-D1d"/>
                 <outlet property="timeCombo" destination="YHV-l5-PhS" id="g9p-KC-Xoi"/>
+                <outlet property="timeCombo2" destination="O3P-H4-Sbv" id="irI-0q-aXU"/>
+                <outlet property="timeComboWhoIsFree" destination="3" id="jos-26-K1X"/>
                 <outlet property="webViewSchedule" destination="EGe-jf-7JE" id="Z21-cY-vQO"/>
                 <outlet property="window" destination="2" id="6"/>
             </connections>
@@ -338,9 +340,9 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="Skf-6L-C9I">
-                        <rect key="frame" x="586" y="600" width="151" height="17"/>
+                        <rect key="frame" x="441" y="594" width="89" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who is free and teaches" id="5vR-ns-rwj">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who is free at" id="5vR-ns-rwj">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -364,6 +366,24 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="9I4-uQ-PsF">
+                        <rect key="frame" x="658" y="594" width="79" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and teaches" id="LZH-Rn-Ksq">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="O3P-H4-Sbv">
+                        <rect key="frame" x="534" y="587" width="121" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Ey7-i1-jOL">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="g22-Ak-tYn"/>
+                        </popUpButtonCell>
+                    </popUpButton>
                 </subviews>
             </view>
             <connections>
