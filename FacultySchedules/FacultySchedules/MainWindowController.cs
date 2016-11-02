@@ -2,6 +2,7 @@
 using Foundation;
 using AppKit;
 using System.Collections.Generic;
+using CoreGraphics;
 
 namespace FacultySchedules
 {
@@ -13,13 +14,11 @@ namespace FacultySchedules
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
 		GetData getDataInit = new GetData(); //Class of query builders
 		List<string> names = new List<string>();
+		int NumberOfTimesClicked = 0;
+
+		public NSButton ClickMeButton { get; set; }
 
 		public void ViewDidLoad()
-		{
-			base.AwakeFromNib();
-		}
-
-		public override void AwakeFromNib()
 		{
 			base.AwakeFromNib();
 		}
@@ -48,6 +47,11 @@ namespace FacultySchedules
 
 		partial void findOut3(NSObject sender)
 		{
+			
+			ClickMeButton = new NSButton()
+			{
+				//AutoresizingMask = NSViewResizingMask.MinYMargin
+			};
 			resultTextBox.StringValue = getDataInit.whoIsFreeAtXAndTeachesY(timeCombo2.TitleOfSelectedItem, classCombo3.TitleOfSelectedItem);
 		}
 
@@ -99,6 +103,19 @@ namespace FacultySchedules
 				timeCombo.AddItem(eachTime);
 				timeCombo2.AddItem(eachTime);
 			}
+		}
+
+		public override void AwakeFromNib()
+		{
+			base.AwakeFromNib();
+
+			/*
+			ClickMeButton.Activated += (sender, e) =>
+			{
+				// Update count
+				ClickMeButton.StringValue = (++NumberOfTimesClicked == 1) ? "Button clicked one time." : string.Format("Button clicked {0} times.", NumberOfTimesClicked);
+			};
+			*/
 		}
 	}
 }
