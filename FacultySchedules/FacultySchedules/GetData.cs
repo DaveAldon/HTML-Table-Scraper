@@ -1,22 +1,76 @@
 ﻿using MySql.Data.MySqlClient;
 using AppKit;
 using System.Collections.Generic;
+using System;
 
 namespace FacultySchedules
 {
 	public class GetData
 	{
 		allFaculty allFacultyInit = new allFaculty();
-		public string whoIsFreeAtXAndTeachesY(string time, string className)
+		public string whoIsFreeAtXFromList(string time, string facultyTextNames)
 		{
-			int facultyCount = internalWhoTeachesX(className).Count;
+			string[] facultyNames = facultyTextNames.Split(new string[] { "\n" }, StringSplitOptions.None);
+			int facultyCount = facultyNames.Length;
+			string connectionParam = Globals.connectionParam;
+			List<string> resultList = new List<string>();
+			int existanceResult = 0;
+
+			foreach (string eachDay in Globals.dayList)
+			{
+				resultList.Add("\n" + "~ " + eachDay + " ~" + "\n");
+				for (int i = 0; i < facultyCount; i++)
+				{
+					MySqlConnection connection = null;
+					MySqlDataReader dataReader = null;
+
+					try
+					{
+						connection = new MySqlConnection(connectionParam);
+						connection.Open();
+						string stm = "SELECT 1 FROM `" + facultyNames[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+						MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+						dataReader = replaceCmd.ExecuteReader();
+						existanceResult = 0;
+
+						while (dataReader.Read())
+						{
+							existanceResult = int.Parse(dataReader.GetString(0));
+						}
+
+						if (existanceResult == 0)
+						{
+							resultList.Add(facultyNames[i] + "\n");
+						}
+					}
+
+					catch (MySqlException error)
+					{
+						errorHandle(error);
+					}
+
+					finally //We need to close all of our connections once everything is retrieved
+					{
+						if (dataReader != null)
+						{
+							dataReader.Close();
+						}
+
+						if (connection != null)
+						{
+							connection.Close();
+						}
+					}
+				}
+			}
+
 			string finalResult = "";
 
-			foreach (string eachName in internalWhoTeachesX(className))
+			foreach (string eachResult in resultList)
 			{
 				//if (internalWhoIsFreeAtX(time, className).Count == facultyCount)
 				//{
-					finalResult += eachName + "\n";
+					finalResult += eachResult + "\n";
 				//}
 			}
 		return finalResult;
@@ -91,7 +145,6 @@ namespace FacultySchedules
 		public List<string> internalWhoIsFreeAtX(string time, string classEvent)
 		{
 			int existanceResult;
-			//string finalResult = "";
 			List<string> resultList = new List<string>();
 			List<string> everyName = new List<string>();
 			everyName.AddRange(allFacultyInit.getEveryonesName());
@@ -145,13 +198,6 @@ namespace FacultySchedules
 					}
 				}
 			}
-
-			/*
-			foreach (string results in resultList)
-			{
-				finalResult.Add(results);
-			}
-			*/
 
 			everyName.Clear();
 			return resultList;

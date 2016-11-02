@@ -1,8 +1,6 @@
 ﻿using System;
 using Foundation;
 using AppKit;
-using System.Collections.Generic;
-using CoreGraphics;
 
 namespace FacultySchedules
 {
@@ -13,17 +11,16 @@ namespace FacultySchedules
 		AllClasses allClassesInit = new AllClasses(); //Class finder
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
 		GetData getDataInit = new GetData(); //Class of query builders
-		List<string> names = new List<string>();
-		int NumberOfTimesClicked = 0;
 
-		public NSButton ClickMeButton { get; set; }
+		//
+		//UI dependancies and instantiation
 
 		public void ViewDidLoad()
 		{
 			base.AwakeFromNib();
 		}
 
-		public new MainWindow Window
+		public new MainWindow Window //Instantiates a new NSView
 		{
 			get { return (MainWindow)base.Window; }
 		}
@@ -34,6 +31,15 @@ namespace FacultySchedules
 		public MainWindowController(NSCoder coder) : base(coder) { }
 
 		public MainWindowController() : base("MainWindow") { }
+
+		public override void AwakeFromNib()
+		{
+			base.AwakeFromNib();
+		}
+
+		//
+		//Event Handling
+		//
 
 		partial void findOut1(NSObject sender)
 		{
@@ -47,12 +53,7 @@ namespace FacultySchedules
 
 		partial void findOut3(NSObject sender)
 		{
-			
-			ClickMeButton = new NSButton()
-			{
-				//AutoresizingMask = NSViewResizingMask.MinYMargin
-			};
-			resultTextBox.StringValue = getDataInit.whoIsFreeAtXAndTeachesY(timeCombo2.TitleOfSelectedItem, classCombo3.TitleOfSelectedItem);
+			resultTextBox.StringValue = getDataInit.whoIsFreeAtXFromList(timeCombo2.TitleOfSelectedItem, listOfChosenText.StringValue);
 		}
 
 		partial void findOut4(NSObject sender)
@@ -63,6 +64,19 @@ namespace FacultySchedules
 		partial void findOut5(NSObject sender)
 		{
 			resultTextBox.StringValue = getDataInit.whoIsFreeAtX(timeCombo.TitleOfSelectedItem);
+		}
+
+		partial void pushAddName(NSObject sender)
+		{
+			listOfChosenText.StringValue += classCombo3.TitleOfSelectedItem + "\n";
+		}
+
+		partial void pushRemoveName(NSObject sender)
+		{
+			if (listOfChosenText.StringValue.Contains(classCombo3.TitleOfSelectedItem))
+			{
+				listOfChosenText.StringValue = listOfChosenText.StringValue.Replace(classCombo3.TitleOfSelectedItem + "\n", string.Empty);
+			}
 		}
 
 		partial void clickedAddFacultyButton(NSObject sender)
@@ -85,37 +99,23 @@ namespace FacultySchedules
 		{
 			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
 			{
-				facultyListCombo.AddItem(eachName); //Adds a new element to the combo list
+				facultyListCombo.AddItem(eachName); //Populate the faculty names combo lists
 				htmlScheduleCombo.AddItem(eachName);
-				names.Add(eachName);
+				classCombo3.AddItem(eachName);
 				runInit.start(eachName); //Begins the main engine with the given name
 			}
 
-			foreach (string eachClassName in allClassesInit.getEveryClass())
+			foreach (string eachClassName in allClassesInit.getEveryClass()) //Populate the class combo lists
 			{
 				classCombo.AddItem(eachClassName);
 				classCombo2.AddItem(eachClassName);
-				classCombo3.AddItem(eachClassName);
 			}
 
-			foreach (string eachTime in Globals.timeList)
+			foreach (string eachTime in Globals.timeList) //Populate the time combo lists
 			{
 				timeCombo.AddItem(eachTime);
 				timeCombo2.AddItem(eachTime);
 			}
-		}
-
-		public override void AwakeFromNib()
-		{
-			base.AwakeFromNib();
-
-			/*
-			ClickMeButton.Activated += (sender, e) =>
-			{
-				// Update count
-				ClickMeButton.StringValue = (++NumberOfTimesClicked == 1) ? "Button clicked one time." : string.Format("Button clicked {0} times.", NumberOfTimesClicked);
-			};
-			*/
 		}
 	}
 }

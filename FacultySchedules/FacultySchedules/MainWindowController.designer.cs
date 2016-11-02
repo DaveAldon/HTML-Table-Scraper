@@ -16,6 +16,9 @@ namespace FacultySchedules
 		AppKit.NSView addFacultyButton { get; set; }
 
 		[Outlet]
+		AppKit.NSButton addName { get; set; }
+
+		[Outlet]
 		AppKit.NSButton allFacultyCheckBox { get; set; }
 
 		[Outlet]
@@ -52,10 +55,19 @@ namespace FacultySchedules
 		AppKit.NSTextField lastNameInput { get; set; }
 
 		[Outlet]
+		AppKit.NSScrollView listOfChosen { get; set; }
+
+		[Outlet]
+		AppKit.NSTextField listOfChosenText { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField middleInitialInput { get; set; }
 
 		[Outlet]
 		AppKit.NSView removeFacultyButton { get; set; }
+
+		[Outlet]
+		AppKit.NSButton removeName { get; set; }
 
 		[Outlet]
 		AppKit.NSTextField resultTextBox { get; set; }
@@ -101,17 +113,28 @@ namespace FacultySchedules
 
 		[Action ("findOut5:")]
 		partial void findOut5 (Foundation.NSObject sender);
+
+		[Action ("pushAddName:")]
+		partial void pushAddName (Foundation.NSObject sender);
+
+		[Action ("pushRemoveName:")]
+		partial void pushRemoveName (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (timeCombo2 != null) {
-				timeCombo2.Dispose ();
-				timeCombo2 = null;
+			if (listOfChosenText != null) {
+				listOfChosenText.Dispose ();
+				listOfChosenText = null;
 			}
 
 			if (addFacultyButton != null) {
 				addFacultyButton.Dispose ();
 				addFacultyButton = null;
+			}
+
+			if (addName != null) {
+				addName.Dispose ();
+				addName = null;
 			}
 
 			if (allFacultyCheckBox != null) {
@@ -174,6 +197,11 @@ namespace FacultySchedules
 				lastNameInput = null;
 			}
 
+			if (listOfChosen != null) {
+				listOfChosen.Dispose ();
+				listOfChosen = null;
+			}
+
 			if (middleInitialInput != null) {
 				middleInitialInput.Dispose ();
 				middleInitialInput = null;
@@ -182,6 +210,11 @@ namespace FacultySchedules
 			if (removeFacultyButton != null) {
 				removeFacultyButton.Dispose ();
 				removeFacultyButton = null;
+			}
+
+			if (removeName != null) {
+				removeName.Dispose ();
+				removeName = null;
 			}
 
 			if (resultTextBox != null) {
@@ -202,6 +235,11 @@ namespace FacultySchedules
 			if (timeCombo != null) {
 				timeCombo.Dispose ();
 				timeCombo = null;
+			}
+
+			if (timeCombo2 != null) {
+				timeCombo2.Dispose ();
+				timeCombo2 = null;
 			}
 
 			if (webViewSchedule != null) {
