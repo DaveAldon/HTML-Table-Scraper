@@ -102,6 +102,7 @@
     <Compile Include="SpecialNameFormatting.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="AllClasses.cs" />
+    <Compile Include="EventObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />

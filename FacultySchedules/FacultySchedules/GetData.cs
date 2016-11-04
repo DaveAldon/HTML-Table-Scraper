@@ -142,11 +142,13 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
-		public List<string> internalWhoIsFreeAtX(string time, string classEvent)
+		public string whenIsEveryoneAvailable()
 		{
 			int existanceResult;
+			string finalResult = "";
 			List<string> resultList = new List<string>();
 			List<string> everyName = new List<string>();
+			List<string> timeList = new List<string>();
 			everyName.AddRange(allFacultyInit.getEveryonesName());
 			int nameCount = everyName.Count;
 			string connectionParam = Globals.connectionParam;
@@ -154,74 +156,67 @@ namespace FacultySchedules
 			foreach (string eachDay in Globals.dayList)
 			{
 				resultList.Add("\n" + "~ " + eachDay + " ~" + "\n");
-				for (int i = 0; i < nameCount; i++)
+				foreach (string time in Globals.timeList)
 				{
-					MySqlConnection connection = null;
-					MySqlDataReader dataReader = null;
-
-					try
+					for (int i = 0; i < nameCount; i++)
 					{
-						connection = new MySqlConnection(connectionParam);
-						connection.Open();
-						string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND event = '" + classEvent + "' AND hour = '" + time + "'" + "LIMIT 1";
-						MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
-						dataReader = replaceCmd.ExecuteReader();
-						existanceResult = 0;
+						MySqlConnection connection = null;
+						MySqlDataReader dataReader = null;
 
-						while (dataReader.Read())
+						try
 						{
-							existanceResult = int.Parse(dataReader.GetString(0));
+							connection = new MySqlConnection(connectionParam);
+							connection.Open();
+							string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+							MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+							dataReader = replaceCmd.ExecuteReader();
+							existanceResult = 0;
+
+							while (dataReader.Read())
+							{
+								existanceResult = int.Parse(dataReader.GetString(0));
+							}
+
+							if (existanceResult == 0)
+							{
+								timeList.Add(time + "\n");
+							}
 						}
 
-						if (existanceResult == 0)
+						catch (MySqlException error)
 						{
-							resultList.Add(everyName[i] + "\n");
+							errorHandle(error);
+						}
+
+						finally //We need to close all of our connections once everything is retrieved
+						{
+							if (dataReader != null)
+							{
+								dataReader.Close();
+							}
+
+							if (connection != null)
+							{
+								connection.Close();
+							}
 						}
 					}
-
-					catch (MySqlException error)
+					if (timeList.Count == nameCount)
 					{
-						errorHandle(error);
+						resultList.Add(time + "\n");
 					}
-
-					finally //We need to close all of our connections once everything is retrieved
-					{
-						if (dataReader != null)
-						{
-							dataReader.Close();
-						}
-
-						if (connection != null)
-						{
-							connection.Close();
-						}
-					}
+					timeList.Clear();
 				}
+			}
+
+			foreach (string results in resultList)
+			{
+				finalResult += results;
 			}
 
 			everyName.Clear();
-			return resultList;
-		}
-
-		public string whenIsEveryoneAvailable()
-		{
-			int facultyCount = allFacultyInit.getEveryonesName().Count;
-			string finalResult = "";
-
-			foreach (string eachDay in Globals.dayList)
-			{
-				finalResult += "\n" + eachDay;
-				foreach (string eachTime in Globals.timeList)
-				{
-					if (internalWhoIsFreeAtX(eachTime, eachDay).Count == facultyCount)
-					{
-						finalResult += eachTime + "\n";
-					}
-				}
-			}
 			return finalResult;
 		}
-
 
 		public List<string> internalWhoTeachesX(string className)
 		{

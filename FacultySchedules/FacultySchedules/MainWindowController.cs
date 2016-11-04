@@ -56,7 +56,7 @@ namespace FacultySchedules
 			resultTextBox.StringValue = getDataInit.whoIsFreeAtXFromList(timeCombo2.TitleOfSelectedItem, listOfChosenText.StringValue);
 		}
 
-		partial void findOut4(NSObject sender)
+		partial void findOut4(NSObject sender) //All faculty availability query
 		{
 			resultTextBox.StringValue = getDataInit.whenIsEveryoneAvailable();
 		}
