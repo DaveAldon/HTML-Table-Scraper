@@ -11,6 +11,7 @@ namespace FacultySchedules
 		AllClasses allClassesInit = new AllClasses(); //Class finder
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
 		GetData getDataInit = new GetData(); //Class of query builders
+		GiveData clearInit = new GiveData();
 
 		//
 		//UI dependancies and instantiation
@@ -99,6 +100,7 @@ namespace FacultySchedules
 		{
 			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
 			{
+				clearInit.dropTable(eachName);
 				facultyListCombo.AddItem(eachName); //Populate the faculty names combo lists
 				htmlScheduleCombo.AddItem(eachName);
 				classCombo3.AddItem(eachName);

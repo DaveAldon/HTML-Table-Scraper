@@ -97,17 +97,17 @@ namespace FacultySchedules
 
 						value = innerString;
 						firstTime = DateTime.Parse(time);
-						days.Add(Globals.dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+						days.Add(index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+						//Globals.dayList[index]
 						classes.Add(value);
 
-						firstTime = DateTime.Parse(time);
 						int tempSpan = span;
 
 						while (tempSpan > 1)
 						{
 							firstTime = firstTime.AddMinutes(30);
 
-							days.Add(Globals.dayList[index] + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+							days.Add(index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
 							tempSpan--;
 						}
 						index = index + 1;

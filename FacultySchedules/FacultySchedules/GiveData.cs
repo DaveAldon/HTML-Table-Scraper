@@ -8,28 +8,56 @@ namespace FacultySchedules
 	{
 		string connectionParam = Globals.connectionParam;
 		bool firstTime = true;
+		bool skip = false;
+		int rowSkip = 0;
 
 		public void DBGather(List<string> data, string name, List<string> classes)
 		{
-			string inputDay, inputHour, inputEvent;
+			int inputDay;
+			string inputHour, inputEvent;
 			int inputRowSpan;
 
 			if (firstTime == true)
 			{
-				dropTable(name);
+				//dropTable(name);
 				dropTable("Classes");
 				createClassesTable();
 				firstTime = false;
 			}
 
+			createTable(name);
+
 			for (int i = 0; i < data.Count; i++)
 			{
+				if (skip)
+				{
+					skip = false;
+					if (i + rowSkip + 1 >= data.Count) { }
+					else {
+						i += rowSkip + 1;
+					/*
+							string[] subStringsSkip = data[i - 2].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
+							inputDay = int.Parse(subStringsSkip[0]) + 1;
+							inputHour = subStringsSkip[1];
+							inputEvent = subStringsSkip[2];
+							inputRowSpan = Convert.ToInt16(subStringsSkip[3]);
+							fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
+
+						string[] subStringsSkipp = data[i - 1].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
+						//inputDay = int.Parse(subStringsSkipp[0]) + 1;
+						inputHour = subStringsSkipp[1];
+						inputEvent = subStringsSkipp[2];
+						inputRowSpan = Convert.ToInt16(subStringsSkipp[3]);
+						fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name);//Sends the data out into the final filter
+						*/
+					}
+				}
 				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
-				inputDay = subStrings[0];
+				inputDay = int.Parse(subStrings[0]);
 				inputHour = subStrings[1];
 				inputEvent = subStrings[2];
 				inputRowSpan = Convert.ToInt16(subStrings[3]);
-				DBpush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the appropriate database
+				fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the final filter
 			}
 
 			foreach (string className in classes) 
@@ -38,10 +66,73 @@ namespace FacultySchedules
 			}
 		}
 
-		public void DBpush(string inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
+		//Filter that fixes the overlap that happens with the cells that have rowspans higher than 2, then pushes it to the database
+		public void fixOverlapThenPush(int inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
 		{
-			createTable(name);
-			insertIntoTable(inputDay, inputHour, inputEvent, inputRowSpan, name);
+			if (inputDay == 4)
+			{
+				insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
+			}
+			else {
+				if (checkOverlap(name, Globals.dayList[inputDay], inputHour) == 1)
+				{
+					insertIntoTable(Globals.dayList[inputDay + 1], inputHour, inputEvent, inputRowSpan, name);
+					for (int i = inputRowSpan - 1; i > 0; i--)
+					{
+						insertIntoTable(Globals.dayList[inputDay + 1], String.Format("{0:t}", DateTime.Parse(inputHour).AddMinutes(30 * i)), inputEvent, inputRowSpan, name);
+					}
+					skip = true;
+					rowSkip = inputRowSpan;
+				}
+				else {
+					insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
+				}
+			}
+		}
+
+		public void justPush(int inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
+		{
+			insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
+		}
+
+
+		public int checkOverlap(string name, string day, string time)
+		{
+			int existanceResult = 0;
+			MySqlConnection connection = null;
+			MySqlDataReader dataReader = null;
+
+			try
+			{
+				connection = new MySqlConnection(connectionParam);
+				connection.Open();
+				string stm = "SELECT 1 FROM `" + name + "` WHERE day = '" + day + "' AND hour = '" + time + "'" + "AND rowspan > '2'"+ "LIMIT 1";
+				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+				dataReader = replaceCmd.ExecuteReader();
+
+				while (dataReader.Read())
+				{
+					existanceResult = int.Parse(dataReader.GetString(0));
+				}
+			}
+
+			catch (MySqlException error)
+			{
+			}
+
+			finally //We need to close all of our connections once everything is retrieved
+			{
+				if (dataReader != null)
+				{
+					dataReader.Close();
+				}
+
+				if (connection != null)
+				{
+					connection.Close();
+				}
+			}
+			return existanceResult;
 		}
 
 		public void createClassesTable()
