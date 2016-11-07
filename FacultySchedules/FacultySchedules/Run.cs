@@ -23,6 +23,7 @@ namespace FacultySchedules
 			bool first = true;
 			int breakIndex;
 			string tempSubString = "";
+			int skipAmount = 0;
 
 			foreach (HtmlNode item in x)
 			{
@@ -51,7 +52,7 @@ namespace FacultySchedules
 					var innerString = subStrings[i].Substring(subStrings[i].IndexOf(">", StringComparison.Ordinal) + 1,
 														  subStrings[i].IndexOf("</td>", StringComparison.Ordinal) -
 														  subStrings[i].IndexOf(">", StringComparison.Ordinal) - 1);
-					
+
 					if (innerString.Contains("<br>"))
 					{
 						breakIndex = innerString.IndexOf("<br>", StringComparison.Ordinal);
@@ -109,6 +110,16 @@ namespace FacultySchedules
 
 							days.Add(index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
 							tempSpan--;
+						}
+
+						if ((((index + span) / 2) - 1 > 0) && (index + skipAmount < 4))
+						{
+							skipAmount = ((index + span) / 2) - 1;
+							for (int ii = 0; ii < span; ii++)
+							{
+								days.Add((index + skipAmount) + "$" + String.Format("{0:t}", firstTime) + "$" + "empty" + "$" + span);
+								firstTime = firstTime.AddMinutes(-30);
+							}
 						}
 						index = index + 1;
 					}

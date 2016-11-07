@@ -29,43 +29,70 @@ namespace FacultySchedules
 
 			for (int i = 0; i < data.Count; i++)
 			{
+				/*
 				if (skip)
 				{
 					skip = false;
 					if (i + rowSkip + 1 >= data.Count) { }
 					else {
 						i += rowSkip + 1;
-					/*
-							string[] subStringsSkip = data[i - 2].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
-							inputDay = int.Parse(subStringsSkip[0]) + 1;
-							inputHour = subStringsSkip[1];
-							inputEvent = subStringsSkip[2];
-							inputRowSpan = Convert.ToInt16(subStringsSkip[3]);
+
+						for (int ii = rowSkip - 2; ii > -1; ii--)
+						{
+							string[] subStringsSkipppp = data[i - ii].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
+							inputDay = int.Parse(subStringsSkipppp[0]) + 1;
+							inputHour = subStringsSkipppp[1];
+							inputEvent = subStringsSkipppp[2];
+							inputRowSpan = Convert.ToInt16(subStringsSkipppp[3]);
 							fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
 
-						string[] subStringsSkipp = data[i - 1].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
-						//inputDay = int.Parse(subStringsSkipp[0]) + 1;
-						inputHour = subStringsSkipp[1];
-						inputEvent = subStringsSkipp[2];
-						inputRowSpan = Convert.ToInt16(subStringsSkipp[3]);
-						fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name);//Sends the data out into the final filter
-						*/
+						}
+						continue;
 					}
 				}
+*/
 				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
 				inputDay = int.Parse(subStrings[0]);
 				inputHour = subStrings[1];
 				inputEvent = subStrings[2];
 				inputRowSpan = Convert.ToInt16(subStrings[3]);
-				fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the final filter
-			}
 
-			foreach (string className in classes) 
-			{
-				insertIntoClasses(className);
+				//justPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
+
+
+				if ((checkOverlap(name, Globals.dayList[inputDay], inputHour) == 1) && (inputDay == 4))
+				{
+					justPush(inputDay - 1, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the final filter
+
+					string[] subStringsFriday = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
+					inputDay = int.Parse(subStringsFriday[0]);
+					inputHour = subStringsFriday[1];
+					inputEvent = subStringsFriday[2];
+					inputRowSpan = Convert.ToInt16(subStringsFriday[3]);
+
+					justPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
+
+				}
+				else if (checkOverlap(name, Globals.dayList[inputDay], inputHour) == 1)
+				{
+					justPush(inputDay + 1, inputHour, inputEvent, inputRowSpan, name);
+					//deleteSpecific(name, Globals.dayList[inputDay], inputHour);
+				}
+				else {
+					justPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
+					//deleteSpecific(name, Globals.dayList[inputDay], inputHour);
+				}
+
+				foreach (string className in classes)
+				{
+					insertIntoClasses(className);
+				}
+				deleteEmpty(name);
 			}
 		}
 
+
+		/*
 		//Filter that fixes the overlap that happens with the cells that have rowspans higher than 2, then pushes it to the database
 		public void fixOverlapThenPush(int inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
 		{
@@ -89,12 +116,114 @@ namespace FacultySchedules
 				}
 			}
 		}
+		*/
 
 		public void justPush(int inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
 		{
 			insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
 		}
 
+		public void deleteSpecific(string name, string day, string time)
+		{
+			MySqlConnection connection = null;
+			MySqlDataReader dataReader = null;
+
+			try
+			{
+				connection = new MySqlConnection(connectionParam);
+				connection.Open();
+				string stm = "DELETE FROM `" + name + "` WHERE day = '" + day + "' AND hour = '" + time + "'" + "AND event = 'empty'";
+				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+				dataReader = replaceCmd.ExecuteReader();
+			}
+
+			catch (MySqlException error)
+			{
+			}
+
+			finally //We need to close all of our connections once everything is retrieved
+			{
+				if (dataReader != null)
+				{
+					dataReader.Close();
+				}
+
+				if (connection != null)
+				{
+					connection.Close();
+				}
+			}
+		}
+
+		public void deleteEmpty(string name)
+		{
+			MySqlConnection connectionCreate = null;
+			MySqlDataReader dataReaderCreate = null;
+			try
+			{
+				connectionCreate = new MySqlConnection(connectionParam);
+				connectionCreate.Open();
+				string stm = "DELETE FROM `" + name + "` WHERE event = 'empty'";
+				MySqlCommand createCmd = new MySqlCommand(stm, connectionCreate);
+				dataReaderCreate = createCmd.ExecuteReader();
+			}
+
+			catch (MySqlException error)
+			{
+			}
+
+			finally //We need to close all of our connections once everything is retrieved
+			{
+				if (dataReaderCreate != null)
+				{
+					dataReaderCreate.Close();
+				}
+
+				if (connectionCreate != null)
+				{
+					connectionCreate.Close();
+				}
+			}
+		}
+
+		public int checkDuplicate(string name, string day, string time, string eventName)
+		{
+			int existanceResult = 0;
+			MySqlConnection connection = null;
+			MySqlDataReader dataReader = null;
+
+			try
+			{
+				connection = new MySqlConnection(connectionParam);
+				connection.Open();
+				string stm = "SELECT 1 FROM `" + name + "` WHERE day = '" + day + "' AND hour = '" + time + "'" + "AND event = '" + eventName + "'" + "LIMIT 1";
+				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+				dataReader = replaceCmd.ExecuteReader();
+
+				while (dataReader.Read())
+				{
+					existanceResult = int.Parse(dataReader.GetString(0));
+				}
+			}
+
+			catch (MySqlException error)
+			{
+			}
+
+			finally //We need to close all of our connections once everything is retrieved
+			{
+				if (dataReader != null)
+				{
+					dataReader.Close();
+				}
+
+				if (connection != null)
+				{
+					connection.Close();
+				}
+			}
+			return existanceResult;
+		}
 
 		public int checkOverlap(string name, string day, string time)
 		{
@@ -106,7 +235,7 @@ namespace FacultySchedules
 			{
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
-				string stm = "SELECT 1 FROM `" + name + "` WHERE day = '" + day + "' AND hour = '" + time + "'" + "AND rowspan > '2'"+ "LIMIT 1";
+				string stm = "SELECT 1 FROM `" + name + "` WHERE day = '" + day + "' AND hour = '" + time + "'" +  "LIMIT 1";
 				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 				dataReader = replaceCmd.ExecuteReader();
 
