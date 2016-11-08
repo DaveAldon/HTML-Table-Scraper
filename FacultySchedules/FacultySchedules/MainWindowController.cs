@@ -8,7 +8,7 @@ namespace FacultySchedules
 	{
 		Run runInit = new Run(); //Instantiation of main engine
 		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
-		AllClasses allClassesInit = new AllClasses(); //Class finder
+		//AllClasses allClassesInit = new AllClasses(); //Class finder
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
 		GetData getDataInit = new GetData(); //Class of query builders
 		GiveData clearInit = new GiveData();
@@ -107,11 +107,13 @@ namespace FacultySchedules
 				runInit.start(eachName); //Begins the main engine with the given name
 			}
 
+			/*
 			foreach (string eachClassName in allClassesInit.getEveryClass()) //Populate the class combo lists
 			{
 				classCombo.AddItem(eachClassName);
 				classCombo2.AddItem(eachClassName);
 			}
+			*/
 
 			foreach (string eachTime in Globals.timeList) //Populate the time combo lists
 			{

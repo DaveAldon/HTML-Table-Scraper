@@ -8,87 +8,50 @@ namespace FacultySchedules
 	{
 		string connectionParam = Globals.connectionParam;
 		bool firstTime = true;
-		bool skip = false;
-		int rowSkip = 0;
 
-		public void DBGather(List<string> data, string name, List<string> classes)
+		public void DBGather(string[,] weeksWorth, string name)
 		{
 			int inputDay;
 			string inputHour, inputEvent;
 			int inputRowSpan;
+			//int missingDay;
 
 			if (firstTime == true)
 			{
 				//dropTable(name);
-				dropTable("Classes");
-				createClassesTable();
+				//dropTable("Classes");
+				//createClassesTable();
 				firstTime = false;
 			}
 
 			createTable(name);
 
-			for (int i = 0; i < data.Count; i++)
+			for (int h = 0; h < 31; h++)
 			{
-				/*
-				if (skip)
+				for (int d = 0; d < 5; d++)
 				{
-					skip = false;
-					if (i + rowSkip + 1 >= data.Count) { }
-					else {
-						i += rowSkip + 1;
-
-						for (int ii = rowSkip - 2; ii > -1; ii--)
-						{
-							string[] subStringsSkipppp = data[i - ii].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
-							inputDay = int.Parse(subStringsSkipppp[0]) + 1;
-							inputHour = subStringsSkipppp[1];
-							inputEvent = subStringsSkipppp[2];
-							inputRowSpan = Convert.ToInt16(subStringsSkipppp[3]);
-							fixOverlapThenPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
-
-						}
+					if ((weeksWorth[h, d].Contains("nothing")) || (weeksWorth[h, d] == null))
+					{
 						continue;
 					}
-				}
-*/
-				string[] subStrings = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
-				inputDay = int.Parse(subStrings[0]);
-				inputHour = subStrings[1];
-				inputEvent = subStrings[2];
-				inputRowSpan = Convert.ToInt16(subStrings[3]);
-
-				//justPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
-
-
-				if ((checkOverlap(name, Globals.dayList[inputDay], inputHour) == 1) && (inputDay == 4))
-				{
-					justPush(inputDay - 1, inputHour, inputEvent, inputRowSpan, name); //Sends the data out into the final filter
-
-					string[] subStringsFriday = data[i].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into three pieces
-					inputDay = int.Parse(subStringsFriday[0]);
-					inputHour = subStringsFriday[1];
-					inputEvent = subStringsFriday[2];
-					inputRowSpan = Convert.ToInt16(subStringsFriday[3]);
+					string[] subStrings = weeksWorth[h, d].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into pieces
+					inputDay = int.Parse(subStrings[0]);
+					inputHour = subStrings[1];
+					inputEvent = subStrings[2];
+					inputRowSpan = Convert.ToInt16(subStrings[3]);
 
 					justPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
 
-				}
-				else if (checkOverlap(name, Globals.dayList[inputDay], inputHour) == 1)
-				{
-					justPush(inputDay + 1, inputHour, inputEvent, inputRowSpan, name);
-					//deleteSpecific(name, Globals.dayList[inputDay], inputHour);
-				}
-				else {
-					justPush(inputDay, inputHour, inputEvent, inputRowSpan, name);
-					//deleteSpecific(name, Globals.dayList[inputDay], inputHour);
-				}
 
-				foreach (string className in classes)
-				{
-					insertIntoClasses(className);
+					//deleteEmpty(name);
 				}
-				deleteEmpty(name);
 			}
+			/*
+			foreach (string className in classes)
+			{
+				insertIntoClasses(className);
+			}
+			*/
 		}
 
 

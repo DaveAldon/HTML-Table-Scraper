@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using HtmlAgilityPack;
+using System.Linq;
 
 namespace FacultySchedules
 {
@@ -9,8 +10,6 @@ namespace FacultySchedules
 		public GiveData giveDB = new GiveData();
 		public void start(string name)
 		{
-			List<string> days = new List<string>();
-			List<string> classes = new List<string>();
 			int index = 0;
 			string value = "";
 			string rowSpan = "rowspan=\"";
@@ -23,7 +22,12 @@ namespace FacultySchedules
 			bool first = true;
 			int breakIndex;
 			string tempSubString = "";
-			int skipAmount = 0;
+
+			int skipHorizontal = 0;
+
+			int weeksWorthCounter = 0;
+
+			string[,] weeksWorth = new string[32,5];
 
 			foreach (HtmlNode item in x)
 			{
@@ -98,40 +102,61 @@ namespace FacultySchedules
 
 						value = innerString;
 						firstTime = DateTime.Parse(time);
-						days.Add(index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
-						//Globals.dayList[index]
-						classes.Add(value);
-
 						int tempSpan = span;
 
-						while (tempSpan > 1)
+					
+						for (int d = 0; d < 5; d++)
 						{
-							firstTime = firstTime.AddMinutes(30);
+							if (weeksWorth[weeksWorthCounter, d] == null)
+							{
+								skipHorizontal = d;
+								break;
+							}
+						}
+						int tempCount = weeksWorthCounter;
 
-							days.Add(index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+						while (tempSpan > 0)
+						{
+							//var lowest = Array.IndexOf(weeksWorth, null);
+
+							weeksWorth[tempCount, skipHorizontal] = (skipHorizontal + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+
+							//vertical[lowest] = (index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+
+							firstTime = firstTime.AddMinutes(30);
+							//days.Add(index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+
+							//weeksWorth[h, index] = (index + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
+							tempCount++;
 							tempSpan--;
 						}
 
-						if ((((index + span) / 2) - 1 > 0) && (index + skipAmount < 4))
+						index = index + 1;
+					}
+					else {
+
+						for (int d = 0; d < 5; d++)
 						{
-							skipAmount = ((index + span) / 2) - 1;
-							for (int ii = 0; ii < span; ii++)
+							if (weeksWorth[weeksWorthCounter, d] == null)
 							{
-								days.Add((index + skipAmount) + "$" + String.Format("{0:t}", firstTime) + "$" + "empty" + "$" + span);
-								firstTime = firstTime.AddMinutes(-30);
+								skipHorizontal = d;
+								break;
 							}
 						}
-						index = index + 1;
-					}
+						weeksWorth[weeksWorthCounter, skipHorizontal] = "nothing";
 
-					else {
 						span = 0;
-						index = index + 1;
+						index += 1;
 					}
 				}
+				weeksWorthCounter++;
 				index = 0;
+				//Array.Clear(vertical, 0, vertical.Length);
+				skipHorizontal = 0;
 			}
-			giveDB.DBGather(days, name, classes);
+			weeksWorthCounter = 0;
+			giveDB.DBGather(weeksWorth, name);
+			//classes = classes.Distinct().ToList();
 		}
 	}
 }
