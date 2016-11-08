@@ -8,13 +8,13 @@ namespace FacultySchedules
 	public class GetData
 	{
 		allFaculty allFacultyInit = new allFaculty();
+		string connectionParam = Globals.connectionParam;
 		public string whoIsFreeAtXFromList(string time, string facultyTextNames)
 		{
 			string[] facultyNames = facultyTextNames.Split(new string[] { "\n" }, StringSplitOptions.None);
 			int facultyCount = facultyNames.Length;
-			string connectionParam = Globals.connectionParam;
-			List<string> resultList = new List<string>();
 			int existanceResult = 0;
+			List<string> resultList = new List<string>();
 
 			foreach (string eachDay in Globals.dayList)
 			{
@@ -68,10 +68,7 @@ namespace FacultySchedules
 
 			foreach (string eachResult in resultList)
 			{
-				//if (internalWhoIsFreeAtX(time, className).Count == facultyCount)
-				//{
-					finalResult += eachResult + "\n";
-				//}
+				finalResult += eachResult + "\n";
 			}
 		return finalResult;
 		}
@@ -84,7 +81,6 @@ namespace FacultySchedules
 			List<string> everyName = new List<string>();
 			everyName.AddRange(allFacultyInit.getEveryonesName());
 			int nameCount = everyName.Count;
-			string connectionParam = Globals.connectionParam;
 
 			foreach (string eachDay in Globals.dayList)
 			{
@@ -118,7 +114,7 @@ namespace FacultySchedules
 						errorHandle(error);
 					}
 
-					finally //We need to close all of our connections once everything is retrieved
+					finally
 					{
 						if (dataReader != null)
 						{
@@ -144,14 +140,15 @@ namespace FacultySchedules
 
 		public string whenIsEveryoneAvailable()
 		{
-			int existanceResult;
 			string finalResult = "";
 			List<string> resultList = new List<string>();
 			List<string> everyName = new List<string>();
 			List<string> timeList = new List<string>();
+
 			everyName.AddRange(allFacultyInit.getEveryonesName());
+
+			int existanceResult;
 			int nameCount = everyName.Count;
-			string connectionParam = Globals.connectionParam;
 
 			foreach (string eachDay in Globals.dayList)
 			{
@@ -188,7 +185,7 @@ namespace FacultySchedules
 							errorHandle(error);
 						}
 
-						finally //We need to close all of our connections once everything is retrieved
+						finally
 						{
 							if (dataReader != null)
 							{
@@ -213,7 +210,6 @@ namespace FacultySchedules
 			{
 				finalResult += results;
 			}
-
 			everyName.Clear();
 			return finalResult;
 		}
@@ -225,7 +221,6 @@ namespace FacultySchedules
 
 			foreach (string eachName in allFacultyInit.getEveryonesName())
 			{
-				string connectionParam = Globals.connectionParam;
 				MySqlConnection connection = null;
 				MySqlDataReader dataReader = null;
 
@@ -277,7 +272,6 @@ namespace FacultySchedules
 			string finalResult = "";
 
 			foreach (string eachName in allFacultyInit.getEveryonesName()) {
-				string connectionParam = Globals.connectionParam;
 				MySqlConnection connection = null;
 				MySqlDataReader dataReader = null;
 
@@ -325,7 +319,6 @@ namespace FacultySchedules
 
 		public string whenDoesXHaveY(string name, string className)
 		{
-			string connectionParam = Globals.connectionParam;
 			MySqlConnection connection = null;
 			MySqlDataReader dataReader = null;
 
@@ -333,10 +326,8 @@ namespace FacultySchedules
 			{
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
-				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = '" + className + "'";
-				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
-				dataReader = replaceCmd.ExecuteReader();
 				int count = dataReader.FieldCount;
+				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = '" + className + "'";
 				string retrievedDay = "";
 				string retrievedHour = "";
 				string result = "";
@@ -345,6 +336,8 @@ namespace FacultySchedules
 				List<string> wednesday = new List<string>();
 				List<string> thursday = new List<string>();
 				List<string> friday = new List<string>();
+				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+				dataReader = replaceCmd.ExecuteReader();
 
 				while (dataReader.Read())
 				{
@@ -404,7 +397,7 @@ namespace FacultySchedules
 			catch (MySqlException error)
 			{
 				errorHandle(error);
-				return null;
+				return null; //Return null in order to force a return on this code path
 			}
 
 			finally

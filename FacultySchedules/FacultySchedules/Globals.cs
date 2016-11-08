@@ -4,6 +4,8 @@ namespace FacultySchedules
 {
 	public static class Globals
 	{
+		public static HashSet<string> uniqueClassInput = new HashSet<string>();
+
 		public const string ip = "127.0.0.1";
 		public const string username = "test";
 		public const string port = "8889";

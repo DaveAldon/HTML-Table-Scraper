@@ -10,9 +10,7 @@
 
 		public string getURL(string firstName, string lastName)
 		{
-			string URL;
-
-			URL = "http://www.cis.gvsu.edu/public/staffListing/index.php?page=staff&fname=" + firstName + "&lname=" + lastName;
+			string URL = "http://www.cis.gvsu.edu/public/staffListing/index.php?page=staff&fname=" + firstName + "&lname=" + lastName;
 			return URL;
 		}
 
@@ -30,7 +28,6 @@
 				firstname = nameToSplit[0];
 				lastname = nameToSplit[1];
 			}
-
 			return getURL(firstname, lastname);
 		}
 	}

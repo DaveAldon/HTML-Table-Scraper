@@ -8,13 +8,13 @@ namespace FacultySchedules
 	{
 		Run runInit = new Run(); //Instantiation of main engine
 		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
-		//AllClasses allClassesInit = new AllClasses(); //Class finder
 		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
 		GetData getDataInit = new GetData(); //Class of query builders
-		GiveData clearInit = new GiveData();
+		GiveData clearInit = new GiveData(); //Class of queries, only needed to reset tables in this class
 
 		//
 		//UI dependancies and instantiation
+		//
 
 		public void ViewDidLoad()
 		{
@@ -90,30 +90,28 @@ namespace FacultySchedules
 			runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 
-		partial void clickedScheduleButton(Foundation.NSObject sender)
+		partial void clickedScheduleButton(NSObject sender)
 		{
 			string facName = htmlScheduleCombo.TitleOfSelectedItem; //Grabs the selected combo list item
 			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName); //Sets browser view to the formatted URL
 		}
 
-		partial void clickedScrapeButton(Foundation.NSObject sender)
+		partial void clickedScrapeButton(NSObject sender)
 		{
 			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
 			{
-				clearInit.dropTable(eachName);
+				clearInit.dropTable(eachName); //Drop all of the faculty name tables to refresh the data
 				facultyListCombo.AddItem(eachName); //Populate the faculty names combo lists
 				htmlScheduleCombo.AddItem(eachName);
 				classCombo3.AddItem(eachName);
 				runInit.start(eachName); //Begins the main engine with the given name
 			}
 
-			/*
-			foreach (string eachClassName in allClassesInit.getEveryClass()) //Populate the class combo lists
+			foreach (string eachClassName in Globals.uniqueClassInput) //Populate the class combo lists
 			{
 				classCombo.AddItem(eachClassName);
 				classCombo2.AddItem(eachClassName);
 			}
-			*/
 
 			foreach (string eachTime in Globals.timeList) //Populate the time combo lists
 			{
