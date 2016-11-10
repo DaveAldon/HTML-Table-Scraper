@@ -15,21 +15,21 @@ namespace FacultySchedules
 			int inputRowSpan;
 			createTable(name);
 
-			for (int h = 0; h < 31; h++)
+			for (int h = 0; h < 32; h++)
 			{
 				for (int d = 0; d < 5; d++)
 				{
-					if ((weeksWorth[h, d].Contains("nothing")) || (weeksWorth[h, d] == null))
+					if ((weeksWorth[h, d] != null) && (weeksWorth[h, d].Contains("nothing") == false))
 					{
-						continue;
+						string[] subStrings = weeksWorth[h, d].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into pieces
+						inputDay = int.Parse(subStrings[0]);
+						inputHour = subStrings[1];
+						inputEvent = subStrings[2];
+						inputRowSpan = Convert.ToInt16(subStrings[3]);
+						insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
+						Globals.uniqueClassInput.Add(inputEvent);
 					}
-					string[] subStrings = weeksWorth[h, d].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into pieces
-					inputDay = int.Parse(subStrings[0]);
-					inputHour = subStrings[1];
-					inputEvent = subStrings[2];
-					inputRowSpan = Convert.ToInt16(subStrings[3]);
-					insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
-					Globals.uniqueClassInput.Add(inputEvent);
+					else continue;
 				}
 			}
 		}

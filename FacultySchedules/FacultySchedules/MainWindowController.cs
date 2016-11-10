@@ -98,7 +98,8 @@ namespace FacultySchedules
 
 		partial void clickedScrapeButton(NSObject sender)
 		{
-			foreach (string eachName in allFacultyInit.getEveryonesName()) //Goes through each faculty name in the database table
+			allFacultyInit.findAndInsertAllNames();
+			foreach (string eachName in Globals.uniqueFacultyNames) //Goes through each faculty name in the database table
 			{
 				clearInit.dropTable(eachName); //Drop all of the faculty name tables to refresh the data
 				facultyListCombo.AddItem(eachName); //Populate the faculty names combo lists

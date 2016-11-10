@@ -1,11 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using AppKit;
+using HtmlAgilityPack;
 using MySql.Data.MySqlClient;
 
 namespace FacultySchedules
 {
 	public class allFaculty
 	{
+		Scrape scraper = new Scrape();
+		GiveData giveDB = new GiveData();
+		SpecialNameFormatting dynamicNameFinder = new SpecialNameFormatting();
 		List<string> everybodyName = new List<string>();
+		string tempName;
 		public List<string> getEveryonesName()
 		{
 			everybodyName.Clear();
@@ -33,6 +41,7 @@ namespace FacultySchedules
 
 			catch (MySqlException error) //If at any point there's a connection or query error, we want to know what exactly is going on
 			{
+				errorHandle(error);
 			}
 
 			finally //We need to close all of our connections once everything is retrieved
@@ -48,6 +57,48 @@ namespace FacultySchedules
 				}
 			}
 			return everybodyName;
+		}
+
+		public void findAndInsertAllNames()
+		{
+			var facultyNames = scraper.ScrapeFaculty();
+			var facultyNamesEven = scraper.ScrapeFacultyEven();
+			List<string> allNames = new List<string>();
+
+			foreach (HtmlNode eachName in facultyNamesEven)
+			{
+				facultyNames.Add(eachName);
+			}
+
+			foreach (HtmlNode eachName in facultyNames)
+			{
+				tempName = eachName.InnerText;
+				string[] subStrings = Regex.Split(tempName, "\\n");
+
+				for (int i = 1; i < subStrings.Length - 1; i += 3)
+				{
+					allNames.Add(dynamicNameFinder.getNameForTable(subStrings[i]));
+				}
+				foreach (string name in allNames)
+				{
+					giveDB.createTable(name);
+					Globals.uniqueFacultyNames.Add(name);
+				}
+			}
+		}
+
+		void errorHandle(MySqlException error)
+		{
+			NSAlert oAlert = new NSAlert();
+			// Set the buttons
+			oAlert.InvokeOnMainThread(delegate
+			{
+				oAlert.AddButton("Ok");
+			});
+			// Show the message box and capture
+			oAlert.MessageText = "There's a problem with the query!";
+			oAlert.InformativeText = error.ToString();
+			oAlert.AlertStyle = NSAlertStyle.Informational;
 		}
 	}
 }

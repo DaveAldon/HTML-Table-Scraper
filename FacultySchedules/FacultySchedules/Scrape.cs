@@ -14,10 +14,36 @@ namespace FacultySchedules
 
 			string page = webClient.DownloadString(specialFormatInit.splitNameGetURL(name));
 
-			HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+			HtmlDocument doc = new HtmlDocument();
 			doc.LoadHtml(page);
 
 			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_tblSchedule").Elements("tr").ToList();
+			return x;
+		}
+
+		public List<HtmlNode> ScrapeFaculty()
+		{
+			WebClient webClient = new WebClient();
+
+			string page = webClient.DownloadString("http://www.cis.gvsu.edu/public/staffListing/");
+
+			HtmlDocument doc = new HtmlDocument();
+			doc.LoadHtml(page);
+
+			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_grdListing").Elements("tbody").ToList();
+			return x;
+		}
+
+		public List<HtmlNode> ScrapeFacultyEven()
+		{
+			WebClient webClient = new WebClient();
+
+			string page = webClient.DownloadString("http://www.cis.gvsu.edu/public/staffListing/");
+
+			HtmlDocument doc = new HtmlDocument();
+			doc.LoadHtml(page);
+
+			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_grdListingEven").Elements("tbody").ToList();
 			return x;
 		}
 	}

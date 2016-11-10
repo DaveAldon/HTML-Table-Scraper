@@ -7,6 +7,7 @@ namespace FacultySchedules
 	class Run
 	{
 		public GiveData giveDB = new GiveData();
+
 		public void start(string name)
 		{
 			Scrape scraper = new Scrape();
@@ -24,15 +25,21 @@ namespace FacultySchedules
 			string tempHTML = "";
 			string tempSubString = "";
 			string[,] weeksWorth = new string[32, 5];
+			string[,] sabbaticalWeek = new string[0, 0];
 
 			foreach (HtmlNode item in x)
 			{
 				if (first)
 				{
-					first = false;
-					continue;
+					if (item.InnerText.Contains("Sabbatical"))
+					{
+						sabbaticalWeek[0,0] = (0 + "$" + "All Semester" + "$" + "Sabbatical" + "$" + 0);
+						giveDB.DBGather(sabbaticalWeek, name);
+					}
+					break;
 				}
-
+				first = false;
+					
 				tempHTML = item.InnerHtml;
 				string[] subStrings = tempHTML.Split(new string[] { "</td>" }, StringSplitOptions.None);
 

@@ -1,10 +1,21 @@
-﻿namespace FacultySchedules
+﻿using System;
+using System.Text.RegularExpressions;
+
+namespace FacultySchedules
 {
 	public class SpecialNameFormatting
 	{
 		public string getNameForCombo(string firstName, string lastName)
 		{
 			string fullName = firstName + " " + lastName;
+			return fullName;
+		}
+
+		public string getNameForTable(string name)
+		{
+			//string[] subStrings = name.Split(new string[] { "," }, StringSplitOptions.None);
+			string[] subStrings = Regex.Split(name, ",");
+			string fullName = subStrings[1] + " " + subStrings[0];
 			return fullName;
 		}
 
@@ -16,6 +27,7 @@
 
 		public string splitNameGetURL(string input) //Splits the name into first and last names including their special characters
 		{
+			input = input.Trim();
 			string[] nameToSplit = input.Split();
 			string firstname, lastname;
 
