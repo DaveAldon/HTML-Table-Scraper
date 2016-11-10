@@ -145,9 +145,16 @@ namespace FacultySchedules
 			List<string> everyName = new List<string>();
 			List<string> timeList = new List<string>();
 
-			everyName.AddRange(Globals.uniqueFacultyNames);
-
 			int existanceResult;
+
+			foreach (string uniqueName in Globals.uniqueFacultyNames)
+			{
+				if (doesTableExist(uniqueName) == 1)
+				{
+					everyName.Add(uniqueName);
+				}
+			}
+
 			int nameCount = everyName.Count;
 
 			foreach (string eachDay in Globals.dayList)
@@ -212,6 +219,48 @@ namespace FacultySchedules
 			}
 			everyName.Clear();
 			return finalResult;
+		}
+
+		public int doesTableExist(string name)
+		{
+			int existanceResult = 0;
+			MySqlConnection connection = null;
+			MySqlDataReader dataReader = null;
+
+			try
+			{
+				connection = new MySqlConnection(connectionParam);
+				connection.Open();
+				string stm = "SELECT 1 FROM `" + name + "`";
+				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
+				dataReader = replaceCmd.ExecuteReader();
+				int count = dataReader.FieldCount;
+				existanceResult = 0;
+
+				while (dataReader.Read())
+				{
+					existanceResult = int.Parse(dataReader.GetString(0));
+				}
+			}
+
+			catch (MySqlException error)
+			{
+				errorHandle(error);
+			}
+
+			finally
+			{
+				if (dataReader != null)
+				{
+					dataReader.Close();
+				}
+
+				if (connection != null)
+				{
+					connection.Close();
+				}
+			}
+			return existanceResult;
 		}
 
 		public List<string> internalWhoTeachesX(string className)
