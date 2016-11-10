@@ -14,6 +14,8 @@ namespace FacultySchedules
 		SpecialNameFormatting dynamicNameFinder = new SpecialNameFormatting();
 		List<string> everybodyName = new List<string>();
 		string tempName;
+
+		/*
 		public List<string> getEveryonesName()
 		{
 			everybodyName.Clear();
@@ -58,6 +60,7 @@ namespace FacultySchedules
 			}
 			return everybodyName;
 		}
+		*/
 
 		public void findAndInsertAllNames()
 		{

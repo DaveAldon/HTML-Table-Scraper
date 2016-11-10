@@ -27,6 +27,7 @@ namespace FacultySchedules
 				string tempHTML = "";
 				string tempSubString = "";
 				string[,] weeksWorth = new string[32, 5];
+				const int MaxLength = 7;
 
 				foreach (HtmlNode item in x)
 				{
@@ -34,18 +35,15 @@ namespace FacultySchedules
 					{
 						if (item.InnerText.Contains("Sabbatical"))
 						{
-							Globals.uniqueClassInput.Add("On Sabbatical");
-							for (int h = 0; h < 32; h++)
-							{
-								for (int d = 0; d < 5; d++)
-								{
-									giveDB.insertMissingIntoTable(Globals.dayList[d], Globals.timeList[h], "On Sabbatical", 2, name);
-								}
-							}
+							Globals.eventAnomolies.Add("On Sabbatical");
 							return;
 						}
+						else if (item.InnerText.Contains("Monday") == false)
+						{
+							continue;
+						}
+						first = false;
 					}
-
 
 					tempHTML = item.InnerHtml;
 					string[] subStrings = tempHTML.Split(new string[] { "</td>" }, StringSplitOptions.None);
@@ -99,6 +97,12 @@ namespace FacultySchedules
 							}
 
 							value = innerString;
+
+							if (value.Length > MaxLength)
+							{
+								value = value.Substring(0, MaxLength);
+							}
+
 							firstTime = DateTime.Parse(time);
 							int tempSpan = span;
 
@@ -143,14 +147,8 @@ namespace FacultySchedules
 				giveDB.DBGather(weeksWorth, name);
 			}
 			else {
-				Globals.uniqueClassInput.Add("Missing Information");
-				for (int h = 0; h < 32; h++)
-				{
-					for (int d = 0; d < 5; d++)
-					{
-						giveDB.insertMissingIntoTable(Globals.dayList[d], Globals.timeList[h], "Missing Information", 2, name);
-					}
-				}
+				Globals.eventAnomolies.Add("Missing Information");
+				return;
 			}
 		}
 	}

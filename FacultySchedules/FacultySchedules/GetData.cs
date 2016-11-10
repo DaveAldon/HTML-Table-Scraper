@@ -7,7 +7,7 @@ namespace FacultySchedules
 {
 	public class GetData
 	{
-		allFaculty allFacultyInit = new allFaculty();
+		//allFaculty allFacultyInit = new allFaculty();
 		string connectionParam = Globals.connectionParam;
 		public string whoIsFreeAtXFromList(string time, string facultyTextNames)
 		{
@@ -79,7 +79,7 @@ namespace FacultySchedules
 			string finalResult = "";
 			List<string> resultList = new List<string>();
 			List<string> everyName = new List<string>();
-			everyName.AddRange(allFacultyInit.getEveryonesName());
+			everyName.AddRange(Globals.uniqueFacultyNames);
 			int nameCount = everyName.Count;
 
 			foreach (string eachDay in Globals.dayList)
@@ -145,7 +145,7 @@ namespace FacultySchedules
 			List<string> everyName = new List<string>();
 			List<string> timeList = new List<string>();
 
-			everyName.AddRange(allFacultyInit.getEveryonesName());
+			everyName.AddRange(Globals.uniqueFacultyNames);
 
 			int existanceResult;
 			int nameCount = everyName.Count;
@@ -164,7 +164,7 @@ namespace FacultySchedules
 						{
 							connection = new MySqlConnection(connectionParam);
 							connection.Open();
-							string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+							string stm = "SELECT 1 FROM `" + Globals.uniqueFacultyNames[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
 							MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 							dataReader = replaceCmd.ExecuteReader();
 							existanceResult = 0;
@@ -219,7 +219,7 @@ namespace FacultySchedules
 			int existanceResult;
 			List<string> finalResult = new List<string>();
 
-			foreach (string eachName in allFacultyInit.getEveryonesName())
+			foreach (string eachName in Globals.uniqueFacultyNames)
 			{
 				MySqlConnection connection = null;
 				MySqlDataReader dataReader = null;
@@ -271,7 +271,7 @@ namespace FacultySchedules
 			int existanceResult;
 			string finalResult = "";
 
-			foreach (string eachName in allFacultyInit.getEveryonesName()) {
+			foreach (string eachName in Globals.uniqueFacultyNames) {
 				MySqlConnection connection = null;
 				MySqlDataReader dataReader = null;
 

@@ -6,6 +6,7 @@ namespace FacultySchedules
 	{
 		public static HashSet<string> uniqueClassInput = new HashSet<string>();
 		public static HashSet<string> uniqueFacultyNames = new HashSet<string>();
+		public static HashSet<string> eventAnomolies = new HashSet<string>();
 
 		public static bool isMissing = false;
 
