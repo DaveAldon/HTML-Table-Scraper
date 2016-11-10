@@ -164,7 +164,7 @@ namespace FacultySchedules
 						{
 							connection = new MySqlConnection(connectionParam);
 							connection.Open();
-							string stm = "SELECT 1 FROM `" + Globals.uniqueFacultyNames[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+							string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
 							MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 							dataReader = replaceCmd.ExecuteReader();
 							existanceResult = 0;
@@ -326,7 +326,7 @@ namespace FacultySchedules
 			{
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
-				int count = dataReader.FieldCount;
+
 				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = '" + className + "'";
 				string retrievedDay = "";
 				string retrievedHour = "";
@@ -338,6 +338,7 @@ namespace FacultySchedules
 				List<string> friday = new List<string>();
 				MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 				dataReader = replaceCmd.ExecuteReader();
+				int count = dataReader.FieldCount;
 
 				while (dataReader.Read())
 				{
