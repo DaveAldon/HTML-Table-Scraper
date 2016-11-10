@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using HtmlAgilityPack;
@@ -17,8 +18,18 @@ namespace FacultySchedules
 			HtmlDocument doc = new HtmlDocument();
 			doc.LoadHtml(page);
 
-			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_tblSchedule").Elements("tr").ToList();
-			return x;
+			try
+			{
+				List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_tblSchedule").Elements("tr").ToList();
+				Globals.isMissing = false;
+				return x;
+			}
+
+			catch (NullReferenceException error)
+			{
+				Globals.isMissing = true;
+				return null;
+			}
 		}
 
 		public List<HtmlNode> ScrapeFaculty()

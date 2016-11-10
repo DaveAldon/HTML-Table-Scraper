@@ -66,6 +66,43 @@ namespace FacultySchedules
 			}
 		}
 
+		public void insertMissingIntoTable(string inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
+		{
+			createTable(name);
+			MySqlConnection addConnection = null;
+			MySqlDataReader addDataReader = null;
+			try
+			{
+				addConnection = new MySqlConnection(connectionParam);
+				addConnection.Open();
+				string stm = "INSERT INTO `" + name + "` (day, hour, event, rowspan) VALUES(@day, @hour, @event, @rowspan)";
+				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
+				cmd.Parameters.AddWithValue("@day", inputDay);
+				cmd.Parameters.AddWithValue("@hour", inputHour);
+				cmd.Parameters.AddWithValue("@event", inputEvent);
+				cmd.Parameters.AddWithValue("@rowspan", inputRowSpan);
+				addDataReader = cmd.ExecuteReader();
+			}
+
+			catch (MySqlException error)
+			{
+				errorHandle(error);
+			}
+
+			finally
+			{
+				if (addDataReader != null)
+				{
+					addDataReader.Close();
+				}
+
+				if (addConnection != null)
+				{
+					addConnection.Close();
+				}
+			}
+		}
+
 		public void insertIntoTable(string inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
 		{
 			MySqlConnection addConnection = null;

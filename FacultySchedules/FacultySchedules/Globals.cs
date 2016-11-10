@@ -7,6 +7,8 @@ namespace FacultySchedules
 		public static HashSet<string> uniqueClassInput = new HashSet<string>();
 		public static HashSet<string> uniqueFacultyNames = new HashSet<string>();
 
+		public static bool isMissing = false;
+
 		public const string ip = "127.0.0.1";
 		public const string username = "test";
 		public const string port = "8889";

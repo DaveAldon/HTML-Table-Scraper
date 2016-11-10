@@ -81,7 +81,6 @@ namespace FacultySchedules
 				}
 				foreach (string name in allNames)
 				{
-					giveDB.createTable(name);
 					Globals.uniqueFacultyNames.Add(name);
 				}
 			}
