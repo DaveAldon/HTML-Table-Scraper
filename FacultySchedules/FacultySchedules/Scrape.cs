@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using AppKit;
 using HtmlAgilityPack;
 
 namespace FacultySchedules
@@ -27,6 +28,7 @@ namespace FacultySchedules
 
 			catch (NullReferenceException error)
 			{
+				errorHandle(error);
 				Globals.isMissing = true;
 				return null;
 			}
@@ -56,6 +58,20 @@ namespace FacultySchedules
 
 			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_grdListingEven").Elements("tbody").ToList();
 			return x;
+		}
+
+		void errorHandle(NullReferenceException error)
+		{
+			NSAlert oAlert = new NSAlert();
+			// Set the buttons
+			oAlert.InvokeOnMainThread(delegate
+			{
+				oAlert.AddButton("Ok");
+			});
+			// Show the message box and capture
+			oAlert.MessageText = "There's a problem with the website or your internet connection!";
+			oAlert.InformativeText = error.ToString();
+			oAlert.AlertStyle = NSAlertStyle.Informational;
 		}
 	}
 }

@@ -42,19 +42,19 @@ namespace FacultySchedules
 		//Event Handling
 		//
 
-		partial void findOut1(NSObject sender)
+		partial void findOut1(NSObject sender) //When does a faculty teach a specified class
 		{
 			resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyListCombo.TitleOfSelectedItem, classCombo.TitleOfSelectedItem);
 		}
 
-		partial void findOut2(NSObject sender)
+		partial void findOut2(NSObject sender) //Who teaches a specific class query
 		{
 			resultTextBox.StringValue = getDataInit.whoTeachesX(classCombo2.TitleOfSelectedItem);
 		}
 
-		partial void findOut3(NSObject sender)
+		partial void findOut3(NSObject sender) //Customized availability query
 		{
-			resultTextBox.StringValue = getDataInit.whoIsFreeAtXFromList(timeCombo2.TitleOfSelectedItem, listOfChosenText.StringValue);
+			resultTextBox.StringValue = getDataInit.whoIsFreeFromList(listOfChosenText.StringValue);
 		}
 
 		partial void findOut4(NSObject sender) //All faculty availability query
@@ -62,7 +62,7 @@ namespace FacultySchedules
 			resultTextBox.StringValue = getDataInit.whenIsEveryoneAvailable();
 		}
 
-		partial void findOut5(NSObject sender)
+		partial void findOut5(NSObject sender) //Who is free at a specified time query
 		{
 			resultTextBox.StringValue = getDataInit.whoIsFreeAtX(timeCombo.TitleOfSelectedItem);
 		}
