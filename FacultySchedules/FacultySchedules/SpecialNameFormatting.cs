@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace FacultySchedules
 {
@@ -13,7 +12,6 @@ namespace FacultySchedules
 
 		public string getNameForTable(string name)
 		{
-			//string[] subStrings = name.Split(new string[] { "," }, StringSplitOptions.None);
 			string[] subStrings = Regex.Split(name, ",");
 			string fullName = subStrings[1] + " " + subStrings[0];
 			return fullName;

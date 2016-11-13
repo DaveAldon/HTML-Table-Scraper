@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AppKit;
 using HtmlAgilityPack;
@@ -49,7 +48,7 @@ namespace FacultySchedules
 				oAlert.AddButton("Ok");
 			});
 			// Show the message box and capture
-			oAlert.MessageText = "There's a problem with the query!";
+			oAlert.MessageText = "There's a problem with the faculty names!";
 			oAlert.InformativeText = error.ToString();
 			oAlert.AlertStyle = NSAlertStyle.Informational;
 		}

@@ -26,8 +26,7 @@ namespace FacultySchedules
 				string rowSpan = "rowspan=\"";
 				string tempHTML = "";
 				string tempSubString = "";
-				string[,] weeksWorth = new string[32, 5];
-				const int MaxLength = 7;
+				string[,] weeksWorth = new string[Globals.hourSlots, Globals.daySlots];
 
 				foreach (HtmlNode item in x)
 				{
@@ -87,7 +86,7 @@ namespace FacultySchedules
 
 						if (tempSubString.Contains(rowSpan))
 						{
-							for (int spanFinder = 2; spanFinder < 32; spanFinder++)
+							for (int spanFinder = Globals.minEventPeriod; spanFinder < Globals.hourSlots; spanFinder++)
 							{
 								if (tempSubString.LastIndexOf(spanFinder.ToString(), 50, StringComparison.Ordinal) > 0)
 								{
@@ -98,15 +97,15 @@ namespace FacultySchedules
 
 							value = innerString;
 
-							if (value.Length > MaxLength)
+							if (value.Length > Globals.maxCharLength)
 							{
-								value = value.Substring(0, MaxLength);
+								value = value.Substring(0, Globals.maxCharLength);
 							}
 
 							firstTime = DateTime.Parse(time);
 							int tempSpan = span;
 
-							for (int d = 0; d < 5; d++)
+							for (int d = 0; d < Globals.daySlots; d++)
 							{
 								if (weeksWorth[weeksWorthCounter, d] == null)
 								{
@@ -120,14 +119,14 @@ namespace FacultySchedules
 							while (tempSpan > 0)
 							{
 								weeksWorth[tempCount, skipHorizontal] = (skipHorizontal + "$" + String.Format("{0:t}", firstTime) + "$" + value + "$" + span);
-								firstTime = firstTime.AddMinutes(30);
+								firstTime = firstTime.AddMinutes(Globals.cellIncrement);
 								tempCount++;
 								tempSpan--;
 							}
 							index = index + 1;
 						}
 						else {
-							for (int d = 0; d < 5; d++)
+							for (int d = 0; d < Globals.daySlots; d++)
 							{
 								if (weeksWorth[weeksWorthCounter, d] == null)
 								{

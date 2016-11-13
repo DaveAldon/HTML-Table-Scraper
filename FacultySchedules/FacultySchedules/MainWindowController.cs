@@ -113,19 +113,5 @@ namespace FacultySchedules
 				timeCombo2.AddItem(eachTime);
 			}
 		}
-
-		//
-		//Databse connection settings
-		//
-
-		partial void clickedAddFacultyButton(NSObject sender) //Updates the global connection parameters
-		{
-			runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
-		}
-
-		partial void clickedRemoveFacultyButton(NSObject sender)
-		{
-			runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
-		}
 	}
 }

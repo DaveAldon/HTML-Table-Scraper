@@ -15,19 +15,21 @@ namespace FacultySchedules
 			int inputRowSpan;
 			createTable(name);
 
-			for (int h = 0; h < 32; h++)
+			//Seperates the string of data into pieces
+			for (int h = 0; h < Globals.hourSlots; h++)
 			{
-				for (int d = 0; d < 5; d++)
+				for (int d = 0; d < Globals.daySlots; d++)
 				{
-					if ((weeksWorth[h, d] != null) && (weeksWorth[h, d].Contains("nothing") == false))
+					if ((weeksWorth[h, d] != null) && (weeksWorth[h, d].Contains("nothing") == false)) //We want to make sure the data is in the correct format
 					{
-						string[] subStrings = weeksWorth[h, d].Split(new string[] { "$" }, StringSplitOptions.None); //Seperates the string of data into pieces
+						string[] subStrings = weeksWorth[h, d].Split(new string[] { "$" }, StringSplitOptions.None);
 						inputDay = int.Parse(subStrings[0]);
 						inputHour = subStrings[1];
 						inputEvent = subStrings[2];
 						inputRowSpan = Convert.ToInt16(subStrings[3]);
-						insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name);
-						Globals.uniqueClassInput.Add(inputEvent);
+
+						insertIntoTable(Globals.dayList[inputDay], inputHour, inputEvent, inputRowSpan, name); //Insert the data into the database
+						Globals.uniqueClassInput.Add(inputEvent); //Place each unique event name into a global list
 					}
 					else continue;
 				}

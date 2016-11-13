@@ -122,11 +122,6 @@ namespace FacultySchedules
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (listOfChosenText != null) {
-				listOfChosenText.Dispose ();
-				listOfChosenText = null;
-			}
-
 			if (addFacultyButton != null) {
 				addFacultyButton.Dispose ();
 				addFacultyButton = null;
@@ -200,6 +195,11 @@ namespace FacultySchedules
 			if (listOfChosen != null) {
 				listOfChosen.Dispose ();
 				listOfChosen = null;
+			}
+
+			if (listOfChosenText != null) {
+				listOfChosenText.Dispose ();
+				listOfChosenText = null;
 			}
 
 			if (middleInitialInput != null) {

@@ -21,7 +21,7 @@ namespace FacultySchedules
 
 			try
 			{
-				List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_tblSchedule").Elements("tr").ToList();
+				List<HtmlNode> x = doc.GetElementbyId(Globals.tableClass).Elements(Globals.tableClassElement).ToList();
 				Globals.isMissing = false;
 				return x;
 			}
@@ -38,12 +38,12 @@ namespace FacultySchedules
 		{
 			WebClient webClient = new WebClient();
 
-			string page = webClient.DownloadString("http://www.cis.gvsu.edu/public/staffListing/");
+			string page = webClient.DownloadString(Globals.dynamicNameURL);
 
 			HtmlDocument doc = new HtmlDocument();
 			doc.LoadHtml(page);
 
-			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_grdListing").Elements("tbody").ToList();
+			List<HtmlNode> x = doc.GetElementbyId(Globals.dynamicNameTableClass).Elements(Globals.dynamicNameTableClassElement).ToList();
 			return x;
 		}
 
@@ -51,12 +51,12 @@ namespace FacultySchedules
 		{
 			WebClient webClient = new WebClient();
 
-			string page = webClient.DownloadString("http://www.cis.gvsu.edu/public/staffListing/");
+			string page = webClient.DownloadString(Globals.dynamicNameURL);
 
 			HtmlDocument doc = new HtmlDocument();
 			doc.LoadHtml(page);
 
-			List<HtmlNode> x = doc.GetElementbyId("ctl0_Main_grdListingEven").Elements("tbody").ToList();
+			List<HtmlNode> x = doc.GetElementbyId(Globals.dynamicNameTableClassEven).Elements(Globals.dynamicNameTableClassElement).ToList();
 			return x;
 		}
 
