@@ -69,7 +69,10 @@ namespace FacultySchedules
 
 		partial void pushAddName(NSObject sender)
 		{
-			listOfChosenText.StringValue += classCombo3.TitleOfSelectedItem + "\n";
+			if (!listOfChosenText.StringValue.Contains(classCombo3.TitleOfSelectedItem)) //Checks for duplicates
+			{
+				listOfChosenText.StringValue += classCombo3.TitleOfSelectedItem + "\n";
+			}
 		}
 
 		partial void pushRemoveName(NSObject sender)
@@ -78,16 +81,6 @@ namespace FacultySchedules
 			{
 				listOfChosenText.StringValue = listOfChosenText.StringValue.Replace(classCombo3.TitleOfSelectedItem + "\n", string.Empty);
 			}
-		}
-
-		partial void clickedAddFacultyButton(NSObject sender)
-		{
-			runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
-		}
-
-		partial void clickedRemoveFacultyButton(NSObject sender)
-		{
-			runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 
 		partial void clickedScheduleButton(NSObject sender)
@@ -119,6 +112,20 @@ namespace FacultySchedules
 				timeCombo.AddItem(eachTime);
 				timeCombo2.AddItem(eachTime);
 			}
+		}
+
+		//
+		//Databse connection settings
+		//
+
+		partial void clickedAddFacultyButton(NSObject sender) //Updates the global connection parameters
+		{
+			runInit.giveDB.createTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
+		}
+
+		partial void clickedRemoveFacultyButton(NSObject sender)
+		{
+			runInit.giveDB.dropTable(firstNameInput.StringValue + " " + lastNameInput.StringValue);
 		}
 	}
 }
