@@ -48,27 +48,77 @@ namespace FacultySchedules
 
 		partial void findOut1(NSObject sender) //When does a faculty teach a specified class
 		{
-			resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyListCombo.TitleOfSelectedItem, classCombo.TitleOfSelectedItem);
+			try
+			{
+				resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyListCombo.TitleOfSelectedItem, classCombo.TitleOfSelectedItem);
+			}
+
+			#pragma warning disable CS0168 // Variable is declared but never used
+			catch (ArgumentNullException error)
+			#pragma warning restore CS0168
+			{
+				errorMessage();
+			}
 		}
 
 		partial void findOut2(NSObject sender) //Who teaches a specific class query
 		{
-			resultTextBox.StringValue = getDataInit.whoTeachesX(classCombo2.TitleOfSelectedItem);
+			try
+			{
+				resultTextBox.StringValue = getDataInit.whoTeachesX(classCombo2.TitleOfSelectedItem);
+			}
+
+			#pragma warning disable CS0168
+			catch (NullReferenceException error)
+			#pragma warning restore CS0168
+			{
+				errorMessage();
+			}
 		}
 
 		partial void findOut3(NSObject sender) //Customized availability query
 		{
-			resultTextBox.StringValue = getDataInit.whoIsFreeFromList(listOfChosenText.StringValue);
+			try
+			{
+				resultTextBox.StringValue = getDataInit.whoIsFreeFromList(listOfChosenText.StringValue);
+			}
+
+			#pragma warning disable CS0168
+			catch (NullReferenceException error)
+			#pragma warning restore CS0168
+			{
+				errorMessage();
+			}
 		}
 
 		partial void findOut4(NSObject sender) //All faculty availability query
 		{
-			resultTextBox.StringValue = getDataInit.whenIsEveryoneAvailable();
+			try
+			{
+				resultTextBox.StringValue = getDataInit.whenIsEveryoneAvailable();
+			}
+
+			#pragma warning disable CS0168
+			catch (NullReferenceException error)
+			#pragma warning restore CS0168
+			{
+				errorMessage();
+			}
 		}
 
 		partial void findOut5(NSObject sender) //Who is free at a specified time query
 		{
-			resultTextBox.StringValue = getDataInit.whoIsFreeAtX(timeCombo.TitleOfSelectedItem);
+			try
+			{
+				resultTextBox.StringValue = getDataInit.whoIsFreeAtX(timeCombo.TitleOfSelectedItem);
+			}
+
+			#pragma warning disable CS0168
+			catch (NullReferenceException error)
+			#pragma warning restore CS0168
+			{
+				errorMessage();
+			}
 		}
 
 		partial void pushAddName(NSObject sender) //Adds a name to the customized list
@@ -89,8 +139,18 @@ namespace FacultySchedules
 
 		partial void clickedScheduleButton(NSObject sender) //Creates and grabs the appropriate URL for the selected faculty
 		{
-			string facName = htmlScheduleCombo.TitleOfSelectedItem; //Grabs the selected combo list item
-			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName); //Sets browser view to the formatted URL
+			try
+			{
+				string facName = htmlScheduleCombo.TitleOfSelectedItem; //Grabs the selected combo list item
+				webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName); //Sets browser view to the formatted URL
+			}
+
+			#pragma warning disable CS0168
+			catch (NullReferenceException error)
+			#pragma warning restore CS0168
+			{
+				errorMessage();
+			}
 		}
 
 		partial void clickedScrapeButton(NSObject sender) //Gets all of the names of the faculty and scrapes through each of their schedules, placing everything into their appropriate database tables
@@ -116,6 +176,11 @@ namespace FacultySchedules
 				timeCombo.AddItem(eachTime);
 				timeCombo2.AddItem(eachTime);
 			}
+		}
+
+		void errorMessage()
+		{
+			resultTextBox.StringValue = "Please press the \"Scrape\" button first.";
 		}
 	}
 }
