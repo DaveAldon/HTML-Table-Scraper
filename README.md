@@ -1,6 +1,6 @@
-# Capstone-CIS463
+# HTML Table Scraper
 
-This project contains several legacy applications David has worked on. For the current Mac compatible Cocoa application built with Xamarin, look inside the "FacultySchedules" folder.
+This is a project that uses a few interesting and elegant tricks to retrieve data from an HTML table and insert everything into a database. The HTML Agility Pack is used to initially grab the data in between the tags and classes, however it does not supply enough functionality in order to accurately retrieve the data from an HTML table that uses rowspans or calendar schedule formats extensively.
 
 # For Development
 
@@ -22,14 +22,4 @@ Xamarin
 
 MySQL.Data does not add via the Nuget packages UI, so it must be referenced manually after downloading the .dll
 
-MUST target Xamarin.Mac .NET 4.5 Framework, NOT Xamarin.Mac Mobile Framework which is the default
-
-
-
-# Extra Details
-
-It appears we will be scraping data from each professor's link via this main link:
-http://www.cis.gvsu.edu/public/staffListing/
-
-To run Ira's concept, make sure to install the BeautifulSoup v4 plugin dependancy from here first:
-https://www.crummy.com/software/BeautifulSoup/
+You MUST target the Xamarin.Mac .NET 4.5 Framework, NOT the Xamarin.Mac Mobile Framework which is the default
