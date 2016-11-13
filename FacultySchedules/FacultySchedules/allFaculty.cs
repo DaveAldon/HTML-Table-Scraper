@@ -10,9 +10,7 @@ namespace FacultySchedules
 	public class allFaculty
 	{
 		Scrape scraper = new Scrape();
-		GiveData giveDB = new GiveData();
 		SpecialNameFormatting dynamicNameFinder = new SpecialNameFormatting();
-		List<string> everybodyName = new List<string>();
 		string tempName;
 
 		public void findAndInsertAllNames()

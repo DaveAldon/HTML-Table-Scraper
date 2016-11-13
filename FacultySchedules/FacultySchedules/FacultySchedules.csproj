@@ -39,7 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <EnableCodeSigning>true</EnableCodeSigning>
-    <CodeSigningKey>Developer ID Application</CodeSigningKey>
+    <CodeSigningKey>Mac Developer: my.name.is.david.crawford@gmail.com (QUS2LE4M5M)</CodeSigningKey>
     <CreatePackage>true</CreatePackage>
     <EnablePackageSigning>false</EnablePackageSigning>
     <IncludeMonoRuntime>true</IncludeMonoRuntime>
@@ -47,6 +47,7 @@
     <UseRefCounting>true</UseRefCounting>
     <LinkMode>None</LinkMode>
     <PlatformTarget>x86</PlatformTarget>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,18 +66,38 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\128x128.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\128x128%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\16x16.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\16x16%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\256x256.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\256x256%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\32x32.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\32x32%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\512x512.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\512x512%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\64x64.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\128x128.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128%402.imageset\128x128%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16.imageset\16x16.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16%402.imageset\16x16%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32.imageset\32x32.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32%402.imageset\32x32%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512.imageset\512x512.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512%402.imageset\512x512%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\512x512.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\512x512%402.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -105,6 +126,9 @@
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
     <InterfaceDefinition Include="MainWindow.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\GVSUIcons.appiconset\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>
