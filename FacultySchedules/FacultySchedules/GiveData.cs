@@ -1,4 +1,8 @@
-﻿using System;
+﻿//
+//This class handles all creation of tables, deletion of tables, and insertion of data into the MySQL database.
+//
+
+using System;
 using MySql.Data.MySqlClient;
 using AppKit;
 

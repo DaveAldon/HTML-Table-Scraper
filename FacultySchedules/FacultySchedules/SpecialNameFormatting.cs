@@ -1,4 +1,8 @@
-﻿using System.Text.RegularExpressions;
+﻿//
+//This class formats a faculty name into its unique URL, returning the URL to the requester.
+//
+
+using System.Text.RegularExpressions;
 
 namespace FacultySchedules
 {

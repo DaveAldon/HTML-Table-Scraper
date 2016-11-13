@@ -1,4 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿//
+//This class handles the sending of queries to the MySQL database, and returning their formated results to the requester.
+//
+
+using MySql.Data.MySqlClient;
 using AppKit;
 using System.Collections.Generic;
 using System;

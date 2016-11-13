@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿//
+//This class makes sense of HTML nodes that it recieves, taking the text from inside each tag and finding
+//its rowspan and inner text, and placing them all inside of a two-dimentional array that computationally resembles
+//the visible layout of the original HTML table. This data is then passed to the GiveData class for database insertion.
+//
+
+using System.Collections.Generic;
 using System;
 using HtmlAgilityPack;
 

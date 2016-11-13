@@ -1,4 +1,8 @@
-﻿using System;
+﻿//
+//This class seperates an HTML page into pieces by a given class and tag, returning a list of HTML nodes to the requester.
+//
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;

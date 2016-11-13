@@ -1,4 +1,8 @@
-﻿using System;
+﻿//
+//This class runs the window instantiation and event handling for inputs. All scraping and query requests originate from here.
+//
+
+using System;
 using Foundation;
 using AppKit;
 
@@ -67,7 +71,7 @@ namespace FacultySchedules
 			resultTextBox.StringValue = getDataInit.whoIsFreeAtX(timeCombo.TitleOfSelectedItem);
 		}
 
-		partial void pushAddName(NSObject sender)
+		partial void pushAddName(NSObject sender) //Adds a name to the customized list
 		{
 			if (!listOfChosenText.StringValue.Contains(classCombo3.TitleOfSelectedItem)) //Checks for duplicates
 			{
@@ -75,7 +79,7 @@ namespace FacultySchedules
 			}
 		}
 
-		partial void pushRemoveName(NSObject sender)
+		partial void pushRemoveName(NSObject sender) //Removes a name from the customized list
 		{
 			if (listOfChosenText.StringValue.Contains(classCombo3.TitleOfSelectedItem))
 			{
@@ -83,13 +87,13 @@ namespace FacultySchedules
 			}
 		}
 
-		partial void clickedScheduleButton(NSObject sender)
+		partial void clickedScheduleButton(NSObject sender) //Creates and grabs the appropriate URL for the selected faculty
 		{
 			string facName = htmlScheduleCombo.TitleOfSelectedItem; //Grabs the selected combo list item
 			webViewSchedule.MainFrameUrl = specialFormatInit.splitNameGetURL(facName); //Sets browser view to the formatted URL
 		}
 
-		partial void clickedScrapeButton(NSObject sender)
+		partial void clickedScrapeButton(NSObject sender) //Gets all of the names of the faculty and scrapes through each of their schedules, placing everything into their appropriate database tables
 		{
 			allFacultyInit.findAndInsertAllNames();
 			foreach (string eachName in Globals.uniqueFacultyNames) //Goes through each faculty name in the database table

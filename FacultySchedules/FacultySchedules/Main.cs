@@ -1,4 +1,8 @@
-﻿using AppKit;
+﻿//
+//This class runs the instantiation of the entire project.
+//
+
+using AppKit;
 
 namespace FacultySchedules
 {

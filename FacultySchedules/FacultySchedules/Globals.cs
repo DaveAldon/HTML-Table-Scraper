@@ -10,6 +10,14 @@ namespace FacultySchedules
 {
 	public static class Globals
 	{
+		//Make sure that these values match your current database configuration
+		public static string ip = "127.0.0.1";
+		public static string username = "test";
+		public static string port = "8889";
+		public static string password = "test";
+		public static string database = "Faculty";
+		public static string extraSecurityParameters = ""; //Add any extra security settings here, with each followed by a semi-colon ';'
+
 		public static int hourSlots = 32; //Amount of hour vertical slots
 		public static int daySlots = 5; //Amount of day horizontal slots
 		public static int minEventPeriod = 2; //The minimum rowspan for events
@@ -19,18 +27,19 @@ namespace FacultySchedules
 		public static string tableClass = "ctl0_Main_tblSchedule"; //Class name of table to scan
 		public static string tableClassElement = "tr"; //Tag seperator
 
-		public static string dynamicNameURL = "http://www.cis.gvsu.edu/public/staffListing/";
+		public static string dynamicNameURL = "http://www.cis.gvsu.edu/public/staffListing/"; //URL of the faculty listing
 		public static string dynamicNameTableClass = "ctl0_Main_grdListing"; //Class name of table to scan
 		public static string dynamicNameTableClassEven = "ctl0_Main_grdListingEven"; //Class name of table to scan
 		public static string dynamicNameTableClassElement = "tbody"; //Tag seperator
 
-		public static string ip = "127.0.0.1";
-		public static string username = "test";
-		public static string port = "8889";
-		public static string password = "test";
-		public static string database = "Faculty";
+		//Do not change anything below. These are important presets and variable types.
+		public static HashSet<string> uniqueClassInput = new HashSet<string>();
+		public static HashSet<string> uniqueFacultyNames = new HashSet<string>();
+		public static HashSet<string> eventAnomolies = new HashSet<string>();
 
-		public static string connectionParam = "server=" + ip + ";uid=" + username + ";port=" + port + ";pwd=" + password + ";database=" + database + ";";
+		public static bool isMissing = false;
+
+		public static string connectionParam = "server=" + ip + ";uid=" + username + ";port=" + port + ";pwd=" + password + ";database=" + database + ";" + extraSecurityParameters;
 		public static List<string> dayList = new List<string> {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 		public static List<string> timeList = new List<string>{ 
 		"7:00 AM",
@@ -65,12 +74,5 @@ namespace FacultySchedules
 		"9:30 PM",
 		"10:00 PM",
 		};
-
-		//Do not change these
-		public static HashSet<string> uniqueClassInput = new HashSet<string>();
-		public static HashSet<string> uniqueFacultyNames = new HashSet<string>();
-		public static HashSet<string> eventAnomolies = new HashSet<string>();
-
-		public static bool isMissing = false;
 	}
 }

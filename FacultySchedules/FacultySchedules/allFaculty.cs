@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿//
+//This class finds the names of all faculty and stores them in the Globals class so that any class can access it for future use.
+//
+
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using AppKit;
 using HtmlAgilityPack;
-using MySql.Data.MySqlClient;
 
 namespace FacultySchedules
 {
@@ -28,29 +30,15 @@ namespace FacultySchedules
 				tempName = eachName.InnerText;
 				string[] subStrings = Regex.Split(tempName, "\\n");
 
-				for (int i = 1; i < subStrings.Length - 1; i += 3)
+				for (int i = 1; i < subStrings.Length - 1; i += 3) //We skip 3 in order to skip over the faculty's title
 				{
 					allNames.Add(dynamicNameFinder.getNameForTable(subStrings[i]));
 				}
 				foreach (string name in allNames)
 				{
-					Globals.uniqueFacultyNames.Add(name);
+					Globals.uniqueFacultyNames.Add(name); //Add their name to the HashSet for any class to access
 				}
 			}
-		}
-
-		void errorHandle(MySqlException error)
-		{
-			NSAlert oAlert = new NSAlert();
-			// Set the buttons
-			oAlert.InvokeOnMainThread(delegate
-			{
-				oAlert.AddButton("Ok");
-			});
-			// Show the message box and capture
-			oAlert.MessageText = "There's a problem with the faculty names!";
-			oAlert.InformativeText = error.ToString();
-			oAlert.AlertStyle = NSAlertStyle.Informational;
 		}
 	}
 }
