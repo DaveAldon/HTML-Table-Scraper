@@ -174,7 +174,6 @@ namespace FacultySchedules
 			foreach (string eachTime in Globals.timeList) //Populate the time combo lists
 			{
 				timeCombo.AddItem(eachTime);
-				timeCombo2.AddItem(eachTime);
 			}
 		}
 

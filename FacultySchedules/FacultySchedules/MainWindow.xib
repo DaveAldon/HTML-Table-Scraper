@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="11542"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,7 +31,6 @@
                 <outlet property="scheduleButton" destination="qJk-dN-hSd" id="Ztn-H8-TNb"/>
                 <outlet property="scrapeButton" destination="t2H-Lo-Vmo" id="qWs-ek-D1d"/>
                 <outlet property="timeCombo" destination="YHV-l5-PhS" id="g9p-KC-Xoi"/>
-                <outlet property="timeCombo2" destination="O3P-H4-Sbv" id="irI-0q-aXU"/>
                 <outlet property="timeComboWhoIsFree" destination="3" id="jos-26-K1X"/>
                 <outlet property="webViewSchedule" destination="EGe-jf-7JE" id="Z21-cY-vQO"/>
                 <outlet property="window" destination="2" id="6"/>
@@ -223,15 +221,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="Skf-6L-C9I">
-                        <rect key="frame" x="717" y="544" width="89" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who is free at" id="5vR-ns-rwj">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" id="YHV-l5-PhS">
                         <rect key="frame" x="811" y="588" width="120" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -239,24 +228,6 @@
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="pOv-Xn-gEH"/>
-                        </popUpButtonCell>
-                    </popUpButton>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="9I4-uQ-PsF">
-                        <rect key="frame" x="940" y="544" width="190" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="from the customized list below" id="LZH-Rn-Ksq">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="O3P-H4-Sbv">
-                        <rect key="frame" x="809" y="538" width="121" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Ey7-i1-jOL">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="g22-Ak-tYn"/>
                         </popUpButtonCell>
                     </popUpButton>
                     <button verticalHuggingPriority="750" misplaced="YES" id="cS3-Ze-1fB">
@@ -310,6 +281,15 @@
                             <action selector="findOut3:" target="-2" id="YaI-5L-Wh0"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="9I4-uQ-PsF">
+                        <rect key="frame" x="817" y="543" width="311" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When is everyone in the customized list below free" id="LZH-Rn-Ksq">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
