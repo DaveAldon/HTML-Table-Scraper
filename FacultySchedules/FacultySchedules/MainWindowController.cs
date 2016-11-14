@@ -179,7 +179,7 @@ namespace FacultySchedules
 
 		void errorMessage()
 		{
-			resultTextBox.StringValue = "Please press the \"Scrape\" button first.";
+			resultTextBox.StringValue = "Please press the \"Scrape\" button first, \n or the faculty is not teaching this semester.";
 		}
 	}
 }

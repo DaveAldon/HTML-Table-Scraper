@@ -92,9 +92,9 @@ namespace FacultySchedules
 
 						if (tempSubString.Contains(rowSpan))
 						{
-							for (int spanFinder = Globals.minEventPeriod; spanFinder < Globals.hourSlots; spanFinder++)
+							for (int spanFinder = Globals.hourSlots; spanFinder >= Globals.minEventPeriod; spanFinder--)
 							{
-								if (tempSubString.LastIndexOf(spanFinder.ToString(), 50, StringComparison.Ordinal) > 0)
+								if (tempSubString.LastIndexOf(spanFinder.ToString(), 48, StringComparison.Ordinal) > 0)
 								{
 									span = spanFinder;
 									break;
