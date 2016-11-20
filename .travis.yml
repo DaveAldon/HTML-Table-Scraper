@@ -1,5 +1,1 @@
 language: csharp
-solution: FacultySchedules.sln
-install:
-  - sudo apt-get install -y gtk-sharp2
-  - nuget restore FacultySchedules.sln
