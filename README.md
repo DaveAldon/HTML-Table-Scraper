@@ -4,7 +4,7 @@ This is a project that uses a few interesting and elegant tricks to retrieve dat
 
 # Build Status
 
-**Master Branch** [![Build Status](https://travis-ci.com/DavidAldon/Capstone-CIS463.svg?token=eCnosqg9nhqR9WqTkK12&branch=master)](https://travis-ci.com/DavidAldon/Capstone-CIS463)
+**Master Branch** - [![Build Status](https://www.bitrise.io/app/4a4a05a6c19f0241.svg?token=JtGHt5BGOeEG48k8rBJ69w)](https://www.bitrise.io/app/4a4a05a6c19f0241)
 
 # For Development
 
