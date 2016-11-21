@@ -4,7 +4,7 @@ This is a project that uses a few interesting and elegant tricks to retrieve dat
 
 # Build Status
 
-**Master Branch** - [![Build Status](https://www.bitrise.io/app/4a4a05a6c19f0241.svg?token=JtGHt5BGOeEG48k8rBJ69w)](https://www.bitrise.io/app/4a4a05a6c19f0241)
+**Master Branch** - [![Build Status](https://www.bitrise.io/app/8eb52e35de8c2067.svg?token=3xm3z_hNZxt_UvNnetlqRQ)](https://www.bitrise.io/app/8eb52e35de8c2067)
 
 # For Development
 
