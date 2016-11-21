@@ -1,5 +1,5 @@
 language: csharp
-solution: FacultySchedules.
+solution: FacultySchedules.sln
  
 script:
 - xbuild FacultySchedules.sln /p:Configuration="Release"
