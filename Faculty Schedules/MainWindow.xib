@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
+            <connections>
+                <outlet property="addFacultyButton" destination="3" id="8h1-zN-qqX"/>
+                <outlet property="addName" destination="cS3-Ze-1fB" id="Z16-7t-axs"/>
+                <outlet property="allFacultyCheckBox" destination="jpy-aA-JJH" id="dRB-rp-9yo"/>
+                <outlet property="classCombo" destination="ciC-pE-ljA" id="caK-ym-LMM"/>
+                <outlet property="classCombo2" destination="ysf-ef-RmZ" id="ORe-by-Jxl"/>
+                <outlet property="classCombo3" destination="AAl-WF-UnB" id="nSe-1p-ozi"/>
+                <outlet property="facultyComboQuery" destination="xon-z8-wVk" id="sJs-p9-6Mv"/>
+                <outlet property="facultyListCombo" destination="xon-z8-wVk" id="kQO-nR-8Rn"/>
+                <outlet property="facultyListComboQuery" destination="3" id="ljl-Yl-33Q"/>
+                <outlet property="findOut1" destination="FxK-rV-QD5" id="HuM-qf-MdO"/>
+                <outlet property="findOut2" destination="gqG-pQ-HtU" id="ogm-qH-cah"/>
+                <outlet property="findOut3" destination="Fxg-vQ-zT8" id="dKk-jS-qt7"/>
+                <outlet property="findOut4" destination="7XV-tc-Y67" id="lEb-Zh-ZKh"/>
+                <outlet property="findOut5" destination="dtL-yL-FEW" id="Fp4-sm-fUG"/>
+                <outlet property="htmlScheduleCombo" destination="tmU-il-FhR" id="5BL-EW-to8"/>
+                <outlet property="listOfChosenText" destination="eXx-s7-awr" id="aKb-wq-XQV"/>
+                <outlet property="middleInitialInput" destination="3" id="PHY-ym-eeM"/>
+                <outlet property="removeFacultyButton" destination="3" id="pRa-ID-C34"/>
+                <outlet property="removeName" destination="K2Q-5X-2hu" id="X86-vO-gKi"/>
+                <outlet property="resultTextBox" destination="rCV-Su-gzp" id="7EK-IM-l51"/>
+                <outlet property="scheduleButton" destination="qJk-dN-hSd" id="Ztn-H8-TNb"/>
+                <outlet property="scrapeButton" destination="t2H-Lo-Vmo" id="qWs-ek-D1d"/>
+                <outlet property="timeCombo" destination="YHV-l5-PhS" id="g9p-KC-Xoi"/>
+                <outlet property="timeComboWhoIsFree" destination="3" id="jos-26-K1X"/>
+                <outlet property="webViewSchedule" destination="EGe-jf-7JE" id="Z21-cY-vQO"/>
+                <outlet property="window" destination="2" id="6"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Faculty Schedules" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" animationBehavior="default" id="2" customClass="MainWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <rect key="contentRect" x="131" y="74" width="1140" height="678"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <view key="contentView" misplaced="YES" id="3">
+                <rect key="frame" x="0.0" y="0.0" width="1140" height="678"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="rCV-Su-gzp">
+                        <rect key="frame" x="634" y="14" width="294" height="516"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Result" drawsBackground="YES" id="A4V-tr-tNm">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="t2H-Lo-Vmo">
+                        <rect key="frame" x="14" y="637" width="289" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Scrape!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Erb-wA-bie">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="clickedScrapeButton:" target="-2" id="HnC-Vs-W5t"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="qJk-dN-hSd">
+                        <rect key="frame" x="173" y="537" width="130" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="View Schedule" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cJf-An-K1w">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="clickedScheduleButton:" target="-2" id="i7Q-As-g3m"/>
+                        </connections>
+                    </button>
+                    <webView misplaced="YES" id="EGe-jf-7JE">
+                        <rect key="frame" x="16" y="14" width="601" height="516"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <webPreferences key="preferences" defaultFontSize="16" defaultFixedFontSize="13" minimumFontSize="0">
+                            <nil key="identifier"/>
+                        </webPreferences>
+                        <connections>
+                            <accessibilityConnection property="title" destination="3" id="Sdk-ZQ-ioT"/>
+                        </connections>
+                    </webView>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="xon-z8-wVk">
+                        <rect key="frame" x="557" y="639" width="153" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Efc-bz-3c2">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="i8l-PN-Nut"/>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="facultyComboQuery:" target="-2" id="8s4-Hn-l77"/>
+                        </connections>
+                    </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="fcA-WO-kDF">
+                        <rect key="frame" x="486" y="646" width="73" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When does" id="Azo-p1-Dxc">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="7Jo-bG-dTr">
+                        <rect key="frame" x="713" y="645" width="38" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="have" id="MnB-cI-cJa">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="FxK-rV-QD5">
+                        <rect key="frame" x="935" y="636" width="90" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Find out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Shi-Zz-2w3">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="findOut1:" target="-2" id="RG3-wu-iRL"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="gqG-pQ-HtU">
+                        <rect key="frame" x="935" y="611" width="90" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Find out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ykp-Nr-0Mt">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="findOut2:" target="-2" id="7cs-02-SMA"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="dtL-yL-FEW">
+                        <rect key="frame" x="935" y="586" width="90" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Find out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V9f-sX-e2D">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="findOut5:" target="-2" id="y02-RE-4Db"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="JBh-m5-BJV">
+                        <rect key="frame" x="718" y="594" width="89" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who is free at" id="hJc-KV-tGS">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="7XV-tc-Y67">
+                        <rect key="frame" x="935" y="561" width="90" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Find out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zuI-aE-ubx">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="findOut4:" target="-2" id="28f-3D-xN5"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="CFk-D8-k0G">
+                        <rect key="frame" x="789" y="570" width="140" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When is everyone free" id="lgM-Vz-6fe">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ciC-pE-ljA">
+                        <rect key="frame" x="755" y="639" width="176" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="ulc-He-ti9">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="RZe-yx-tpr"/>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="classCombo:" target="-2" id="5Q6-eU-JlZ"/>
+                        </connections>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="tmU-il-FhR">
+                        <rect key="frame" x="14" y="541" width="160" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="bvK-d4-WDV">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="xCo-tJ-CUv"/>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="HTMLScheduleCombo:" target="-2" id="p2x-Tk-EZp"/>
+                        </connections>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="ysf-ef-RmZ">
+                        <rect key="frame" x="755" y="613" width="176" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="X1w-5i-7ij">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="hEw-Pc-raG"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="UB9-wy-GqE">
+                        <rect key="frame" x="661" y="620" width="84" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Who teaches" id="0RD-1t-wVP">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="YHV-l5-PhS">
+                        <rect key="frame" x="811" y="588" width="120" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="QI4-ab-dWK">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="pOv-Xn-gEH"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="cS3-Ze-1fB">
+                        <rect key="frame" x="937" y="476" width="96" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBM-sw-eJx">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="pushAddName:" target="-2" id="sft-sS-Wuc"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="K2Q-5X-2hu">
+                        <rect key="frame" x="1033" y="476" width="99" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PNC-9g-Szu">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="pushRemoveName:" target="-2" id="luB-dO-5C6"/>
+                        </connections>
+                    </button>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" id="AAl-WF-UnB">
+                        <rect key="frame" x="941" y="506" width="188" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="QI9-Tg-aSn">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="qq2-03-EAC"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="eXx-s7-awr">
+                        <rect key="frame" x="943" y="14" width="183" height="439"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ZHW-w4-AZx">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="Fxg-vQ-zT8">
+                        <rect key="frame" x="937" y="451" width="195" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Find out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mrn-1W-wQk">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="findOut3:" target="-2" id="YaI-5L-Wh0"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="9I4-uQ-PsF">
+                        <rect key="frame" x="817" y="543" width="311" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When is everyone in the customized list below free" id="LZH-Rn-Ksq">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="webViewSchedules" destination="EGe-jf-7JE" id="3In-mQ-9bd"/>
+            </connections>
+            <point key="canvasLocation" x="324" y="175"/>
+        </window>
+        <textField verticalHuggingPriority="750" id="w4R-7n-wfb">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Middle" drawsBackground="YES" id="ohg-62-0z7">
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+            </textFieldCell>
+            <point key="canvasLocation" x="675" y="577"/>
+        </textField>
+        <button verticalHuggingPriority="750" id="jpy-aA-JJH">
+            <rect key="frame" x="0.0" y="0.0" width="85" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="check" title="All Faculty" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1wJ-Dl-8GW">
+                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <point key="canvasLocation" x="693" y="585"/>
+        </button>
+    </objects>
+</document>
