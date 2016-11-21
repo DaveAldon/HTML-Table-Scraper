@@ -2,6 +2,10 @@
 
 This is a project that uses a few interesting and elegant tricks to retrieve data from an HTML table and insert everything into a database. The HTML Agility Pack is used to initially grab the data in between the tags and classes, however it does not supply enough functionality in order to accurately retrieve the data from an HTML table that uses rowspans or calendar schedule formats extensively.
 
+# Build Status
+
+**Master Branch** - [![Build Status](https://www.bitrise.io/app/4a4a05a6c19f0241.svg?token=JtGHt5BGOeEG48k8rBJ69w)](https://www.bitrise.io/app/4a4a05a6c19f0241)
+
 # For Development
 
 **External Dependancies Required:**
