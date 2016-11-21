@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{7F050A86-CD56-4395-8809-E55BCF2F03F6}</ProjectGuid>
+    <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>FacultySchedules</RootNamespace>
+    <AssemblyName>Faculty Schedules</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <UseXamMacFullFramework>true</UseXamMacFullFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CodeSigningKey>Mac Developer</CodeSigningKey>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>true</UseSGen>
+    <UseRefCounting>true</UseRefCounting>
+    <PlatformTarget>x86</PlatformTarget>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <HttpClientHandler>CFNetworkHandler</HttpClientHandler>
+    <TlsProvider>Default</TlsProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <EnableCodeSigning>true</EnableCodeSigning>
+    <CodeSigningKey>Mac Developer: my.name.is.david.crawford@gmail.com (QUS2LE4M5M)</CodeSigningKey>
+    <CreatePackage>true</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>true</IncludeMonoRuntime>
+    <UseSGen>true</UseSGen>
+    <UseRefCounting>true</UseRefCounting>
+    <LinkMode>None</LinkMode>
+    <PlatformTarget>x86</PlatformTarget>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.Mac" />
+    <Reference Include="HtmlAgilityPack-PCL">
+      <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpSwift.Attributes">
+      <HintPath>..\packages\SharpSwift.Attributes.1.1.0\lib\SharpSwift.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\128x128.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\128x128%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\16x16.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\16x16%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\256x256.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\256x256%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\32x32.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\32x32%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\512x512.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\512x512%402.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\64x64.png" />
+    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\128x128.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128%402.imageset\128x128%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16.imageset\16x16.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16%402.imageset\16x16%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32.imageset\32x32.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32%402.imageset\32x32%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512.imageset\512x512.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512%402.imageset\512x512%402.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512%402.imageset\Contents.json" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\512x512.png" />
+    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\512x512%402.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="packages.config" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="MainWindow.designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindowController.cs" />
+    <Compile Include="MainWindowController.designer.cs">
+      <DependentUpon>MainWindowController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Scrape.cs" />
+    <Compile Include="Run.cs" />
+    <Compile Include="GiveData.cs" />
+    <Compile Include="allFaculty.cs" />
+    <Compile Include="GetData.cs" />
+    <Compile Include="SpecialNameFormatting.cs" />
+    <Compile Include="Globals.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainMenu.xib" />
+    <InterfaceDefinition Include="MainWindow.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\GVSUIcons.appiconset\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
+</Project>
