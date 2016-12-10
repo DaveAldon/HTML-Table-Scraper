@@ -1,6 +1,11 @@
 # HTML Table Scraper
 
-This is a project that uses a few interesting and elegant tricks to retrieve data from an HTML table and insert everything into a database. The HTML Agility Pack is used to initially grab the data in between the tags and classes, however it does not supply enough functionality in order to accurately retrieve the data from an HTML table that uses rowspans or calendar schedule formats extensively.
+**Why?**
+If you have one or a thousand HTML tables that you need to scan through and have their values inserted into a MySQL database, **AND** if you do not have a CSV file or any control over the source data, then this application is the perfect starting point for you!
+
+This is a project that uses a few interesting and elegant tricks to retrieve data from an HTML table and insert everything into a database. The HTML Agility Pack is used to initially grab the data in between the tags and classes, however it does not supply enough functionality in order to accurately retrieve the data from an HTML table that uses rowspans or calendar schedule formats extensively. This application fills in where the HTML Agility Pack leaves off, and essentially makes those pesky rowspans a thing of the past. Additionally, there is a lot of query functionality to ask the database various questions about the retrieved data, however that portion is entirely optional.
+
+The application is currently setup to scan through a University's publicly available faculty page and grab all of their various availabilties, making it easy to query the data.
 
 # Build Status
 
@@ -23,6 +28,8 @@ C# development enviroment (preferably Xamarin or Visual Studio)
 Mac OS with XCode
 
 Xamarin
+
+**Special Requirements**
 
 MySQL.Data does not add via the Nuget packages UI, so it must be referenced manually after downloading the .dll
 
