@@ -67,37 +67,20 @@
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\128x128.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\128x128%402.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\16x16.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\16x16%402.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\256x256.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\256x256%402.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\32x32.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\32x32%402.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\512x512.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\512x512%402.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\64x64.png" />
-    <ImageAsset Include="Assets.xcassets\GVSUIcons.appiconset\Contents.json" />
     <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\128x128.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128%402.imageset\128x128%402.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128%402.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16.imageset\16x16.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16%402.imageset\16x16%402.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\16x16%402.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32.imageset\32x32.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32%402.imageset\32x32%402.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\32x32%402.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512.imageset\512x512.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512%402.imageset\512x512%402.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\512x512%402.imageset\Contents.json" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\512x512.png" />
-    <ImageAsset Include="Resources\FacultySchedules\Images.xcassets\128x128.imageset\512x512%402.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\32x32.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\64x64.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon1024.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon128.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon16.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon256.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon256%402.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon32.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon32%402.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon512.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon512%402.png" />
+    <ImageAsset Include="Assets.xcassets\Icons.appiconset\Icon64.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -128,7 +111,7 @@
     <InterfaceDefinition Include="MainWindow.xib" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets.xcassets\GVSUIcons.appiconset\" />
+    <Folder Include="Assets.xcassets\Icons.appiconset\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>

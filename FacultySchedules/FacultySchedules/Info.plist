@@ -27,7 +27,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/GVSUIcons.appiconset</string>
+	<string>Assets.xcassets/Icons.appiconset</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
