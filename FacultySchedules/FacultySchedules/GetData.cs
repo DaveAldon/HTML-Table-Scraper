@@ -12,6 +12,11 @@ namespace FacultySchedules
 	public class GetData
 	{
 		string connectionParam = Globals.connectionParam;
+		/// <summary>
+		/// Who is free from list query.
+		/// </summary>
+		/// <returns>Who is free from list.</returns>
+		/// <param name="facultyTextNames">Faculty text names.</param>
 		public string whoIsFreeFromList(string facultyTextNames)
 		{
 			string[] facultyNames = facultyTextNames.Split(new string[] { "\n" }, StringSplitOptions.None);
@@ -34,7 +39,7 @@ namespace FacultySchedules
 						{
 							connection = new MySqlConnection(connectionParam);
 							connection.Open();
-							string stm = "SELECT 1 FROM `" + facultyNames[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+							string stm = "SELECT 1 FROM `" + facultyNames[i] + "` WHERE " + Globals.DBFieldDay + " = '" + eachDay + "' AND " + Globals.DBFieldHour + " = '" + time + "'" + "LIMIT 1";
 							MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 							dataReader = replaceCmd.ExecuteReader();
 							existanceResult = 0;
@@ -85,6 +90,11 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
+		/// <summary>
+		/// Who is free at x.
+		/// </summary>
+		/// <returns>The free at x.</returns>
+		/// <param name="time">Time.</param>
 		public string whoIsFreeAtX(string time)
 		{
 			int existanceResult;
@@ -105,7 +115,7 @@ namespace FacultySchedules
 					{
 						connection = new MySqlConnection(connectionParam);
 						connection.Open();
-						string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+						string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE " + Globals.DBFieldDay + " = '" + eachDay + "' AND " + Globals.DBFieldHour + " = '" + time + "'" + "LIMIT 1";
 						MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 						dataReader = replaceCmd.ExecuteReader();
 						existanceResult = 0;
@@ -150,6 +160,10 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
+		/// <summary>
+		/// When is everyone available.
+		/// </summary>
+		/// <returns>The time everyone is available.</returns>
 		public string whenIsEveryoneAvailable()
 		{
 			string finalResult = "";
@@ -183,7 +197,7 @@ namespace FacultySchedules
 						{
 							connection = new MySqlConnection(connectionParam);
 							connection.Open();
-							string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE day = '" + eachDay + "' AND hour = '" + time + "'" + "LIMIT 1";
+							string stm = "SELECT 1 FROM `" + everyName[i] + "` WHERE " + Globals.DBFieldDay + " = '" + eachDay + "' AND " + Globals.DBFieldHour + " = '" + time + "'" + "LIMIT 1";
 							MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 							dataReader = replaceCmd.ExecuteReader();
 							existanceResult = 0;
@@ -233,6 +247,11 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
+		/// <summary>
+		/// Doeses the table exist.
+		/// </summary>
+		/// <returns>Whether the table exists in the form of an int.</returns>
+		/// <param name="name">Name.</param>
 		public int doesTableExist(string name)
 		{
 			int existanceResult = 0;
@@ -275,6 +294,11 @@ namespace FacultySchedules
 			return existanceResult;
 		}
 
+		/// <summary>
+		/// Internal who teaches x. Used by "When is Everyone..." queries.
+		/// </summary>
+		/// <returns>Who teaches x.</returns>
+		/// <param name="className">Class name.</param>
 		public List<string> internalWhoTeachesX(string className)
 		{
 			int existanceResult;
@@ -289,7 +313,7 @@ namespace FacultySchedules
 				{
 					connection = new MySqlConnection(connectionParam);
 					connection.Open();
-					string stm = "SELECT 1 FROM `" + eachName + "` WHERE event = '" + className + "'" + "LIMIT 1";
+					string stm = "SELECT 1 FROM `" + eachName + "` WHERE " + Globals.DBFieldEvent + " = '" + className + "'" + "LIMIT 1";
 					MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 					dataReader = replaceCmd.ExecuteReader();
 					int count = dataReader.FieldCount;
@@ -327,6 +351,11 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
+		/// <summary>
+		/// Who teaches x.
+		/// </summary>
+		/// <returns>Who teaches x.</returns>
+		/// <param name="className">Class name.</param>
 		public string whoTeachesX(string className)
 		{
 			int existanceResult;
@@ -340,7 +369,7 @@ namespace FacultySchedules
 				{
 					connection = new MySqlConnection(connectionParam);
 					connection.Open();
-					string stm = "SELECT 1 FROM `" + eachName + "` WHERE event = '" + className + "'" + "LIMIT 1";
+					string stm = "SELECT 1 FROM `" + eachName + "` WHERE " + Globals.DBFieldEvent + " = '" + className + "'" + "LIMIT 1";
 					MySqlCommand replaceCmd = new MySqlCommand(stm, connection);
 					dataReader = replaceCmd.ExecuteReader();
 					int count = dataReader.FieldCount;
@@ -378,6 +407,12 @@ namespace FacultySchedules
 			return finalResult;
 		}
 
+		/// <summary>
+		/// When does X have y.
+		/// </summary>
+		/// <returns>A large string of when X has y.</returns>
+		/// <param name="name">Name.</param>
+		/// <param name="className">Class name.</param>
 		public string whenDoesXHaveY(string name, string className)
 		{
 			MySqlConnection connection = null;
@@ -388,7 +423,7 @@ namespace FacultySchedules
 				connection = new MySqlConnection(connectionParam);
 				connection.Open();
 
-				string stm = "SELECT day, hour FROM `" + name + "` " + "WHERE event = '" + className + "'";
+				string stm = "SELECT " + Globals.DBFieldDay + ", " + Globals.DBFieldHour + " FROM `" + name + "` " + "WHERE " + Globals.DBFieldEvent + " = '" + className + "'";
 				string retrievedDay = "";
 				string retrievedHour = "";
 				string result = "";
@@ -408,22 +443,22 @@ namespace FacultySchedules
 						retrievedDay = dataReader.GetString(i);
 						retrievedHour = dataReader.GetString(i + 1);
 
-						if (retrievedDay.Contains("Monday")) {
+						if (retrievedDay.Contains(Globals.dayList[0])) {
 							monday.Add(retrievedHour);
 						} else
-						if (retrievedDay.Contains("Tuesday")) {
+						if (retrievedDay.Contains(Globals.dayList[1])) {
 							tuesday.Add(retrievedHour);
 						}
 						else
-						if (retrievedDay.Contains("Wednesday")) {
+						if (retrievedDay.Contains(Globals.dayList[2])) {
 							wednesday.Add(retrievedHour);
 						}
 						else
-						if (retrievedDay.Contains("Thursday")) {
+						if (retrievedDay.Contains(Globals.dayList[3])) {
 							thursday.Add(retrievedHour);	
 						}
 						else
-						if (retrievedDay.Contains("Friday")) {
+						if (retrievedDay.Contains(Globals.dayList[4])) {
 							friday.Add(retrievedHour);
 						}
 					}
@@ -476,6 +511,10 @@ namespace FacultySchedules
 			}
 		}
 
+		/// <summary>
+		/// Brings up a window with the given error.
+		/// </summary>
+		/// <param name="error">Error.</param>
 		void errorHandle(MySqlException error)
 		{
 			NSAlert oAlert = new NSAlert();

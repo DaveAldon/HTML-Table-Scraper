@@ -13,6 +13,11 @@ namespace FacultySchedules
 {
 	public class Scrape
 	{
+		/// <summary>
+		/// Begins the scrape. Returns an HTML Node from a URL.
+		/// </summary>
+		/// <returns>The scrape.</returns>
+		/// <param name="name">Name.</param>
 		public List<HtmlNode> BeginScrape(string name)
 		{
 			SpecialNameFormatting specialFormatInit = new SpecialNameFormatting();
@@ -38,6 +43,10 @@ namespace FacultySchedules
 			}
 		}
 
+		/// <summary>
+		/// Scrapes an HTML table of names. Returns an HTML Node.
+		/// </summary>
+		/// <returns>The faculty.</returns>
 		public List<HtmlNode> ScrapeFaculty()
 		{
 			WebClient webClient = new WebClient();
@@ -51,6 +60,10 @@ namespace FacultySchedules
 			return x;
 		}
 
+		/// <summary>
+		/// Scrapes an HTML table of names in the even that there's a second column. Returns an HTML Node.
+		/// </summary>
+		/// <returns>The faculty even.</returns>
 		public List<HtmlNode> ScrapeFacultyEven()
 		{
 			WebClient webClient = new WebClient();
@@ -64,6 +77,10 @@ namespace FacultySchedules
 			return x;
 		}
 
+		/// <summary>
+		/// Brings up a window with the given error.
+		/// </summary>
+		/// <param name="error">Error.</param>
 		void errorHandle(NullReferenceException error)
 		{
 			NSAlert oAlert = new NSAlert();

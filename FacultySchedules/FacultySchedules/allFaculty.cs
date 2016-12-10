@@ -14,6 +14,9 @@ namespace FacultySchedules
 		SpecialNameFormatting dynamicNameFinder = new SpecialNameFormatting();
 		string tempName;
 
+		/// <summary>
+		/// Finds and inserts all names into the Global class to be accessed by everything.
+		/// </summary>
 		public void findAndInsertAllNames()
 		{
 			var facultyNames = scraper.ScrapeFaculty();

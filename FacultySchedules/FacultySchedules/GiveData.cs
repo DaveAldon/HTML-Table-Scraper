@@ -12,6 +12,11 @@ namespace FacultySchedules
 	{
 		string connectionParam = Globals.connectionParam;
 
+		/// <summary>
+		/// Seperates a given string of data into pieces and inserts it into the DB.
+		/// </summary>
+		/// <param name="weeksWorth">Weeks worth.</param>
+		/// <param name="name">Name.</param>
 		public void DBGather(string[,] weeksWorth, string name)
 		{
 			int inputDay;
@@ -40,6 +45,10 @@ namespace FacultySchedules
 			}
 		}
 
+		/// <summary>
+		/// Creates a DB table with the name provided.
+		/// </summary>
+		/// <param name="name">Name.</param>
 		public void createTable(string name)
 		{
 			MySqlConnection connectionCreate = null;
@@ -48,7 +57,7 @@ namespace FacultySchedules
 			{
 				connectionCreate = new MySqlConnection(connectionParam);
 				connectionCreate.Open();
-				string stm = "CREATE TABLE `" + name + "` (id int(50) NOT NULL AUTO_INCREMENT, day varchar(50), hour varchar(50), event varchar(50), rowspan int (10), PRIMARY KEY (id))";
+				string stm = "CREATE TABLE `" + name + "` (id int(50) NOT NULL AUTO_INCREMENT, " + Globals.DBFieldDay + " varchar(50), " + Globals.DBFieldHour + " varchar(50), " + Globals.DBFieldEvent + " varchar(50), " + Globals.DBFieldRowspan + " int (10), PRIMARY KEY (id))";
 				MySqlCommand createCmd = new MySqlCommand(stm, connectionCreate);
 				dataReaderCreate = createCmd.ExecuteReader();
 			}
@@ -72,6 +81,14 @@ namespace FacultySchedules
 			}
 		}
 
+		/// <summary>
+		/// Inserts all passed data the into the given table.
+		/// </summary>
+		/// <param name="inputDay">Input day.</param>
+		/// <param name="inputHour">Input hour.</param>
+		/// <param name="inputEvent">Input event.</param>
+		/// <param name="inputRowSpan">Input row span.</param>
+		/// <param name="name">Name.</param>
 		public void insertIntoTable(string inputDay, string inputHour, string inputEvent, int inputRowSpan, string name)
 		{
 			MySqlConnection addConnection = null;
@@ -80,8 +97,10 @@ namespace FacultySchedules
 			{
 				addConnection = new MySqlConnection(connectionParam);
 				addConnection.Open();
-				string stm = "INSERT INTO `" + name + "` (day, hour, event, rowspan) VALUES(@day, @hour, @event, @rowspan)";
+				string stm = "INSERT INTO `" + name + "` (" + Globals.DBFieldDay + ", " + Globals.DBFieldHour + ", " + Globals.DBFieldEvent + ", " + Globals.DBFieldRowspan + ") VALUES(@day, @hour, @event, @rowspan)";
 				MySqlCommand cmd = new MySqlCommand(stm, addConnection);
+
+				//Just a different method of customizing parameters! Makes changing things easier.
 				cmd.Parameters.AddWithValue("@day", inputDay);
 				cmd.Parameters.AddWithValue("@hour", inputHour);
 				cmd.Parameters.AddWithValue("@event", inputEvent);
@@ -108,6 +127,10 @@ namespace FacultySchedules
 			}
 		}
 
+		/// <summary>
+		/// Drops the given table.
+		/// </summary>
+		/// <param name="name">Name.</param>
 		public void dropTable(string name)
 		{
 			MySqlConnection connection = null;
@@ -140,6 +163,10 @@ namespace FacultySchedules
 			}
 		}
 
+		/// <summary>
+		/// Brings up a window with the given error.
+		/// </summary>
+		/// <param name="error">Error.</param>
 		void errorHandle(MySqlException error)
 		{
 			NSAlert oAlert = new NSAlert();

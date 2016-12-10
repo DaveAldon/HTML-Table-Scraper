@@ -3,6 +3,8 @@
 //its rowspan and inner text, and placing them all inside of a two-dimentional array that computationally resembles
 //the visible layout of the original HTML table. This data is then passed to the GiveData class for database insertion.
 //
+//For your own HTML table, you will need to customize some of the formulas as it is searching for specific text at times.
+//
 
 using System.Collections.Generic;
 using System;
@@ -14,6 +16,10 @@ namespace FacultySchedules
 	{
 		public GiveData giveDB = new GiveData();
 
+		/// <summary>
+		/// Scrapes HTML data from a given name (after being formatted into a URL), and places it all into a list which is passed along to be inserted into a DB.
+		/// </summary>
+		/// <param name="name">Name.</param>
 		public void start(string name)
 		{
 			Scrape scraper = new Scrape();
@@ -38,12 +44,12 @@ namespace FacultySchedules
 				{
 					if (first)
 					{
-						if (item.InnerText.Contains("Sabbatical"))
+						if (item.InnerText.Contains(Globals.AnomalyToCheck))
 						{
-							Globals.eventAnomolies.Add("On Sabbatical");
+							Globals.eventAnomolies.Add(Globals.AnomalyForUserToSee);
 							return;
 						}
-						else if (item.InnerText.Contains("Monday") == false)
+						else if (item.InnerText.Contains(Globals.dayList[0]) == false)
 						{
 							continue;
 						}
@@ -152,7 +158,7 @@ namespace FacultySchedules
 				giveDB.DBGather(weeksWorth, name);
 			}
 			else {
-				Globals.eventAnomolies.Add("Missing Information");
+				Globals.eventAnomolies.Add(Globals.MissingCaseAnomaly);
 				return;
 			}
 		}

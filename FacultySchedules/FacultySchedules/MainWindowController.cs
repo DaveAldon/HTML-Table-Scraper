@@ -1,18 +1,15 @@
-﻿//
-//This class runs the window instantiation and event handling for inputs. All scraping and query requests originate from here.
-//
-
-using System;
+﻿using System;
 using Foundation;
 using AppKit;
 
+//This class runs the window instantiation and event handling for inputs. All scraping and query requests originate from here.
 namespace FacultySchedules
 {
 	public partial class MainWindowController : NSWindowController
 	{
 		Run runInit = new Run(); //Instantiation of main engine
 		allFaculty allFacultyInit = new allFaculty(); //Faculty finder
-		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different faculty names into proper URLs
+		SpecialNameFormatting specialFormatInit = new SpecialNameFormatting(); //Formats all of the different names into proper URLs
 		GetData getDataInit = new GetData(); //Class of query builders
 		GiveData clearInit = new GiveData(); //Class of queries, only needed to reset tables in this class
 
@@ -53,7 +50,7 @@ namespace FacultySchedules
 				resultTextBox.StringValue = getDataInit.whenDoesXHaveY(facultyListCombo.TitleOfSelectedItem, classCombo.TitleOfSelectedItem);
 			}
 
-			#pragma warning disable CS0168 // Variable is declared but never used
+			#pragma warning disable CS0168 // Variable is declared but never used, but it's still necessary
 			catch (ArgumentNullException error)
 			#pragma warning restore CS0168
 			{
