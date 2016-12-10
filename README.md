@@ -7,11 +7,19 @@ This is a project that uses a few interesting and elegant tricks to retrieve dat
 
 The application is currently setup to scan through a University's publicly available faculty page and grab all of their various availabilties, making it easy to query the data.
 
-# Build Status
+# Out-of-the-Box Requirements
+**(v1.0)**
+* Mac OS 10.5+
+* A running MySQL server
 
-**Master Branch** - [![Build Status](https://www.bitrise.io/app/8eb52e35de8c2067.svg?token=3xm3z_hNZxt_UvNnetlqRQ)](https://www.bitrise.io/app/8eb52e35de8c2067)
+**(v1.1+)**
+* Mac OS 10.5+
+* A running MySQL server
+* If you want it to work correctly, please change the Globals.cs settings to accomodate your database setup. This means you will need to re-compile at some point, so please see below for additional details
 
 # For Development
+
+**Master Branch** - [![Build Status](https://www.bitrise.io/app/8eb52e35de8c2067.svg?token=3xm3z_hNZxt_UvNnetlqRQ)](https://www.bitrise.io/app/8eb52e35de8c2067)
 
 **External Dependancies Required:**
 
