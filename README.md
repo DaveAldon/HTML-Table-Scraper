@@ -19,6 +19,7 @@ The application is currently setup to scan through a University's publicly avail
 
 # For Development
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3ccf2ef44f4c41bd958a78a875b41736)](https://www.codacy.com/app/crawford_2/HTML-Table-Scraper?utm_source=github.com&utm_medium=referral&utm_content=DaveAldon/HTML-Table-Scraper&utm_campaign=badger)
 **Master Branch** - [![Build Status](https://www.bitrise.io/app/8eb52e35de8c2067.svg?token=3xm3z_hNZxt_UvNnetlqRQ)](https://www.bitrise.io/app/8eb52e35de8c2067)
 
 **External Dependancies Required:**
